@@ -183,11 +183,13 @@ Si al pasar de $k+1$ a $k$ grupos el ínidic presenta una caída muy grande, ent
 
 Los métodos no jerárquicos son también conocidos como métodos de partición, dado que se basan en particionar los datos en una cantidad predeterminada de grupos, $G$. Una forma de trabajar este problema sería construir todos los posibles $G$ grupos en los que las $n$ observaciones podrían particionarse. El problema de esto es que la cantidad posible de grupos a estudiar     es prohibitivamente grande incluso para valores moderados de $n$.
 
+### k-medias
+
 El algoritmo más utilizado para realizar dichas particiones es conocido como **k-medias**, y requiere de las siguientes cuatro etapas:
 
 - Seleccionar $G$ puntos como centros de los grupos.  
 - Calcular la distancia euclidea de cada observación a los centros de cada grupo, y asignar cada una de ellas al centro más próximo. Cada vez que una observación es asignada a un grupo, se re calcula el centro de dicho grupo.  
-- Definir un criterio de optimalidad y comprobar si reasignar uno a uno cada elemento de un grupo a otro mejor el criterio.  
+- Definir un criterio de optimalidad y comprobar si reasignar uno a uno cada elemento de un grupo a otro mejora el criterio.  
 - Si no es posible mejorar el criterio, terminar el proceso.  
 
 El método es sensible a la elección de los centros iniciales. Siempre se recomienda realizar el procedimiento con varios sets de centros iniciales. Si los resultados cambian drasticamente entre un set y otro, o si el algoritmo demora mucho tiempo en converger, puede deberse a que no exista una estructura de grupos en los datos.
@@ -204,7 +206,10 @@ Dado que entontrar la optimalidad de este criterio implicaría calcularlo para t
 - Comprobar si moviendo algún elemento se reduce $\boldsymbol{W}$.  
 - Si es posible, mover el elemento, recalcular las medias de los dos grupos afectados por el cambio, y volver al paso anterior. Si no es posible reducir $\boldsymbol{W}$, terminar.  
 
-Este mismo algoritmo puede utilizarse tomando otro tipos de centros. Por ejemplo, k-medoides toma como centros iniciales a los individuos representativos de cada grupo. Por representativos nos referimos a los infividos que minimizan la disimiliaridad promedio a todos los objetos del cluster.
+Este mismo algoritmo puede utilizarse tomando otro tipos de centros. Por ejemplo, k-medoides toma como centros iniciales a los individuos representativos de cada grupo. Por representativos nos referimos a los individos que minimizan la disimiliaridad promedio a todos los objetos del cluster.
+
+### KNN
+
 
 ## Clusters basados en modelos
 
