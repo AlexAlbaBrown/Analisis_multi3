@@ -17,6 +17,7 @@ header-includes:
 geometry: margin=1in
 fontsize: 12pt
 ---
+
 <!--
 bibliography: References.bib
 biblio-style: plain
@@ -25,7 +26,9 @@ nocite: |
 -->
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+   echo = FALSE
+   )
 ```
 
 # Descripción general
@@ -123,11 +126,11 @@ El primer paso es siempre igual y muy sencillo. Se parte de la matriz de datos $
 El problema comienza con los pasos subsiguiente cuando deben unirse observaciones con grupos previamente formados, o grupos con grupos. La pregunta a la que se debe dar respuesta es ¿cuál es la distancia entre la observación $k$, y el grupo formado por las observaciones $i$ y $j$? (Análogamente uno podría preguntarse cuál es la distancia entre el grupo $U_1$ y el grupo $U_2$, siendo estos dos grupos formados en pasos anteriores del algoritmo). Para definir estas distancias existen distintos criterios:
 
 \begin{itemize}
-\item **Single Linkage**: $d_{(i,j), k} = \min\{ d_{i,k}; \, d_{j,k} \}$
-\item **Complete Linkage**: $d_{(i,j), k} = \max\{ d_{i,k}; \, d_{j,k} \}$
-\item **Average Linkage**: la distancia entre dos grupos es el prmedio entras las distancias entre pares de observaciones. Es sesgado hacia la formación de grupos con igual varianza.
-\item **Centroide**: define la distancia entre los grupos $K$ y $L$ como $d_{(K, L)} = || \bar{x}_K - \bar{x}_L ||^2$. Tiene el beneficio de ser robusto a la presencia de outliers.
-\item **Ward**: la unión entre grupos se relaiza de forma tal de minimizar la varianza interna.
+\item \textbf{Single Linkage}: $d_{(i,j), k} = \min\{ d_{i,k}; \, d_{j,k} \}$
+\item \textbf{Complete Linkage}: $d_{(i,j), k} = \max\{ d_{i,k}; \, d_{j,k} \}$
+\item \textbf{Average Linkage}: la distancia entre dos grupos es el prmedio entras las distancias entre pares de observaciones. Es sesgado hacia la formación de grupos con igual varianza.
+\item \textbf{Centroide}: define la distancia entre los grupos $K$ y $L$ como $d_{(K, L)} = || \bar{x}_K - \bar{x}_L ||^2$. Tiene el beneficio de ser robusto a la presencia de outliers.
+\item \textbf{Ward}: la unión entre grupos se relaiza de forma tal de minimizar la varianza interna.
 $$\underbrace{\sum\limits_{i = 1}^{I} \sum\limits_{j = 1}^{J} (x_{ij} - \bar{x}_j)^2}_{ \text{ T (Total variance)}} = \underbrace{ \sum\limits_{k = 1}^{K} \sum\limits_{i = 1}^{n_k} \sum\limits_{j = 1}^{J} \big( x_{ij}^{(k)} - \bar{x}_j^{(k)} \big)^2 }_{\text{W (Within group variance)} } + \underbrace{ \sum\limits_{k = 1}^{K} \sum\limits_{j = 1}^{J} n_k \big( \bar{x}_j^{(k)} - \bar{x}_j \big)^2 }_{ \text{B (Between group variance)}} $$
 Esto puede verse en términos de distancias realizando las sumas en $J$:
 
