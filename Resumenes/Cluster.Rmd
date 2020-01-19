@@ -214,10 +214,35 @@ $$x_{medoide} = \argmin\limits_{y \in \{ x_1, \, \ldots, x_n \}} \sum\limits_{i 
 
 ### KNN
 
+#### Clasificador de Bayes
+
+
+#### Metodología
+
+En la práctica, no es posible conocer la distribución de $Y|X$, y por lo tanto, el clasificador de Bayes no puede ser calculado. KNN estima la distrubición de $Y|X$, y asigna las observaciones a la clase con mayor probabilidad estimada.
+
+Dado un $K \in \mathbb{N}$ y una observación $x_0$, KNN primero identifica los $k$ vecinos más cercanos. Estos constituyen el conjunto $\mathcal{N}_0$. Luego se estima la probabilidad condicional para la clase $j$ como la fracción de puntos en $\mathcal{N}_0$ cuya variable de respuesta es igual a $j$, esto es:
+$$\Pr(Y = j | X = x_0) = \frac{1}{K} \sum\limits_{i \in \mathcal{N}_0} \text{I}_{(y_i = j)}$$
+
+Cuando $K = 1$, KNN es demasiado flexible y encuntra patrónes en los datos que no se corresponden con el clasificador de Baye. El error de training es cero, pero el error en el grupo de test puede ser muy alato. A medida que $K$ aumenta, el método se vuelve menos flexible y eventualmente produce un clasificador que es lineal.
+
+| K     | Varianza | Sesgo |
+|:-----:|:--------:|:-----:|
+| 1     | muy alta | bajo  |
+| crece | baja     | alto  |
+
+\newpage
 
 ## Clusters basados en modelos
 
+La clusterización basada en modelos es un método en el cual se asume la existencia de un modelo matemático, y se busca optimizar el ajuste entre el modelo y los datos. Generalmente, dicho modelo es una mezcla de distribuciones. Cada distribución determina la probabilidad de que una observación tenga un conjunto particular de atributo-valores, dado que pertenece a una de las $k$ distribuciones.
+
+### Algorítmo EM (Expectation Maximazation)
+
+El algoritmo EM busca la estimación de los parámetros  de las distribuciones que mejor se adaptan a los datos y al modelo propuesto (máxima verosimilitud). Con ello se estima el grado de pertenencia de cada observación a cada grupo.
+
+El algoritmo comienza con la estimación inicial de los parámetros de las distribuciones (maximization) y los utiliza para calcular las probabilidad de que cada observación pertenezca a un cluster (expectation). Luego utiliza dichas probabilidades para re-estimar los parámetros de las distribuciones. El procedimiento se repite hasta converger. El ajuste global del modelo se evalúa a través del BIC.
 
 ## Fuzzy sets
 
-
+Los algoritmos fuzzy se basan en computar la probabilidad de que cada observación pertenezca a cada cluster. Se comienza con $k$ clusters y a cada observación se le asigna una probabilidad de pertenencia a cada cluster.
