@@ -14,6 +14,7 @@ header-includes:
    - \usepackage{multirow}
    - \usepackage{cancel}
    - \usepackage{float}
+   - \DeclareMathOperator*{\argmin}{arg\,min}
 geometry: margin=1in
 fontsize: 12pt
 ---
@@ -206,7 +207,10 @@ Dado que entontrar la optimalidad de este criterio implicaría calcularlo para t
 - Comprobar si moviendo algún elemento se reduce $\boldsymbol{W}$.  
 - Si es posible, mover el elemento, recalcular las medias de los dos grupos afectados por el cambio, y volver al paso anterior. Si no es posible reducir $\boldsymbol{W}$, terminar.  
 
-Este mismo algoritmo puede utilizarse tomando otro tipos de centros. Por ejemplo, k-medoides toma como centros iniciales a los individuos representativos de cada grupo. Por representativos nos referimos a los individos que minimizan la disimiliaridad promedio a todos los objetos del cluster.
+Este mismo algoritmo puede utilizarse tomando otro tipos de centros. Por ejemplo, k-medoides toma como centros iniciales a los individuos representativos de cada grupo. Por representativos nos referimos a los individos que minimizan la disimiliaridad promedio a todos los objetos del cluster. De este forma se logra que los centros, efectivamente sean individuos pertenecientes a la muestra y no puntos ficticios. El método es menos sensible a la presencia de outliers.
+
+Para definir los medoides, supongamos que $x_1, \, \ldots, x_n$ son puntos en un espacio métrico $(X, \, d)$. Entonces, el medoide se define como:
+$$x_{medoide} = \argmin\limits_{y \in \{ x_1, \, \ldots, x_n \}} \sum\limits_{i = 1}^{n} d(y, \, x_i)$$
 
 ### KNN
 
