@@ -39,6 +39,13 @@ vignettes/*.pdf
 .Renviron
 
 # Subdirectorios específicos
-/Trabajo de curso/
 /Entrega ACS y ACM/
 /Entrega Discriminante/
+/Teóricos/
+
+/ZZ. Otros (borrar)/
+
+# Archivos específicos
+Carátula Análisis Multivariado I.docx
+Proyecciones.pptx
+Resultados.pdf
