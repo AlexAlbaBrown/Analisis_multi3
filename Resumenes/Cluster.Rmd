@@ -245,4 +245,20 @@ El algoritmo comienza con la estimación inicial de los parámetros de las distr
 
 ## Fuzzy sets
 
-Los algoritmos fuzzy se basan en computar la probabilidad de que cada observación pertenezca a cada cluster. Se comienza con $k$ clusters y a cada observación se le asigna una probabilidad de pertenencia a cada cluster.
+La clusterización fuzzy es una generalización de los métodos de partición. En estos, cada observación es asignada a un y solo un grupo. Los algoritmos fuzzy se basan en computar un *coeficiente de membresía* para cada observación y cada cluster. El coeficiente toma valores entre 0 y 1, de forma tal que la suma de todos los coeficientes para una misma observación, suman 1.
+
+El algoritmo fuzzy no utiliza individuos representativos, sino que busca minimizar la función objetivo:
+$$C = \sum\limits_{v = 1}^{k} \frac{ \sum\limits_{i, j = 1}^{n} u_{iv}^2 \, u_{jv}^2 \, d(i,j) }{ 2 \, \sum\limits_{j = 1}^{n} u_{ju}^2 }$$
+donde $u_{iv}$ es el coeficiente de membresía de la obserción $i$ en el cluster $v$. La expresión del denominador aparece multiplicada por dos dado que se están sumando tanto el par $(i,j)$ como el $(j,i)$. A su vez, dado que estamos sumando sobre todos los clusters posibles, la función es entonces una medida de dispersión total entre dichos clusters. El algoritmo itera hasta que el cambio en la función objetivo es menor a una tolerancia $\varepsilon$.
+
+Algunas clusterizaciones son más difuzas que otras. Cuando un individuo tiene igual coeficiente de membresía en todos los clusters (todos iguales a $1/k$), decimos que presenta *complete fuzziness*. Por otro lado, cuando un individuo tiene coeficiente 1 en un cluster y 0 en todos los demás, estamos frente a un caso de partición. Para medir que tan rígida es laa clusterización se utiliza el coeficiente de partición de Dunn:
+$$F_k = \sum\limits_{i = 1}^{n} \sum\limits_{v = 1}^{k} \frac{ u_{iv}^2 }{ n }$$
+Cuando la clusterización es completamente disfuza, $F_k = 1/k$, mientras que cuando la clusterización es completamente particionada, toma valor 1. La versión normalizada del coeficiente de Dunn viene dada por la fórmula:
+$$F'_k = \frac{ F_k - (1/k) }{ 1 - (1/k) } = \frac{ k \, F_k - 1 }{ 1 - k }$$
+la cual siempre toma valores entre 1 y 0, independientemente de la cantidad de clusters $k$ elegidos.
+
+Habitualmente, las observaciones son asignadas al cluster para el cual tienen mayor coeficiente de membresía.
+
+
+
+
