@@ -259,6 +259,23 @@ la cual siempre toma valores entre 1 y 0, independientemente de la cantidad de c
 
 Habitualmente, las observaciones son asignadas al cluster para el cual tienen mayor coeficiente de membresía.
 
+# Silhouette 
 
+Un gráfico de Silhouette es una forma de validar el resultado de una clusterización. En el mismo se mide la cohesión (que tan similar es cada observación a los miembros de su propio cluster), y la separación (que tan disimil es cada observación a los miembros de los demás clusters). El Silhouette toma valores entre -1 y 1, donde valores altos indican que la observación está bien correspondida con los elementos de su propio cluster, y mal matcheada con los elementos de los demás clusters. Si la mayoría de las observaciones tienen valores altos de Silhouette, entonces la clusterización es considerada buena. Si, en cambio, varias observaciones tienen valores muy bajos, entonces es evidencia de que se consideraron ya sea muchos o muy pocos clusters.
 
+La Silhouette se calcula con una métrica de distancia. Así, dada una clusterización de $k$ clusters, definimos $a(i)$ como la distancia media entre la observación $i \in \mathcal{C}_i$, es decir:
+$$a(i) = \frac{1}{|\mathcal{C}_i| - 1} \sum\limits_{j \in \mathcal{C}_i, \, i \neq j} d(i,j)$$
+$a(i)$ puede interpretarse entonces como una medida de qué tan bien asignada está la observación $i$ en el cluster $\mathcal{C}_i$.
 
+De forma similar, definimos $b(i)$ como la menor disimilaridad promedio entre la observación $i$, y los miembros de los demás clusters $\mathcal{C}$ con $\mathcal{C} \neq \mathcal{C}_i$.
+$$b(i) = \min\limits_{k \neq i} \left\{ \frac{1}{|\mathcal{C}_k|} \sum\limits_{j \in \mathcal{C}_k} d(i,j) \right\}$$
+
+Definimos la medida de silhouette para la observación $i$, como:
+$$s(i) = \left\{
+\begin{array}{lcc}
+\frac{ b(i) - a(i) }{ \max \left\{ a(i), \, b(i) \right\} } & \text{si} & |\mathcal{C}_i| > 1 \\
+0 & \text{si} & \mathcal{C}_i = 1
+\end{array}
+\right.$$
+
+El promedio de $s(i)$ en todos las observaciones de un cluster es una medida de qué tan compactamente armado está el grupo. El promedio $s(i)$ sobre todos los datos, es una medida de qué tan buena es la clusterización.
