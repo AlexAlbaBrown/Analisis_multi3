@@ -1,0 +1,33 @@
+---
+title: "Análisis discriminante"
+author: "Daniel Czarnievicz"
+output: pdf_document
+header-includes:
+   - \usepackage{mathrsfs}
+   - \everymath{\displaystyle}
+   - \setlength{\parindent}{1em}
+   - \setlength{\parskip}{1em}
+   - \usepackage{fancyhdr}
+   - \pagestyle{fancy}
+   - \lhead{Cluster Analysis}
+   - \rhead{Daniel Czarnievicz}
+   - \usepackage{multirow}
+   - \usepackage{cancel}
+   - \usepackage{float}
+   - \DeclareMathOperator*{\argmin}{arg\,min}
+geometry: margin=1in
+fontsize: 12pt
+bibliography: References.bib
+biblio-style: plain
+nocite: |
+   @RSLang, @tidyverse, @fnnpack, @wasserman2007all, @rencher1998multivariate, @james2013introduction
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+   echo = FALSE
+   )
+```
+
+# Descripción general
+
