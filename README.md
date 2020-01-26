@@ -8,8 +8,8 @@ Edición 2016
 
 # Contenido
 
-[Análisis de clusters](https://github.com/daczarne/multivar1/tree/master/01.%20Clusters)
-[Inferencia multivariada](https://github.com/daczarne/multivar1/tree/master/02.%20Inferencia%20Multivariada)
-[Análisis discriminante]()
-[Análisis factorial]()
+[Análisis de clusters](https://github.com/daczarne/multivar1/tree/master/01.%20Clusters)  
+[Inferencia multivariada](https://github.com/daczarne/multivar1/tree/master/02.%20Inferencia%20Multivariada)  
+[Análisis discriminante]()  
+[Análisis factorial]()  
 
