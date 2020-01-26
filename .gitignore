@@ -39,10 +39,8 @@ vignettes/*.pdf
 .Renviron
 
 # Subdirectorios específicos
-/Entrega ACS y ACM/
 /Teóricos/
-
-/ZZ. Otros (borrar)/
+/Ejercicios Álgebra Lineal/
 
 # Archivos específicos
 Carátula Análisis Multivariado I.docx
