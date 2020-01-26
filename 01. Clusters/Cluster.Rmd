@@ -17,14 +17,11 @@ header-includes:
    - \DeclareMathOperator*{\argmin}{arg\,min}
 geometry: margin=1in
 fontsize: 12pt
----
-
-<!--
 bibliography: References.bib
 biblio-style: plain
 nocite: |
-   @RSLang, @tidyverse, @scott2015multivariate, @fnnpack, @wasserman2007all
--->
+   @RSLang, @tidyverse, @scott2015multivariate, @fnnpack, @wasserman2007all, @rencher1998multivariate, @james2013introduction
+---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
@@ -259,7 +256,7 @@ la cual siempre toma valores entre 1 y 0, independientemente de la cantidad de c
 
 Habitualmente, las observaciones son asignadas al cluster para el cual tienen mayor coeficiente de membresía.
 
-# Silhouette 
+# Silhouette
 
 Un gráfico de Silhouette es una forma de validar el resultado de una clusterización. En el mismo se mide la cohesión (que tan similar es cada observación a los miembros de su propio cluster), y la separación (que tan disimil es cada observación a los miembros de los demás clusters). El Silhouette toma valores entre -1 y 1, donde valores altos indican que la observación está bien correspondida con los elementos de su propio cluster, y mal matcheada con los elementos de los demás clusters. Si la mayoría de las observaciones tienen valores altos de Silhouette, entonces la clusterización es considerada buena. Si, en cambio, varias observaciones tienen valores muy bajos, entonces es evidencia de que se consideraron ya sea muchos o muy pocos clusters.
 
@@ -279,3 +276,5 @@ $$s(i) = \left\{
 \right.$$
 
 El promedio de $s(i)$ en todos las observaciones de un cluster es una medida de qué tan compactamente armado está el grupo. El promedio $s(i)$ sobre todos los datos, es una medida de qué tan buena es la clusterización.
+
+# Referencias
