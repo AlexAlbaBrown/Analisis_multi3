@@ -1,5 +1,5 @@
 ---
-title: "Cluster Analysis"
+title: "Análisis de clusters"
 author: "Daniel Czarnievicz"
 output: pdf_document
 header-includes:
