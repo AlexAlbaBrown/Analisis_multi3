@@ -59,9 +59,24 @@ $$f(\mathbf{x}_i|g) > f(\mathbf{x}_i|g') \,\,\, \forall g' \neq g \Leftrightarro
 ### Principio de probabilidad a posteriori
 
 La regla consiste en asignar la observación $i$ a la población con mayor probabilidad a posteriori (la probailidad de que $i$ pertenzca a $g$, dado $\mathbf{x}_i$). Utilizando el Teorema de Bayes, tenemos que la probabilidad a posteriori está dada por:
-$$\Pr(i \in g | \mathbf{x} = \mathbf{x}_i) = \frac{ \pi_g \Pr(\mathbf{x}_i | g) }{ \Pr(\mathbf{x}_i) } = \frac{ \pi_g \Pr(\mathbf{x}_i | g) }{ \sum\limits_{g'1 = 1}^{k} \pi_g' \Pr(\mathbf{x}_i | g') } = \frac{ \pi_g f(\mathbf{x}_i | g) }{ \sum\limits_{g'1 = 1}^{k} \pi_g' f(\mathbf{x}_i | g') }$$
+$$\Pr(i \in g | \mathbf{x} = \mathbf{x}_i) = \frac{ \pi_g \Pr(\mathbf{x}_i | g) }{ \Pr(\mathbf{x}_i) } = \frac{ \pi_g \Pr(\mathbf{x}_i | g) }{ \sum\limits_{g' = 1}^{k} \pi_g' \,\, \Pr(\mathbf{x}_i | g') } = \frac{ \pi_g f(\mathbf{x}_i | g) }{ \sum\limits_{g' = 1}^{k} \pi_{g'} \,\, f(\mathbf{x}_i | g') }$$
 
 De esta forma, la observación $i$ se asignará al grupo $g$, sí y solo sí:
 $$\Pr(i \in g | \mathbf{x} = \mathbf{x}_i) > \Pr(i \in g' | \mathbf{x} = \mathbf{x}_i) \,\,\, \forall g' \neq g$$
+
+**Normalidad**
+
+Si $\mathbf{x}_i \sim \text{N}_p(\mathbf{\mu}, \, \mathbf{\Sigma})$ su función de densidad viene dada por:
+$$f(\mathbf{x}_i | g) = \frac{ 1 }{ (2 \pi)^{^p/_2} | \mathbf{\Sigma}_g |^{^1/_2} } \, \exp \left\{ - \frac{1}{2} (\mathbf{x}_i - \mathbf{\mu}_g)' \mathbf{\Sigma}_g^{-1} (\mathbf{x}_i - \mathbf{\mu}_g) \right\}$$
+
+La densidad puede estimarse utilizando los estimadores MV de $\mathbf{\mu}_g$ y $\mathbf{\Sigma}_g$, $\mathbf{\bar{x}}_g$ y $\mathbf{S}_g$ respectivamente, para obtener:
+$$\hat{f}(\mathbf{x}_i | g) = \frac{ 1 }{ (2 \pi)^{^p/_2} | \mathbf{S}_g |^{^1/_2} } \, \exp \left\{ - \frac{1}{2} (\mathbf{x}_i - \mathbf{\bar{x}}_g)' \mathbf{S}_g^{-1} (\mathbf{x}_i - \mathbf{\bar{x}}_g) \right\}$$
+
+Si aplicamos el supuesto de normalidad a la probabilidad posteriori, obtenemos que:
+$$\Pr(i \in g | \mathbf{x} = \mathbf{x}_i) = \frac{ \pi_g \,\, | \mathbf{\Sigma}_g |^{-1/2} \exp\left\{ (-1/2) \, D^2_{ig} \right\} }{ \sum\limits_{g' = 1}^{k} \pi_{g'} \,\, | \mathbf{\Sigma}_{g'} |^{-1/2} \exp\left\{ (-1/2) \, D^2_{ig'} \right\} }$$
+donde $D^2_{ig}$ y $D^2_{ig'}$ son la distancia de Mahalanobis entre la observación $i$ y los grupos $g$ y $g'$ respectivamente. Utilizando los estimadores de $\mathbf{\mu}_g$ y $\mathbf{\Sigma}_g$ mencionadas anteriormente, obtenemos que:
+$$\hat{\Pr}(i \in g | \mathbf{x} = \mathbf{x}_i) = \frac{ \hat{\pi}_g \,\, | \mathbf{S}_g |^{-1/2} \exp\left\{ (-1/2) \, \hat{D}^2_{ig} \right\} }{ \sum\limits_{g' = 1}^{k} \hat{\pi}_{g'} \,\, | \mathbf{S}_{g'} |^{-1/2} \exp\left\{ (-1/2) \, \hat{D}^2_{ig'} \right\} }$$
+y la observación $i$ se asignará al grupo $g$, sí, y solo si se cumple que:
+$$\hat{\pi}_g \,\, | \mathbf{S}_g |^{-1/2} \exp\left\{ (-1/2) \, \hat{D}^2_{ig} \right\} > \hat{\pi}_{g'} \,\, | \mathbf{S}_{g'} |^{-1/2} \exp\left\{ (-1/2) \, \hat{D}^2_{ig'} \right\} \,\,\, \forall g' \neq g$$
 
 # Referencias
