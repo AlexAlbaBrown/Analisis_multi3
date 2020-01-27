@@ -86,6 +86,34 @@ $$\frac{ f(\mathbf{x}_i | g) }{ f(\mathbf{x}_i | g') } > \frac{ \pi_{g'} \, c(g 
 
 # Errores de clasificación
 
+## Tasa de error aparente
+
+Luego de elegida una regla de clasificación, se utilizan los $n$ datos para construir la función discriminante y clasificar las observaciones. Una vez clasificadas, se calcula la *tasa de error aparente*,
+$$e_{i, \, app} = \frac{m_i}{n_i}$$
+donde $m_i$ es la cantidad de observaciones clasificadas errónemente, de las $n_i$ observaciones asignadas al grupo $g_i$.
+
+## LOOCV
+
+*Leave-one-out cross-validation* consiste en:
+
+- apartar una observación de la muestra.  
+- construir la función discriminante con las $n - 1$ observaciones restantes.  
+- clasificar laa observación apartada y registrar si dicha observación fue correcta o incorrectamente clasificada.  
+- repetir para cada una de las $n$ observaciones  
+
+La proporción de observaciones mal clasificadas dentro de cada grupo se define como:
+$$e_{i, \, c} = \frac{a_i}{n_i}$$
+
+# Funciones discriminantes
+
+
+## AD factorial
+
+
+## AD probabilístico (distribución normal)
+
+
+## AD probabilístico (distribución desconocida)
 
 
 # Referencias
