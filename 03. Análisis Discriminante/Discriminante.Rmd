@@ -33,11 +33,11 @@ knitr::opts_chunk$set(
 
 El análisis discriminante es una técnica con finalidades de descripción (analizar la existencia de diferencias entre grupos), predicción (clasificar nuevas observaciones) y re-clasificación. El problema consiste en construir un modelo que permita discriminar las observaciones según el grupo poblacional al que pertenecen. A la $i$-ésima observación se le miden $p$ características, las cuales componen el vector $\mathbf{x}_i' = (x_{i1}, \, x_{i2}, \, \ldots, \, x_{ip})$. Se asume que existen $k$ grupos en la población.
 
-## Reglas de decisión
+# Reglas de decisión
 
 Existen distintas reglas de decisión para la asignación de observaciones a grupos.
 
-### Minimizar la probabilidad de error
+## Minimizar la probabilidad de error
 
 La regla de decisión será aquella que minimize la probabilidad total de error. Supongamos que una población $P$ está sub-dividida en $k$ grupos excluyentes. Llamaremos $f_k(x)$ a la densidad de $x$, si $x$ pertenece al $k$-ésimo grupo. El objetivo es encontrar una partición del espacio muestral $R$, tal que asigne $x$ al grupo $k \Leftrightarrow x \in r_x$.
 
@@ -51,12 +51,12 @@ De esta forma entonces, la probabilidad total de clasificación errónea está d
 $$\Pr(R, \, f) = \sum\limits_{g = 1}^{k} \pi_g \Pr(g)$$
 donde $\pi_g$ es la probabilidad a priori de que $i$ pertenzca a al grupo $g$.
 
-### Principio de máxima verosimilitud
+## Principio de máxima verosimilitud
 
 El pricipio de clasificación por máxima verosimilitud consiste en asignar la observación $i$ a la población donde el vector observado $\mathbf{x}_i'$ tenga mayor verosimilitud de ocurrir. Es decir, se asigna $i$ al grupo $g$, sí y solo si:
 $$f(\mathbf{x}_i|g) > f(\mathbf{x}_i|g') \,\,\, \forall g' \neq g \Leftrightarrow \Pr(\mathbf{x}_i|g) > \Pr(\mathbf{x}_i|g') \,\,\, \forall g' \neq g \Leftrightarrow \frac{ f(\mathbf{x}_i|g) }{ f(\mathbf{x}_i|g') } > 1$$
 
-### Principio de probabilidad a posteriori
+## Principio de probabilidad a posteriori
 
 La regla consiste en asignar la observación $i$ a la población con mayor probabilidad a posteriori (la probailidad de que $i$ pertenzca a $g$, dado $\mathbf{x}_i$). Utilizando el Teorema de Bayes, tenemos que la probabilidad a posteriori está dada por:
 $$\Pr(i \in g | \mathbf{x} = \mathbf{x}_i) = \frac{ \pi_g \Pr(\mathbf{x}_i | g) }{ \Pr(\mathbf{x}_i) } = \frac{ \pi_g \Pr(\mathbf{x}_i | g) }{ \sum\limits_{g' = 1}^{k} \pi_g' \,\, \Pr(\mathbf{x}_i | g') } = \frac{ \pi_g f(\mathbf{x}_i | g) }{ \sum\limits_{g' = 1}^{k} \pi_{g'} \,\, f(\mathbf{x}_i | g') }$$
@@ -78,5 +78,14 @@ donde $D^2_{ig}$ y $D^2_{ig'}$ son la distancia de Mahalanobis entre la observac
 $$\hat{\Pr}(i \in g | \mathbf{x} = \mathbf{x}_i) = \frac{ \hat{\pi}_g \,\, | \mathbf{S}_g |^{-1/2} \exp\left\{ (-1/2) \, \hat{D}^2_{ig} \right\} }{ \sum\limits_{g' = 1}^{k} \hat{\pi}_{g'} \,\, | \mathbf{S}_{g'} |^{-1/2} \exp\left\{ (-1/2) \, \hat{D}^2_{ig'} \right\} }$$
 y la observación $i$ se asignará al grupo $g$, sí, y solo si se cumple que:
 $$\hat{\pi}_g \,\, | \mathbf{S}_g |^{-1/2} \exp\left\{ (-1/2) \, \hat{D}^2_{ig} \right\} > \hat{\pi}_{g'} \,\, | \mathbf{S}_{g'} |^{-1/2} \exp\left\{ (-1/2) \, \hat{D}^2_{ig'} \right\} \,\,\, \forall g' \neq g$$
+
+# Costos
+
+Existen situaciones en las que el error de clasificación es más costo para algunos grupos que para otros. La regla de decisión puede modificarse de forma tal de contemplar estas situaciones de la siguiente forma. Se define un costo para cada error de clasificación, $c(g|g')$. Luego, se asigna $i$ al grupo $g$ sí, y solo si, se cumple que:
+$$\frac{ f(\mathbf{x}_i | g) }{ f(\mathbf{x}_i | g') } > \frac{ \pi_{g'} \, c(g | g') }{ \pi_{g} \, c(g' | g) } \,\,\, \forall g' \neq g$$
+
+# Errores de clasificación
+
+
 
 # Referencias
