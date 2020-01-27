@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7050 64-bit) (preloaded format=pdflatex 2019.6.15)  27 JAN 2020 11:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7050 64-bit) (preloaded format=pdflatex 2019.6.15)  27 JAN 2020 17:47
 entering extended mode
 **./Discriminante.tex
 (Discriminante.tex
@@ -714,19 +714,44 @@ Underfull \hbox (badness 10000) in paragraph at lines 219--222
  []
 
 [3]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 275.
-[4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 275.
+Underfull \hbox (badness 10000) in paragraph at lines 237--239
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 239--242
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 242--245
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 245--248
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 248--250
+
+ []
+
+[4] [5]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 361.
+[6]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 361.
 (Discriminante.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 275.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 275.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 361.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 361.
  ) 
 Here is how much of TeX's memory you used:
- 13382 strings out of 492895
- 194843 string characters out of 3133479
+ 13400 strings out of 492895
+ 195025 string characters out of 3133479
  309263 words of memory out of 3000000
  16982 multiletter control sequences out of 15000+200000
- 73655 words of font info for 100 fonts, out of 3000000 for 9000
+ 74383 words of font info for 108 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  35i,12n,43p,814b,359s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Program Files/
@@ -744,9 +769,9 @@ s/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/
 type1/public/lm/lmri12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/l
 msy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy6.pfb><C:/Prog
 ram Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb>
-Output written on Discriminante.pdf (4 pages, 204579 bytes).
+Output written on Discriminante.pdf (6 pages, 214991 bytes).
 PDF statistics:
- 179 PDF objects out of 1000 (max. 8388607)
- 40 named destinations out of 1000 (max. 500000)
+ 187 PDF objects out of 1000 (max. 8388607)
+ 42 named destinations out of 1000 (max. 500000)
  12401 words of extra memory for PDF output out of 14400 (max. 10000000)
 
