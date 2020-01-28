@@ -4,16 +4,17 @@ author: "Daniel Czarnievicz"
 output: pdf_document
 header-includes:
    - \usepackage{mathrsfs}
-   - \everymath{\displaystyle}
-   - \setlength{\parindent}{1em}
-   - \setlength{\parskip}{1em}
    - \usepackage{fancyhdr}
-   - \pagestyle{fancy}
-   - \lhead{Cluster Analysis}
-   - \rhead{Daniel Czarnievicz}
    - \usepackage{multirow}
    - \usepackage{cancel}
    - \usepackage{float}
+   - \pagestyle{fancy}
+   - \everymath{\displaystyle}
+   - \setlength{\parindent}{1em}
+   - \setlength{\parskip}{1em}
+   - \setlength{\headheight}{15pt}
+   - \lhead{Análisis Discriminante}
+   - \rhead{Daniel Czarnievicz}
    - \DeclareMathOperator*{\argmin}{arg\,min}
 geometry: margin=1in
 fontsize: 12pt
@@ -31,7 +32,7 @@ knitr::opts_chunk$set(
 
 # Descripción general
 
-El análisis discriminante es una técnica con finalidades de descripción (analizar la existencia de diferencias entre grupos), predicción (clasificar nuevas observaciones) y re-clasificación. El problema consiste en construir un modelo que permita discriminar las observaciones según el grupo poblacional al que pertenecen. A la $i$-ésima observación se le miden $p$ características, las cuales componen el vector $\mathbf{x}_i' = (x_{i1}, \, x_{i2}, \, \ldots, \, x_{ip})$. Se asume que existen $k$ grupos en la población.
+El análisis discriminante es una técnica supervisada con finalidades de descripción (analizar la existencia de diferencias entre grupos), predicción (clasificar nuevas observaciones) y re-clasificación. El problema consiste en construir un modelo que permita discriminar las observaciones según el grupo poblacional al que pertenecen. A la $i$-ésima observación se le miden $p$ características, las cuales componen el vector $\mathbf{x}_i' = (x_{i1}, \, x_{i2}, \, \ldots, \, x_{ip})$. Se asume que existen $k$ grupos en la población.
 
 # Reglas de decisión
 
@@ -60,6 +61,7 @@ $$f(\mathbf{x}_i|g) > f(\mathbf{x}_i|g') \,\,\, \forall g' \neq g \Leftrightarro
 
 La regla consiste en asignar la observación $i$ a la población con mayor probabilidad a posteriori (la probailidad de que $i$ pertenzca a $g$, dado $\mathbf{x}_i$). Utilizando el Teorema de Bayes, tenemos que la probabilidad a posteriori está dada por:
 $$\Pr(i \in g | \mathbf{x} = \mathbf{x}_i) = \frac{ \pi_g \Pr(\mathbf{x}_i | g) }{ \Pr(\mathbf{x}_i) } = \frac{ \pi_g \Pr(\mathbf{x}_i | g) }{ \sum\limits_{g' = 1}^{k} \pi_g' \,\, \Pr(\mathbf{x}_i | g') } = \frac{ \pi_g f(\mathbf{x}_i | g) }{ \sum\limits_{g' = 1}^{k} \pi_{g'} \,\, f(\mathbf{x}_i | g') }$$
+donde $\pi_g$ es la probailidad previa de que $i \in g$. Salvo que información adicional sugiera lo contrario, $\pi_g$ se estimad como la proporción de observaciones en $\mathbf{X}$ que pertenecen a la clase $g$. Esto es, $\hat{\pi}_g = n_g / n$, siendo $n$ la cantidad total de observaciones, y $n_g$ la cantidad de observaciones con variable de respuesta igual a la etiqueta de la clase $g$.
 
 De esta forma, la observación $i$ se asignará al grupo $g$, sí y solo sí:
 $$\Pr(i \in g | \mathbf{x} = \mathbf{x}_i) > \Pr(i \in g' | \mathbf{x} = \mathbf{x}_i) \,\,\, \forall g' \neq g$$
@@ -138,6 +140,41 @@ En total, pueden hallarse $r = \min(k - 1, \, p)$ valores y vectores propios no 
 Para determinar con cuántas funciones discriminantes trabajar se calcula la variación explicada por ellas, siendo $\frac{ \lambda_1 }{ \sum\limits_{j = 1}^{r} \lambda_j }$ la de la primera, $\frac{ \lambda_1 + \lambda_2 }{ \sum\limits_{j = 1}^{r} \lambda_j }$ la primera y la segunda juntas, y así sucesivamente. La correlación entre las variables orginales y las combinaciones lineales establece la importancia de cada una de las variables originales para discriminar.
 
 ## AD probabilístico (distribución normal)
+
+Se asume que cada grupo tiene una distribución normal $p$-variada.
+$$\begin{array}{c}
+\mathbf{x}_1 \sim \text{N}_p(\mathbf{\mu}_1, \, \mathbf{\Sigma}_1) \\
+\mathbf{x}_2 \sim \text{N}_p(\mathbf{\mu}_2, \, \mathbf{\Sigma}_2) \\
+\vdots \\
+\mathbf{x}_k \sim \text{N}_p(\mathbf{\mu}_k, \, \mathbf{\Sigma}_k) \\
+\end{array}$$
+
+### AD lineal
+
+Adicionalmente, se asume que las matrices de covarianzas son iguales en todos los grupos: 
+$$\mathbf{\Sigma}_1 = \mathbf{\Sigma}_2 = \ldots = \mathbf{\Sigma}_k$$
+
+Sabemos que para aplicar la regla de probabilidad a posteriori, se debe maximizar $\Pr(i \in g | \mathbf{x} = \mathbf{x}_i)$, lo cual requiere maximizar $\pi_g \, \exp\left\{ - \frac{1}{2} D_{ig}^2 \right\}$. Tomando logaritmos tenemos que la función objetivo es entonces:
+$$\begin{array}{rcl}
+\log \pi_g - \frac{1}{2} D_{ig}^2 & = & \log \pi_g - \frac{1}{2} \left[ (\mathbf{x}_i - \mathbf{\mu}_g)' \mathbf{\Sigma}^{-1} ((\mathbf{x}_i - \mathbf{\mu}_g)) \right] \\ \\
+   & = & \log \pi_g - \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \mathbf{\mu}_g - \frac{1}{2} \mathbf{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{\mu}_g \\ \\
+   & = & \log \hat{\pi}_g - \frac{1}{2} \mathbf{x}'_i \, \mathbf{S}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{\bar{x}}'_g \, \mathbf{S}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{x}'_i \, \mathbf{S}^{-1} \, \mathbf{\bar{x}}_g - \frac{1}{2} \mathbf{\bar{x}}'_g \, \mathbf{S}^{-1} \, \mathbf{\bar{x}}_g
+\end{array}$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## AD probabilístico (distribución desconocida)
