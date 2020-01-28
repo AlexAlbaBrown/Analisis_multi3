@@ -154,28 +154,38 @@ $$\begin{array}{c}
 Adicionalmente, se asume que las matrices de covarianzas son iguales en todos los grupos: 
 $$\mathbf{\Sigma}_1 = \mathbf{\Sigma}_2 = \ldots = \mathbf{\Sigma}_k$$
 
-Sabemos que para aplicar la regla de probabilidad a posteriori, se debe maximizar $\Pr(i \in g | \mathbf{x} = \mathbf{x}_i)$, lo cual requiere maximizar $\pi_g \, \exp\left\{ - \frac{1}{2} D_{ig}^2 \right\}$. Tomando logaritmos tenemos que la función objetivo es entonces:
+Sabemos que para aplicar la regla de probabilidad a posteriori, se debe maximizar la probabilidad condicional $\Pr(i \in g | \mathbf{x} = \mathbf{x}_i)$. Sabemos tambien que maximizar dicha probabilidad condicional es equivalente a maximizar $\pi_g \, \exp\left\{ - \frac{1}{2} D_{ig}^2 \right\}$. Definimos la función $L_{ig}$ como el logaritmo de nuestra función objetivo, esto es:
 $$\begin{array}{rcl}
-\log \pi_g - \frac{1}{2} D_{ig}^2 & = & \log \pi_g - \frac{1}{2} \left[ (\mathbf{x}_i - \mathbf{\mu}_g)' \mathbf{\Sigma}^{-1} ((\mathbf{x}_i - \mathbf{\mu}_g)) \right] \\ \\
-   & = & \log \pi_g - \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \mathbf{\mu}_g - \frac{1}{2} \mathbf{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{\mu}_g \\ \\
-   & = & \log \hat{\pi}_g - \frac{1}{2} \mathbf{x}'_i \, \mathbf{S}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{\bar{x}}'_g \, \mathbf{S}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{x}'_i \, \mathbf{S}^{-1} \, \mathbf{\bar{x}}_g - \frac{1}{2} \mathbf{\bar{x}}'_g \, \mathbf{S}^{-1} \, \mathbf{\bar{x}}_g
+L_{ig} & = & \log \pi_g - \frac{1}{2} D_{ig}^2 \\ \\
+   & = & \log \pi_g - \frac{1}{2} \left[ (\mathbf{x}_i - \mathbf{\mu}_g)' \mathbf{\Sigma}^{-1} ((\mathbf{x}_i - \mathbf{\mu}_g)) \right] \\ \\
+   & = & \log \pi_g - \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \mathbf{\mu}_g - \frac{1}{2} \mathbf{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{\mu}_g
+\end{array}$$
+dado que $\mathbf{\mu}_g$ y $\mathbf{\Sigma}$ son desconocidos, utilizamos sus estimadores MV. Adicionalmente, dado que $\mathbf{\Sigma}$ es una matrix simétrica, tenemos que $\frac{1}{2} \mathbf{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \mathbf{\mu}_g = \mathbf{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i$. Por útimo, dado que el vector $\mathbf{x}_i$ es el mismo para todos los grupo, el término $\mathbf{x}'_i \, \mathbf{S}^{-1} \, \mathbf{x}_i$ puede descartarse ya que es constante. De esta forma, obtenemos que la función $L_{ig}$ está dada por
+$$L_{ig} = \log \hat{\pi}_g + \mathbf{\bar{x}}'_g \, \mathbf{S}^{-1} \, \mathbf{x}_i - \frac{1}{2} \mathbf{\bar{x}}'_g \, \mathbf{S}^{-1} \, \mathbf{\bar{x}}_g$$
+
+La función $L_{ig}$ es la conocida como **función discriminante lineal**. El valor que $L_{ig}$ toma es conocido como el **score** de la observación $i$ en el grupo $g$. La misma es lineal en las $x$.
+
+La función que permite determinar en qué grupo clasificar una observación es llamada **función de la clasificación**. Para hallar, partimos de la desigualdad derivada en la sección de reglas de decisión: la observación $i$ se asigna al grupo $g$, sí, y solo si,
+$$\Pr(i \in g | \mathbf{x} = \mathbf{x}_i) > \Pr(i \in g' | \mathbf{x} = \mathbf{x}_i) \,\,\, \forall g \neq g'$$
+
+Para el caso de la normalidad con igualdad de matrices de covarianzas, sabemos que esto es equivalente a asignar la observación $i$ al grupo $g$ si se cumple que:
+$$\hat{\pi}_g \, \hat{D}^2_{ig} > \hat{\pi}_{g'} \, \hat{D}^2_{ig'} \,\,\, \forall g \neq g'$$
+
+Por lo tanto, para hallar la función de clasificación, debemos comparar las funciones discriminantes para los grupo $g$ y $g'$. Esto es, $i$ se asignará al grupo $g$ si se cumple:
+$$\begin{array}{rcl}
+L_{ig} & > & L_{ig'} \\ \\
+\log \hat{\pi}_g + \mathbf{\bar{x}}'_g \, \mathbf{S}^{-1} \, \mathbf{x}_i - \frac{1}{2} \mathbf{\bar{x}}'_g \, \mathbf{S}^{-1} \, \mathbf{\bar{x}}_g & > & \log \hat{\pi}_{g'} + \mathbf{\bar{x}}'_{g'} \, \mathbf{S}^{-1} \, \mathbf{x}_i - \frac{1}{2} \mathbf{\bar{x}}'_{g'} \, \mathbf{S}^{-1} \, \mathbf{\bar{x}}_{g'} \\ \\
+\mathbf{\bar{x}}'_g \, \mathbf{S}^{-1} \, \mathbf{x}_i - \mathbf{\bar{x}}'_{g'} \, \mathbf{S}^{-1} \, \mathbf{x}_i - \frac{1}{2} \mathbf{\bar{x}}'_g \, \mathbf{S}^{-1} \, \mathbf{\bar{x}}_g + \frac{1}{2} \mathbf{\bar{x}}'_{g'} \, \mathbf{S}^{-1} \, \mathbf{\bar{x}}_{g'} & > & \log \hat{\pi}_{g'} - \log \hat{\pi}_g \\ \\
+\left( \mathbf{\bar{x}}'_g - \mathbf{\bar{x}}'_{g'} \right) \mathbf{S}^{-1} \, \mathbf{x}_i - \frac{1}{2} \mathbf{\bar{x}}'_g \, \mathbf{S}^{-1} \, \mathbf{\bar{x}}_g + \frac{1}{2} \mathbf{\bar{x}}'_{g'} \, \mathbf{S}^{-1} \, \mathbf{\bar{x}}_{g'} & > & \log \left( \frac{ \hat{\pi}_{g'} }{ \hat{\pi}_{g} } \right) \\ \\
+\left( \mathbf{\bar{x}}'_g - \mathbf{\bar{x}}'_{g'} \right) \mathbf{S}^{-1} \, \mathbf{x}_i - \frac{1}{2} \left[ \mathbf{\bar{x}}'_g \, \mathbf{S}^{-1} \, \mathbf{\bar{x}}_g - \mathbf{\bar{x}}'_{g'} \, \mathbf{S}^{-1} \, \mathbf{\bar{x}}_{g'} \right] & > & \log \left( \frac{ \hat{\pi}_{g'} }{ \hat{\pi}_{g} } \right) \\ \\
+\left( \mathbf{\bar{x}}'_g - \mathbf{\bar{x}}'_{g'} \right) \mathbf{S}^{-1} \, \mathbf{x}_i - \frac{1}{2} \left[ \left( \mathbf{\bar{x}}'_g - \mathbf{\bar{x}}'_{g'} \right) \mathbf{S}^{-1} \left( \mathbf{\bar{x}}_g - \mathbf{\bar{x}}_{g'} \right) \right] & > & \log \left( \frac{ \hat{\pi}_{g'} }{ \hat{\pi}_{g} } \right) \\ \\
+\left( \mathbf{\bar{x}}'_g - \mathbf{\bar{x}}'_{g'} \right) \mathbf{S}^{-1} \left[ \mathbf{x}_i - \frac{1}{2} \left( \mathbf{\bar{x}}_g - \mathbf{\bar{x}}_{g'} \right) \right] & > & \log \left( \frac{ \hat{\pi}_{g'} }{ \hat{\pi}_{g} } \right) \\ \\
+\underbrace { \left( \mathbf{\bar{x}}_g - \mathbf{\bar{x}}_{g'} \right)' \mathbf{S}^{-1} \left[ \mathbf{x}_i - \frac{1}{2} \left( \mathbf{\bar{x}}_g - \mathbf{\bar{x}}_{g'} \right) \right] }_{ L_{igg'} } & > & \log \left( \frac{ \hat{\pi}_{g'} }{ \hat{\pi}_{g} } \right)
 \end{array}$$
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Por lo tanto, la región de clasificación queda determinada por los $k - 1$ hiperplanos definidos por las inequaciones de la forma
+$$R_{gg'}: \,\, L_{igg'} > \log \left( \frac{ \hat{\pi}_{g'} }{ \hat{\pi}_{g} } \right)$$
+Los bordes de estas regiones están determinadas por las ecuaciones $L_{igg'} = \log \left( \frac{ \hat{\pi}_{g'} }{ \hat{\pi}_{g} } \right)$, y en ellos, no se cuenta con regla de decisión.
 
 ## AD probabilístico (distribución desconocida)
 
