@@ -332,4 +332,4 @@ Si $\mathbf{V}_0 = \mathbf{I} \Rightarrow \lambda = - n \log|\mathbf{S}| + n \, 
 
 ### Contraste de esfericidad
 
-
+# Referencias
