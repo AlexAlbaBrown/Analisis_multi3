@@ -13,7 +13,7 @@ header-includes:
    - \setlength{\parindent}{1em}
    - \setlength{\parskip}{1em}
    - \setlength{\headheight}{15pt}
-   - \lhead{Análisis Discriminante}
+   - \lhead{Análisis de Clusters}
    - \rhead{Daniel Czarnievicz}
    - \DeclareMathOperator*{\argmin}{arg\,min}
 geometry: margin=1in
