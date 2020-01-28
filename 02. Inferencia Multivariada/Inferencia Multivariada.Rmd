@@ -4,25 +4,25 @@ author: "Daniel Czarnievicz"
 output: pdf_document
 header-includes:
    - \usepackage{mathrsfs}
-   - \everymath{\displaystyle}
-   - \setlength{\parindent}{1em}
-   - \setlength{\parskip}{1em}
    - \usepackage{fancyhdr}
-   - \pagestyle{fancy}
-   - \lhead{Inferencia Multivariada}
-   - \rhead{Daniel Czarnievicz}
    - \usepackage{multirow}
    - \usepackage{cancel}
    - \usepackage{float}
+   - \pagestyle{fancy}
+   - \everymath{\displaystyle}
+   - \setlength{\parindent}{1em}
+   - \setlength{\parskip}{1em}
+   - \setlength{\headheight}{15pt}
+   - \lhead{Inferencia Multivariada}
+   - \rhead{Daniel Czarnievicz}
+   - \DeclareMathOperator*{\argmin}{arg\,min}
 geometry: margin=1in
 fontsize: 12pt
----
-<!--
 bibliography: References.bib
 biblio-style: plain
 nocite: |
-   @RSLang, @tidyverse, @scott2015multivariate, @fnnpack, @wasserman2007all
--->
+   @RSLang, @tidyverse, @fnnpack, @wasserman2007all, @rencher1998multivariate, @james2013introduction
+---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
