@@ -207,6 +207,10 @@ La $Q_{ig}$ se utiliza para calcular el **score**de la observación $i$ en el gr
 
 ### Comparación entre LDA y QDA
 
+La diferencia estadística entre LDA y QDA radica en el bias-variance trade-off. Cuando se cuenta con $p$ variables, la estimación de la matriz de covarianzas requiere estimar $p(p + 1) / 2$ parámetros para LDA, pero $K p (p + 1) / 2$ parámetros para QDA.
+
+LDA es un método menos flexible que QDA y, consequentemente, tiene menor varianza en la estimación de sus parámetros. Si bien esto puede derivar en una mejor capacidad predictiva en la clasificación, también puede generar grandes sesgos en los casos en que el supuesto de homocedasticidad no sea creible
+
 ## AD probabilístico (distribución desconocida)
 
 
