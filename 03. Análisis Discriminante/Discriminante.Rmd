@@ -187,7 +187,50 @@ Por lo tanto, la región de clasificación queda determinada por los $k - 1$ hip
 $$R_{gg'}: \,\, L_{igg'} > \log \left( \frac{ \hat{\pi}_{g'} }{ \hat{\pi}_{g} } \right)$$
 Los bordes de estas regiones están determinadas por las ecuaciones $L_{igg'} = \log \left( \frac{ \hat{\pi}_{g'} }{ \hat{\pi}_{g} } \right)$, y en ellos, no se cuenta con regla de decisión.
 
+Si lo costos de error de clasificación no son iguales entre grupos, la regla de decisión será:
+$$R_{gg'}: \,\, L_{igg'} > \log \left( \frac{ \hat{\pi}_{g'} \, c(g | g') }{ \hat{\pi}_{g} \, c(g' | g) } \right)$$
+
+### AD cuadrático
+
+A diferencia del ADL, el cuadrático no asume la igualdad de matrices de covarianzas. No obstante ello, el problem se mantiene igual,
+$$\max\big\{ \Pr(i \in g | \mathbf{x} = \mathbf{x}_i) \big\} = \max\left\{ \pi_g \, \exp\left\{ - \frac{1}{2} D_{ig}^2 \right\} \left| \mathbf{\Sigma}_g \right|^{-1/2} \right\}$$
+
+Definimos la **función discriminante cuadrática** aplicando logarítmos y utilizando los estimadores MV para $\mathbf{\mu}_g$ y $\mathbf{\Sigma}_g$ en la función objetivo. De esta forma, tenemos que:
+$$\begin{array}{rcl}
+Q_{ig} & = & \pi_g \, \exp\left\{ - \frac{1}{2} D_{ig}^2 \right\} \left| \mathbf{\Sigma}_g \right|^{-1/2} \\ \\
+   & = & \log \hat{\pi}_g - \frac{1}{2} \hat{D}_{ig}^2 - \frac{1}{2} \log |\mathbf{S}_g| \\ \\
+   & = & \log \hat{\pi}_g - \frac{1}{2} \log |\mathbf{S}_g| - \frac{1}{2} \left(\mathbf{x}_i - \mathbf{\bar{x}}_g \right)' \mathbf{S}_g^{-1} \left(\mathbf{x}_i - \mathbf{\bar{x}}_g \right) \\ \\
+   & = & \log \hat{\pi}_g - \frac{1}{2} \log |\mathbf{S}_g| - \frac{1}{2} \mathbf{x}_i' \mathbf{S}_g^{-1} \mathbf{x}_i + \frac{1}{2} \mathbf{x}_i' \mathbf{S}_g^{-1} \mathbf{\bar{x}}_g + \frac{1}{2} \mathbf{\bar{x}}_g' \mathbf{S}_g^{-1} \mathbf{x}_i - \frac{1}{2} \mathbf{\bar{x}}_g' \mathbf{S}_g^{-1} \mathbf{\bar{x}}_g
+\end{array}$$
+
+La $Q_{ig}$ se utiliza para calcular el **score**de la observación $i$ en el grupo $g$, para cada grupo $g = 1, \, \ldots, k$. Así entonces, $i$ se asigna al grupo $g$, sí, y solo si, $Q_{ig} > Q_{ig'} \,\,\, \forall g \neq g'$.
+
+### Comparación entre LDA y QDA
+
 ## AD probabilístico (distribución desconocida)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Referencias
