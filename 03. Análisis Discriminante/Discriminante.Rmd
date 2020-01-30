@@ -16,6 +16,10 @@ header-includes:
    - \lhead{Análisis Discriminante}
    - \rhead{Daniel Czarnievicz}
    - \DeclareMathOperator*{\argmin}{arg\,min}
+   - \DeclareMathOperator*{\plim}{plim}
+   - \DeclareMathOperator{\E}{\mathbf{E}}
+   - \DeclareMathOperator{\V}{\mathbf{Var}}
+   - \DeclareMathOperator{\Cov}{\mathbf{Cov}}
 geometry: margin=1in
 fontsize: 12pt
 bibliography: References.bib
@@ -213,28 +217,76 @@ LDA es un método menos flexible que QDA y, consequentemente, tiene menor varian
 
 ## AD probabilístico (distribución desconocida)
 
+### Logit con dos grupos
 
+Supongamos que se cuenta con una población en la que existen dos grupos, a los que se suele denominar como "éxito" y "fracaso". Por lo tanto, podemos modelar la variable de respuesta según el modelo:
+$$Y_i \sim \text{Bernoulli}(\pi_i)$$
+Por lo que sabemos que: 
+$$\begin{array}{ccccc}
+\Pr(Y_i = 1) = \pi_i & & \Pr(Y_i = 0) = 1 - \pi_i & & \E(Y_i | X) = \pi_i
+\end{array}$$
+$$\Pr(Y_i = 1 | \mathbf{x} = \mathbf{x}_i) = \pi_i = \frac{ e^{\mathbf{x}_i' \beta} }{ 1 + e^{\mathbf{x}_i' \beta} }$$
 
+Este modelo se puede linealizar utilizando las *transformación Logit*, y encontramos que:
+$$\log\left( \frac{\pi_i }{ 1 - \pi_i } \right) = \mathbf{x}_i' \beta$$
 
+Al cociente $\frac{\pi_i }{ 1 - \pi_i } = e^{\mathbf{x}_i' \beta}$ se lo denomina *odds*, y se lo puede conciderar como una medida de riesgo. Es el cociente entre la probabilidad de éxito $\pi_i$ y la probabilidad de fracaso $1 - \pi_i$.
 
+Para hallar estimaciones de los parámetros se utiliza el método de máxima verosimilitud. Dado que $Y_i \sim \text{Bernoulli}(\pi_i)$, su función de densidad está dada por:
+$$f(Y_i) = \pi_i^{Y_i} \, \big( 1 - \pi_i \big)^{1 - Y_i}$$
 
+Si asumimos que las variables $Y_i$ son independientes, tenemos que su función de verosimilitud está dada por:
+$$\mathscr{L}(\beta) = \prod\limits_{i = 1}^{n} f(Y_i) = \prod\limits_{i = 1}^{n} \pi_i^{Y_i} \, \big( 1 - \pi_i \big)^{1 - Y_i}$$
+y su log-verosimiilitud será:
+$$\begin{array}{rcl}
+\ell(\beta) & = & \sum\limits_{i = 1}^{n} Y_i \log\left( \frac{ \pi_i }{ 1 - \pi_i } \right) + \sum\limits_{i = 1}^{n} \log \big( 1 - Y_i \big) \\ \\
+   & = & \sum\limits_{i = 1}^{n} Y_i \mathbf{x}_i' \beta + \sum\limits_{i = 1}^{n} \log \big( 1 - Y_i \big)
+\end{array}$$
 
+Las estimaciones de los coeficientes se obtienen resolviendo las CPO:
+$$\frac{ \partial \ell(\beta) }{ \partial \beta } = 0$$
+utilizando algorítmos numéricos, por ejemplo Newton-Raphson. Los valores estimados de $Y_i$ se obtienen utilizando las estimaciones de los parámetros:
+$$\hat{\pi}_i = \frac{ e^{\mathbf{x}_i' \hat{\mathbf{\beta}}} }{ 1 + e^{\mathbf{x}_i' \hat{\mathbf{\beta}}} }$$
 
+Debido a que el AD logístico se trata de un modelo, se pueden realizar pruebas de significación del modelo, de los parámetros y de la bondad de ajuste. Las pruebas de significación tienen la forma habitual:
+$$\begin{array}{lcc}
+H_0) \,\,\, \beta_1 = \beta_2 = \ldots = \beta_p = 0 \\
+H_1) \,\,\, \exists \beta_j \neq 0
+\end{array}$$
 
+$$\begin{array}{lcc}
+H_0) \,\,\, \beta_q = \beta_{q + 1} = \ldots = \beta_p = 0 \\
+H_1) \,\,\, \exists \beta_j \neq 0
+\end{array}$$
 
+Un estadístico que suele utilizarse para dichas pruebas es el de ratio de verosimilitud. Primero se define:
+$$\lambda = \frac{ \mathscr{L}_M }{ \mathscr{L}_R }$$
+donde $\mathscr{L}_M$ es la verosimilitud del modelo ajustado, mientras que $\mathscr{L}_R$ es la verosimilitud del modelo reducido. El estadístico de ratio de verosimilitud se define como:
+$$-2 \log \lambda = - 2 \log \left( \frac{ \mathscr{L}_M }{ \mathscr{L}_R } \right) \sim \chi_{p + 1 - q}^2$$
 
+Para las pruebas de significación indiviidual de los parámetros se puede utilizar el estadístico de Wald. La prueba es de la forma:
+$$\begin{array}{lcc}
+H_0) \,\,\, \beta_k = 0 \\
+H_1) \,\,\, \beta_k \neq 0
+\end{array}$$
+y el estadístico se define como:
+$$W = \frac{ \hat{\beta}_k }{ \hat{\sigma}_{\hat{\beta}_k} } \stackrel{a}{\sim} \text{N}(0, \, 1)$$
 
+Una vez estimado el modelo y calculadas las predicciones $\hat{\pi}_i$, se debe decidir cuales clasificar como éxito ($Y_i = 1$) y cuales como fracaso ($Y_i = 0$). Salvo casos en que otra información esté disponible, lo usual es tomar 0,5 como punto de corte. De esta forma entonces:
+$$\hat{Y}_i = \left\{ 
+\begin{array}{rcl}
+1 & \text{si} & \hat{\pi}_i \geq 0.5 \\
+0 & \text{si} & \hat{\pi}_i < 0.5 \\
+\end{array}\right.$$
 
+La acuracidad de predicción de un modelo de respuesta discreta suele medirse mediante la *sensibilidad* y la *especificidad*, donde:
+$$\text{sensibilidad} = \frac{ \#(\text{éxitos observadors clasificados como éxitos}) }{ \#(\text{éxitos observados}) }$$
 
+$$\text{especificidad} = \frac{ \#(\text{fracasos observadors clasificados como fracasos}) }{ \#(\text{fracasos observados}) }$$
 
+Estos resultados suelen mostrarse en la matriz de confusión (observados Vs. predichos) y/o en la curva ROC (sensibilidad Vs. 1 - especificidad). Estos indicadores también se utilizar para el ADL y el ADC.
 
-
-
-
-
-
-
-
+### Logit con múltiples grupos
 
 
 # Referencias
