@@ -98,6 +98,8 @@ Luego de elegida una regla de clasificación, se utilizan los $n$ datos para con
 $$e_{i, \, app} = \frac{m_i}{n_i}$$
 donde $m_i$ es la cantidad de observaciones clasificadas errónemente, de las $n_i$ observaciones asignadas al grupo $g_i$.
 
+\newpage
+
 ## LOOCV
 
 *Leave-one-out cross-validation* consiste en:
@@ -288,5 +290,31 @@ Estos resultados suelen mostrarse en la matriz de confusión (observados Vs. pre
 
 ### Logit con múltiples grupos
 
+Si la variable de respuesta tiene más de dos categorías, existen varias formas de plantear el modelo.
+
+#### Logits acumulados (modelos proporcionales)
+
+El ajuste se basa en que la influencia de las variables explicativas en la variable de respuesta es independienete del punto de corto del logit acumulado. El modelo tiene la siguiente especificación:
+$$logit(\theta_{ik}) = \alpha_k + \mathbf{x}_i' \beta$$
+donde $i$ indica la observación y $k$ la sub-población o grupo. Los modelos tienen entonces la siguiente forma:
+$$\begin{array}{ccccc}
+logit(\theta_{i1}) & = & \log \left( \frac{ \pi_{i1} }{ \pi_{i2} + \pi_{i3} + \ldots + \pi_{ik} } \right) & = & \mathbf{x}_i' \beta \\ \\
+logit(\theta_{i2}) & = & \log \left( \frac{ \pi_{i1} + \pi_{i2} }{ \pi_{i3} + \pi_{i4} + \ldots + \pi_{ik} } \right) & = & \mathbf{x}_i' \beta \\ \\
+\vdots & & \vdots & & \vdots \\ \\
+logit(\theta_{ik-1}) & = & \log \left( \frac{ \pi_{i1} + \pi_{i2} + \ldots + \pi_{ik-1} }{ \pi_{ik} } \right) & = & \mathbf{x}_i' \beta \\ \\
+\end{array}$$
+donde $\pi_{ig}$ es la probabilidad de que la observación $i$ pertenezca al grupo $g$.
+
+#### Logits generalizados
+
+Se utiliza una categoría como referencia. Para cada categoría se ajusta un modelo logit. Existen por lo tanto $K - 1$ juegos de parámetros para cada uno de los $K - 1$ modelos de la forma:
+$$logit_{ig} = \log \left( \frac{ \pi_{ig} }{ \pi_{iK} } \right) = \mathbf{x}_{ig}' \beta_g$$
+donde $\pi_{ig}$ es la probabilidad de que la observación $i$ pertenezca al grupo $g = 1, \, \ldots, \, K$.
+
+#### Logits de categorías adyacentes
+
+También existen $K - 1$ modelos, pero cada modelo compara su categoría, con la categoría siguiente.
+$$logit_{i, \, g} = \log \left( \frac{ \pi_{i, \, g-1} }{ \pi_{i, \, g} } \right) = \mathbf{x}_{i, \, g - 1}' \beta_{g-1}$$
+donde $\pi_{i, \,g}$ es la probabilidad de que la observación $i$ pertenezca al grupo $g = 2, \, \ldots, \, K$.
 
 # Referencias
