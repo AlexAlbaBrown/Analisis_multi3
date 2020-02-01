@@ -121,7 +121,85 @@ $$\mathbf{U}' \mathbf{X}' \mathbf{D} \mathbf{X} \mathbf{U} = \mathbf{\Lambda} \R
 
 # Análisis de Componentes Principales
 
-Partimos de una matriz de datos donde a $n$ individuos se le miden $p$ variables. Cada individuo puede entonces ser representado por un vector en $\mathbb{R}^p$.
+Partimos de una matriz de datos donde a $n$ individuos se le miden $p$ variables cuantiativas. Cada individuo puede entonces ser representado por un vector en $\mathbb{R}^p$, y cada variable puede ser representada por un vector en $\mathbb{R}^n$. El objetivo es reducir la cantidad de dimensiones necesarias para representar cada individuo, sin perder información (i.e. varianza) sobre ellos.
+
+## Construcción de los ejes factoriales
+
+**Maximizar la inercia capturada**
+
+En esta visión del método, lo que se quiere es encontrar las combinaciones lineales de las variables originales que representan los datos de forma correcta. Se utilizan tantos ejes direccionales (nuevas variables) como sea necesario (máximo $p$). El primero de ellos se encuentra resolviendo el sistem de ecuaciones
+$$\mathbf{z}_1 = \mathbf{X} \mathbf{\phi}_1$$
+de forma de maximizar la varianza capturada por él. Es decir, de todas las posibles combinaciones lineales, buscamos aquella sobre la cual las proyecciones de los puntos originales estén más separadas. A los coeficientes $\mathbf{\phi}_1 = (\phi_{11}, \, \phi_{21}, \, \ldots, \, \phi_{p1})'$ les llamamos *loadings* de la primer componente principal, y les imponemos que $\sum\limits_{j = 1}^{p} \mathbf{\phi}_j^2 = 1$. Esto se debe a que, de no hacerlo, podríamos aumentarlos arbitrariamente, para aumentar así la varianza.
+
+Para calcular los loadings, primero debemos estandarizar las variables. Luego debemos resolver el problema
+$$\max\limits_{\phi_1} = \left\{ \frac{1}{n} \sum\limits_{i = 1}^{n} z_{i1}^2 \right\} = \max\limits_{\phi_1} = \left\{ \frac{1}{n} \sum\limits_{i = 1}^{n} \left( \sum\limits_{j = 1}^{p} \phi_{j1} x_{ij} \right)^2 \right\}$$
+$$\text{sujeto a} \,\,\,\,\,\, \sum\limits_{j = 1}^{p} \mathbf{\phi}_j^2 = 1$$
+
+Al vector $\mathbf{z}_1 = (z_{11}, \, z_{21}, \, \ldots, \, z_{n1})'$ le llamamos vector de *scores* de la primera componente principal. El score es el valor que la $i$-ésima observación toma en la proyección sobre el eje encontrado.
+
+Para hallar la segunda componente principal, debemos hallar los scores que maximizan la varianza, siendo el nuevo vector ortogonal al vector $\mathbf{z}_1$.
+$$\max\limits_{\phi_2} = \left\{ \frac{1}{n} \sum\limits_{i = 1}^{n} z_{i2}^2 \right\} = \max\limits_{\phi_2} = \left\{ \frac{1}{n} \sum\limits_{i = 1}^{n} \left( \sum\limits_{j = 1}^{p} \phi_{j2} x_{ij} \right)^2 \right\}$$
+$$\text{sujeto a} \,\,\,\,\,\, \sum\limits_{j = 1}^{p} \mathbf{\phi}_j^2 = 1 \,\,\,\,\,\, \text{y} \,\,\,\,\,\, \langle \mathbf{z}_1, \, \mathbf{z}_2 \rangle= 0$$
+
+Se procede de esta forma hasta hallar todos los ejes $\mathbf{z}_j$, hasta un máximo de $p$ ejes.
+
+**Minimizar distancias al eje de proyección**
+
+Otra forma de resolver el problema es minimizando la suma de las distancias al cuadrado entre los puntos originales y sus proyecciones sobre los ejes. Cuando hablamos de distancias, en este caso, nos referimos a las proyecciones (en sentido algebráico). Es decir, la distancia medida de forma tal que esta sea perpendicular al eje de inercia, no al eje $x_1$ o $x_2$. Si llamamos $r_i$ a la distancia del individuo $i$ al eje de proyección $a_1$, utilizamos el teorema de Pitágoras para ver que:
+$$r_i^2 = ||\mathbf{x}_i||^2 - ||z_i \, \mathbf{a}_1||^2 = \mathbf{x}_i' \mathbf{x}_i - (z_i)^2 ||\mathbf{a}_i||^2 = \mathbf{x}_i' \mathbf{x}_i - z_i^2$$
+
+Nuestro problema se puede plantear entonces como:
+$$\min \left\{ \sum\limits_{i = 1}^{n} r_i^2 \right\} = \min \left\{ \sum\limits_{i = 1}^{n} \mathbf{x}_i'\mathbf{x}_i - \sum\limits_{i = 1}^{n}z_i^2 \right\} = \sum\limits_{i = 1}^{n} \mathbf{x}_i'\mathbf{x}_i - \max \left\{ \sum\limits_{i = 1}^{n}z_i^2 \right\}$$
+donde utilizamos que $\sum\limits_{i = 1}^{n} \mathbf{x}_i'\mathbf{x}_i$ está fija.
+
+Dado que la matriz de datos está centrada, $\sum\limits_{i = 1}^{n}z_i^2$ es la varianza muestral de los datos proyectados. Por lo tanto, queremos hallar los ejes incorrelados que resuelven:
+$$\mathbf{z}_j = \mathbf{X} \mathbf{a}_j$$
+Nuevamente, impondremos que $\mathbf{a}'_j\mathbf{a}_j = 1$.
+
+Por último, notemos tambien que, dado que la matriz de datos está centrada,
+$$\begin{array}{rcl}
+\V(\mathbf{z}_1) & = & \V(\mathbf{X} \mathbf{a}_1) \\ \\
+   & = & \frac{1}{n} \mathbf{z}_1' \mathbf{z}_1 \\ \\
+   & = & \frac{1}{n} (\mathbf{X} \mathbf{a}_1)' (\mathbf{X} \mathbf{a}_1) \\ \\
+   & = & \frac{1}{n} \mathbf{a}_1' \mathbf{X}' \mathbf{X} \mathbf{a}_1 \\ \\
+   & = & \mathbf{a}_1' \left( \frac{1}{n} \mathbf{X}' \mathbf{X} \right) \mathbf{a}_1 \\ \\
+   & = & \mathbf{a}_1' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_1
+\end{array}$$
+
+Por lo tanto, el problema de maximización lo podemos resolver con le siguiente Lagrangeano:
+$$\mathscr{L}_1(\mathbf{a}_1) = \mathbf{a}_1' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_1 - \lambda_1 (\mathbf{a}_1'\mathbf{a}_1 - 1)$$
+
+Cuya CPO está dada por:
+$$\frac{\partial \mathscr{L}_2(\mathbf{a}_1)}{\partial \mathbf{a}_1'} = 2 \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_1 - 2 \lambda_1 \mathbf{I}_p \mathbf{a}_1 = \mathbf{0}_p \Rightarrow \left( \mathbf{\Sigma}_{\mathbf{X}} - \lambda_1 \mathbf{I}_p \right) \mathbf{a}_1 = \mathbf{0}_p$$
+
+Dado que lo que estamos buscando es un $\mathbf{a}_1 \neq \mathbf{0}_p$, resolver la CPO equivale a resolver
+$$\det\left( \mathbf{\Sigma}_{\mathbf{X}} - \lambda_1 \mathbf{I}_p \right) = 0$$
+por lo tanto, $\lambda$ es el valor propio de $\mathbf{\Sigma}_{\mathbf{X}}$ asociado al vector propio $\mathbf{a}_1$. Volviendo al análisis de la varianza, tenemos que:
+$$\V(\mathbf{z}_1) = \mathbf{a}_1' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_1 = \mathbf{a}_1' \lambda_1 \mathbf{a}_1 = \lambda_1 \mathbf{a}_1' \mathbf{a}_1 = \lambda_1$$
+
+Concluimos entonces que, para maximizar la varianza (o minimizar las distancias $r_i$), debemos tomar el mayor valor propio asociado a $\mathbf{\Sigma}_{\mathbf{X}}$, $\lambda_1$, y su correspondiente vector propio asociado, $\mathbf{a}_1$.
+
+Luego, para hallar $\mathbf{z}_2$, procedemos de forma análoga, pero agregando la restricción adicional $\Cov(\mathbf{a}_1, \, \mathbf{a}_2) = 0$. Por lo tanto, el Lagrangeano asociado al problema será:
+$$\mathscr{L}_2(\mathbf{a}_2) = \mathbf{a}_2' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_2 - \lambda_2 (\mathbf{a}_2' \mathbf{a}_2 - 1) - \delta (\mathbf{a}_2' \mathbf{a}_1 - 0 )$$
+
+Su CPO será:
+$$\begin{array}{rcl}
+\frac{\partial \mathscr{L}_2(\mathbf{a}_2)}{\partial \mathbf{a}_2'} & = & 2 \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_2 - 2 \lambda_2 \mathbf{a}_2 - \delta \mathbf{a}_1 \\ \\
+   & = & 2 \mathbf{a}_1' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_2 - 2 \lambda_2 \mathbf{a}_1' \mathbf{a}_2 - \delta \mathbf{a}_1' \mathbf{a}_1 \\ \\
+   & = & 2 \mathbf{a}_1' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_2 - 2 \lambda_2 \underbrace{ \mathbf{a}_1' \mathbf{a}_2 }_{ = 0} - \delta \underbrace{ \mathbf{a}_1' \mathbf{a}_1 }_{ = 1} \\ \\
+   & = & 2 \mathbf{a}_1' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_2 - \delta = \mathbf{0}_p
+\end{array}$$
+Tenemos entonces que el máximo se halla cuando 
+$$\delta = 2 \mathbf{a}_1' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_2 = 2 \mathbf{a}_2' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_1$$
+por lo tanto,
+$$\frac{\partial \mathscr{L}_2(\mathbf{a}_2)}{\partial \mathbf{a}_2'} = 2 \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_2 - 2 \lambda_2 \mathbf{I}_p \mathbf{a}_2 = \mathbf{0}_p \Rightarrow \left( \mathbf{\Sigma}_{\mathbf{X}} - \lambda_2 \mathbf{I}_p \right) \mathbf{a}_2 = \mathbf{0}_p$$
+lo cual implica elegir el segundo mayor valor propio de $\mathbf{\Sigma}_{\mathbf{X}}$, y $\mathbf{a}_2$ será el vector propio asociado a dicho valor propio.
+
+Este procedimiento se repite $p$ veces, restringiendo a que cada nuevo vector $\mathbf{z}_j$ sea ortogonal al anterior. Se obtiene así la matriz ortogonal $\mathbf{A}_{p \times p} = (\mathbf{a}_1, \, \mathbf{a}_2, \, \ldots, \, \mathbf{a}_p)$.
+
+## Relaciones entre ejes
+
+## Elección de la cantidad de ejes
 
 # Análisis de Correspondencias Simples
 
