@@ -20,6 +20,7 @@ header-includes:
    - \DeclareMathOperator{\E}{\mathbf{E}}
    - \DeclareMathOperator{\V}{\mathbf{Var}}
    - \DeclareMathOperator{\Cov}{\mathbf{Cov}}
+   - \DeclareMathOperator{\Cor}{\mathbf{Cor}}
 geometry: margin=1in
 fontsize: 12pt
 bibliography: References.bib
@@ -199,7 +200,32 @@ Este procedimiento se repite $p$ veces, restringiendo a que cada nuevo vector $\
 
 ## Relaciones entre ejes
 
+Tenemos entonces que $\mathbf{Z} = \mathbf{X} \mathbf{A}$ donde las columnas de $\mathbf{Z}$ son las componentes principales de $\mathbf{X}$.
+
+Adicionalmente, dado que $\mathbf{A}$ es la matriz ortonormal de loadings, tenemos que:
+$$\mathbf{\Sigma}_{\mathbf{Z}} = \text{diag}(\lambda_1, \, \ldots, \, \lambda_p) = \mathbf{A}' \V(\mathbf{X}) \mathbf{A} \Rightarrow \mathbf{\Sigma}_{\mathbf{X}} = \mathbf{A} \mathbf{\Sigma}_{\mathbf{Z}} \mathbf{A}'$$
+
+La relación entre las variables originales y las nuevas (los ejes factoriales) puede medirse mediante la correlación entre ambas. Primero calculamos su covarianza:
+$$\Cov(\mathbf{z}_j, \mathbf{x}_i) = \Cov \left( \mathbf{z}_j, \, \sum\limits_{k = 1}^{p} a_{ik} z_{k} \right) = a_{ij} \V(\mathbf{z}_j) = \lambda_j \, a_{ij}$$
+
+Por lo tanto, la correlación entre ambos viene dada por:
+$$\Cor(\mathbf{z}_j, \mathbf{x}_i) = \frac{ \lambda_j a_{ij} }{ \frac{1}{n} \sqrt{\lambda_i} \, ||\mathbf{x}_i|| }$$
+
 ## Elección de la cantidad de ejes
+
+Un criterio utilizado para seleccionar la cantidad de ejes con los que quedarse luego del análisis es seleccionar aquellos que capturen un determinado porcentaje de la variabilidad.
+
+$$\sum\limits_{i = 1}^{p} \V(\mathbf{z}_i) = \sum\limits_{i = 1}^{p} \lambda_i = \text{tr}( \mathbf{\Sigma}_{\mathbf{Z}} ) = \text{tr}( \mathbf{A}' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{A} ) = \text{tr}( \mathbf{\Sigma}_{\mathbf{X}} \mathbf{A} \mathbf{A}' ) = \text{tr}( \mathbf{\Sigma}_{\mathbf{X}} \mathbf{A} \mathbf{A}^{-1} ) = \text{tr}( \mathbf{\Sigma}_{\mathbf{X}} )$$
+
+El porcentaje de varianza capturada por el $i$-ésimo eje está dada por:
+$$\frac{ \V(\mathbf{z}_i) }{ \sum\limits_{i = 1}^{p} \V(\mathbf{z}_i) } = \frac{ \lambda_i }{ \sum\limits_{i = 1}^{p} \lambda_i }$$
+
+Si el análisis se realizó utilizando matrices de correlación, entonces esta expresión se reduce a $\lambda_i / p$. Este análisis se repite de forma acumulativa. Es decir, para cada eje, se suma la variabilidad capturada por los ejes anteriores. Así, si se busca calcular la variablididad capturada por los primeros $m$ ejes, tendremos que:
+$$\sum\limits_{i = 1}^{m} \left( \frac{ \lambda_i }{ \sum\limits_{i = 1}^{p} \lambda_i } \right)$$
+
+Un método gráfico implíca graficar los valores propios de forma ordenada (número de valor propio en el eje $x$, valor del valor propio en el eje $y$), y se seleccionan los ejes hasta el codo del gráfico.
+
+Generalmente, no se suele trabajar con más de 3 ejes, dado que de esta forma el resuultado puede graficarse en un *biplot*. En él se grafican tanto los loadiings (contrubución de cada variable original a la conformación del eje factoral), así como también los scores (corrdenadas de los induviduos proyectados sobre los ejes factoriales).
 
 # Análisis de Correspondencias Simples
 
