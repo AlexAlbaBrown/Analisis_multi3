@@ -424,6 +424,36 @@ $$\text{Cramer's V} = \frac{ \phi^2 }{ \min(I - 1, \, J - 1) } \in [0, \, 1]$$
 
 # Análisis de Correspondencias Múltiple
 
+En ACM volvemos a trabajar con una matriz de datos con $I$ individuos y $J$ variables. A diferencia de ACP, ahora las $J$ columnas son variables cuantitativas. $v_{ij}$ es el valor del $i$-ésimo individuo en la $j$-ésima variable.
 
+\begin{center}
+  \begin{tabular}{ c | ccccc | }
+             & 1        & $\cdots$ & $j$      & $\cdots$ & $J$      \\ \hline
+    1        &          &          & $\vdots$ &          &          \\
+    $\vdots$ &          &          & $\vdots$ &          &          \\
+    $i$      & $\cdots$ & $\cdots$ & $v_{ij}$ & $\cdots$ & $\cdots$ \\
+    $\vdots$ &          &          & $\vdots$ &          &          \\
+    $I$      &          &          & $\vdots$ &          &          \\ \hline
+  \end{tabular}
+\end{center}
+
+A partir de estos datos se construyen tablas disjuntas. En una tabla disjunta, las filas representan a los $I$ individuos, pero las columnas representan a las modalidades de las $J$ variables.
+
+\begin{center}
+  \begin{tabular}{ c | ccccccccc | c}
+             & 1        & $\cdots$ & $j$      & $j$      & $j$      & $j$      & $j$      & $\cdots$ & $J$      &      \\
+             &          &          & $1$      & $\cdots$ & $k$      & $\cdots$ & $K_j$    &          &          &      \\ \hline
+    1        &          &          &          &          & $\vdots$ &          &          &          &          & $J$  \\
+    $\vdots$ &          &          &          &          & $\vdots$ &          &          &          &          & $J$  \\
+    $i$      & $\cdots$ & $\cdots$ & $\cdots$ & $\cdots$ & $y_{ik}$ & $\cdots$ & $\cdots$ & $\cdots$ & $\cdots$ & $J$  \\
+    $\vdots$ &          &          &          &          & $\vdots$ &          &          &          &          & $J$  \\
+    $I$      &          &          &          &          & $\vdots$ &          &          &          &          & $J$  \\ \hline
+             &          &          &          &          & $I p_k$  &          &          &          &          & $IJ$
+  \end{tabular}
+\end{center}
+
+Entonces, si la $j$-ésima variable tiene $K$ modalidades distintas, se agregan $K_j$ columnas a la tabla. La tabla tendrá entonces tantas columnas como la suma de las modalidades de cada variable. $y_{ik} = 1$ si el individuo $i$ presenta la modalidad $k$ en la variable $j$, o 0 en otro caso. Por lo tanto, en las $K_j$ columnas que representan a la variable $j$, cada individuo estará conformardo por un vector de ceros con un único 1 en la modalidad de dicho individuo.
+
+La columna marginal valdrá $J$ para todos los indiviuos (en caso de no existir no respuesta) dado que cada individuo tiene $J$ unos y el resto ceros. La fila de marginales vale $I$ para cada una de las $J$ variables (de nuevo, asumiendo que no existe no respuesta). La marginal de cada una de las $k$ modalidades de la variable $j$ vale $I \, p_k$ donde $p_k$ representa la proporción de individuos con modalidad $k$ en la variable $j$.
 
 # Referencias
