@@ -39,22 +39,22 @@ Diremos que el vector aleatorio es discreto si todas sus componentes son distcre
 
 ## Distribución conjunta
 
-La fución de distribución conjunta de un vector aleatorio $\mathbf{X}$ en un punto $\mathbf{x}$ se define como:
-$$F_{\mathbf{X}}(\mathbf{x}) = P(\mathbf{X} \leq \mathbf{x}) = P(X_1 \leq x_1; \, \ldots; \, X_p \leq x_p)$$
+La función de distribución conjunta de un vector aleatorio $\mathbf{X}$ en un punto $\mathbf{x}$ se define como:
+$$F_{\mathbf{X}}(\mathbf{x}) = \Pr(\mathbf{X} \leq \mathbf{x}) = \Pr(X_1 \leq x_1, \, \ldots, \, X_p \leq x_p)$$
 donde $F(.)$ es no decreciente.
 
 Llamaremos función de probabilida de un vector aleatorio discreto a la función $p(\mathbf{X})$ definida por:
-$$p_{\mathbf{X}}(\mathbf{x}) = P( \mathbf{X} = \mathbf{x} ) = P(X_1 = x_1; \, \ldots; \, X_p = x_p)$$
+$$p_{\mathbf{X}}(\mathbf{x}) = \Pr( \mathbf{X} = \mathbf{x} ) = \Pr(X_1 = x_1, \, \ldots, \, X_p = x_p)$$
 
 Diremos que el vector $\mathbf{X}$ es absolutamente continuo si existe una función de densidad, $f_{\mathbf{X}}(\mathbf{x})$, que satisface:
-$$F_{\mathbf{X}}(\mathbf{x}) = \int\limits_{-\infty}^{\mathbf{x}} f_{\mathbf{X}}(\mathbf{x}) d\mathbf{X} = \int\limits_{-\infty}^{x_1} \ldots \int\limits_{-\infty}^{x_p} f_{X_1; \, \ldots; \, X_p} (x_1; \, \ldots; \, x_p) dX_1 \ldots dX_p $$
+$$F_{\mathbf{X}}(\mathbf{x}) = \int\limits_{-\infty}^{\mathbf{x}} f_{\mathbf{X}}(\mathbf{x}) d\mathbf{X} = \int\limits_{-\infty}^{x_1} \ldots \int\limits_{-\infty}^{x_p} f_{X_1, \, \ldots, \, X_p} (x_1, \, \ldots, \, x_p) dX_1 \ldots dX_p $$
 donde:
 
 - $f_{\mathbf{X}}(\mathbf{x})$ es no negativa
 - $\int_{\mathbb{R}} f_{\mathbf{X}} (\mathbf{x}) d\mathbf{X} = 1$
 
 La probabilida de cualquier suceso $A$ se calcula integrando la función de densidad sobre el subconjunto definido por el suceso.
-$$ P(A) = \int_A f_{\mathbf{X}} (\mathbf{x}) d\mathbf{X} $$
+$$\Pr(A) = \int_A f_{\mathbf{X}} (\mathbf{x}) d\mathbf{X} $$
 
 ## Distribución marginal y distribución condicional
 
@@ -65,7 +65,7 @@ De igual forma, puede definirse una partición del vector $\mathbf{X}$, por ejem
 $$ f_{\mathbf{X_i}} (\mathbf{x}_i) = \int\limits_{Rec(\mathbf{X}_j)} f_{\mathbf{X}} (\mathbf{x}) d\mathbf{X}_j \,\,\,\, \text{ para } \,\,\,\, i;j = 1; \, 2 \,\,\,\, \text{ con } \,\,\,\, i \neq j$$
 
 Operando de igual forma, se define la distribución condicional de $\mathbf{X}_1$ a $\mathbf{X}_2$ como:
-$$ f_{\mathbf{X}_1 | \mathbf{X}_2} (\mathbf{x}_1 | \mathbf{x}_2) = \frac{ f_{\mathbf{X}} (\mathbf{x}) }{ f_{\mathbf{X}_2} (\mathbf{x}_2) } = \frac{ f_{\mathbf{X}_1 ; \, \mathbf{X}_2 } (\mathbf{x}_1 ; \, \mathbf{x}_2) }{ f_{\mathbf{X}_2} (\mathbf{x}_2)} $$
+$$ f_{\mathbf{X}_1 | \mathbf{X}_2} (\mathbf{x}_1 | \mathbf{x}_2) = \frac{ f_{\mathbf{X}} (\mathbf{x}) }{ f_{\mathbf{X}_2} (\mathbf{x}_2) } = \frac{ f_{\mathbf{X}_1, \, \mathbf{X}_2 } (\mathbf{x}_1, \, \mathbf{x}_2) }{ f_{\mathbf{X}_2} (\mathbf{x}_2)} $$
 
 De lo anterior se desprende que la distribución marginal de $\mathbf{X}_i$ puede plantearse como:
 $$ f_{\mathbf{X}_i} (\mathbf{x}_i) = \int\limits_{Rec(\mathbf{X}_j)} f_{\mathbf{X}_i | \mathbf{X}_j} (\mathbf{x}_i | \mathbf{x}_j) \, f_{\mathbf{X}_j} (\mathbf{x}_j) d\mathbf{X}_i $$
@@ -88,21 +88,23 @@ Diremos que dos vectores aleatorios $\mathbf{X}_1$ y $\mathbf{X}_2$ son independ
 $$ f(\mathbf{x}_1 | \mathbf{x}_2) = f(\mathbf{x}_1) $$
 
 Por lo tanto:
-$$ f(\mathbf{x}_1; \, \mathbf{x}_2) = f(\mathbf{x}_1) \, f(\mathbf{x}_2)$$
+$$ f(\mathbf{x}_1, \, \mathbf{x}_2) = f(\mathbf{x}_1) \, f(\mathbf{x}_2)$$
 
-Si dos vctores $p$-dimensionales son independientes, también los don subconjuntos de dimension $h < p$ de variables constituyentes, y funciones de las mismas.
+Si dos vctores $p$-dimensionales son independientes, también los son subconjuntos de dimension $h < p$ de variables constituyentes, y funciones de las mismas.
 
 # Propiedades de los vectores aleatorios
 
 ## Vector de medias
 
-La esperanza de un vector aleatorio $p$-dimensional se define simplemente como un vector de largo $p$, donde cada elemento coresponde a la esperanza de una componente de $\mathbf{X}$.
+La esperanza de un vector aleatorio $p$-dimensional se define simplemente como un vector de largo $p$, donde cada elemento corresponde a la esperanza de una componente de $\mathbf{X}$.
 $$ \boldsymbol{\mu} = \mathbb{E}(\mathbf{X}) = \int_{\mathbf{X}} \mathbf{x} \, f(\mathbf{x}) \, d\mathbf{X}$$
 
 La esperanza es un operador lineal, al igual que en el caso univariado. Esto implica que:
 
 - para toda matriz $\mathbf{A}$ y vector $\mathbf{b}$, $\mathbb{E}(\mathbf{AX} + \mathbf{b}) = \mathbf{A} \mathbb{E}(\mathbf{X}) + \mathbf{b}$
+
 - para todo grupo de vectores aleatorios, $\sum\limits_{i = 1}^n \mathbb{E}(\mathbf{X}_i) = \mathbb{E} \left( \sum\limits_{i = 1}^n \mathbf{X}_i \right)$
+
 - para todo par de vectores independientes, $\mathbb{E}( \mathbf{X} \mathbf{Y}) = \mathbb{E}( \mathbf{X}) \, \mathbb{E}(\mathbf{Y})$
 
 Análogamente con el caso univariado, la esperanza de una función $g$ del vector aleatorio será:
@@ -125,7 +127,9 @@ donde $\sigma^2_i$ representa la varianza de la $i$-ésima componente, y $\sigma
 Medidas de variabilidad:
 
 - Varianza media: $VM = \text{tr}(\mathbf{V}_x)/p$  
+
 - Varianza generalizada: $VG = \det(\mathbf{V}_x)$  
+
 - Varianza promedio: $VP = \big( \det(\mathbf{V}_x) \big)^{^1/_p}$
 
 ## Transformaciones
@@ -136,7 +140,7 @@ y_1 & = & g_1(\mathbf{X}) \\
 \vdots & & \vdots \\
 y_p & = & g_p(\mathbf{X}) \\
 \end{array}$$
-tal que existen las funciones inversas $x_1 = h_1(\mathbf{Y}); \, \ldots; \, x_p = h_p(\mathbf{Y})$, y todas ellas son diferenciables. Entonces, la función de densidad del vector aleatorio $\mathbf{Y}$ estará dada por:
+tal que existen las funciones inversas $x_1 = h_1(\mathbf{Y}), \, \ldots, \, x_p = h_p(\mathbf{Y})$, y todas ellas son diferenciables. Entonces, la función de densidad del vector aleatorio $\mathbf{Y}$ estará dada por:
 $$ f_{\mathbf{Y}} (\mathbf{y}) = f_{\mathbf{X}} \big( h(\mathbf{Y}) \big) \, \left| \frac{d\mathbf{X}}{d\mathbf{Y}} \right| $$
 donde el segundo factor es el valor absoluto del Jacobiano de la matriz (es decir, el valor absoluto del determinante de la matriz Jacobiana):
 $$\left| \frac{d\mathbf{X}}{d\mathbf{Y}} \right| = 
@@ -160,15 +164,14 @@ Si, en cambio, $\mathbf{X}$ es de dimensión $p$ mientras que $\mathbf{Y}$ es de
 
 Se define la matriz de correlaciones de un vector aleatorio $\mathbf{X}$ con matriz de varianzas $\mathbf{V}_x$ como:
 $$\mathbf{R} = \mathbf{D}^{-1/2} \, \mathbf{V}_x \, \mathbf{D}^{-1/2}$$
-donde $\mathbf{D} = \mathbf{diag}(\sigma^2_1; \, \ldots; \, \sigma^2_p)$. Por lo tanto, la matriz de correlaciones será una matriz cuadrada, simétrica, semidefinida positiva, y con unos en la diagonal principal. Los elementos fuera de la diagonal representan la correlación entre los márgenes del vector aleatorio, $\rho_{ij} = \sigma_{ij} / \sigma_{i} \sigma_{j}$. 
+donde $\mathbf{D} = \mathbf{diag}(\sigma^2_1, \, \ldots, \, \sigma^2_p)$. Por lo tanto, la matriz de correlaciones será una matriz cuadrada, simétrica, semidefinida positiva, y con unos en la diagonal principal. Los elementos fuera de la diagonal representan la correlación entre los márgenes del vector aleatorio, $\rho_{ij} = \sigma_{ij} / \sigma_{i} \sigma_{j}$. 
 
 Una medida global de la dependencia viene definida por:
 $$D_x = 1 - |\mathbf{R}|^{1/(p-1)}$$
 
-
 # Maldición de la alta dimensionalidad
 
-Este término es utilizado para describir como aumenta la complejidad deun problema al aumentar la dimensión de las variables involucradas. En el análisis estadístico se manifiesta de dos formas.
+Este término es utilizado para describir como aumenta la complejidad de un problema al aumentar la dimensión (cantidad de variables involucradas). En el análisis estadístico se manifiesta de dos formas.
 
 Primero, al aumentar la dimensión del problema, el espacio está cada vez más vacío, haciendo más dificíl cualquier proceso de inferencia a partir de los datos. Esto se debe a que la masa de probabilidad sigue siendo uno a pesar del aumento de la dimensionalidad del problema.
 
@@ -180,16 +183,21 @@ En resumen, el problema del aumento de la dimensinalidad es el aumento de la inc
 
 Un vector aleatorio $\mathbf{X}$ tiene distribución normal multivariada si su función de densidad es:
 $$ f(\mathbf{x}) = |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} (\mathbf{x} - \boldsymbol{\mu})' \, \mathbf{V}_x^{-1} \, (\mathbf{x} - \boldsymbol{\mu}) \right\} $$
-y escribiremos que $\mathbf{X} \sim N_p \big( \boldsymbol{\mu}_x, \, \mathbf{V}_x \big)$.
+y escribiremos que $\mathbf{X} \sim \text{N}_p \big( \boldsymbol{\mu}_x, \, \mathbf{V}_x \big)$.
 
 ## Propiedades
 
 1. La distribución es simétrica respecto de $\boldsymbol{\mu}$.
-$$f(\boldsymbol{\mu} + \mathbf{a}) = |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} (\boldsymbol{\mu} + \mathbf{a} - \boldsymbol{\mu})' \, \mathbf{V}_x^{-1} \, (\boldsymbol{\mu} + \mathbf{a} - \boldsymbol{\mu}) \right\} =$$
-$$= |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} \, \mathbf{a}' \, \mathbf{V}_x^{-1} \, \mathbf{a} \right\}$$
-$$f(\boldsymbol{\mu} - \mathbf{a}) = |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} (\boldsymbol{\mu} - \mathbf{a} - \boldsymbol{\mu})' \, \mathbf{V}_x^{-1} \, (\boldsymbol{\mu} - \mathbf{a} - \boldsymbol{\mu}) \right\} =$$
-$$= |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} \, (- \mathbf{a})' \, \mathbf{V}_x^{-1} \, (-\mathbf{a}) \right\}$$
-$$= |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} \, \mathbf{a}' \, \mathbf{V}_x^{-1} \, \mathbf{a} \right\}$$
+$$\begin{array}{rcl}
+f(\boldsymbol{\mu} + \mathbf{a}) & = & |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} (\boldsymbol{\mu} + \mathbf{a} - \boldsymbol{\mu})' \, \mathbf{V}_x^{-1} \, (\boldsymbol{\mu} + \mathbf{a} - \boldsymbol{\mu}) \right\} \\ \\
+   & = & |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} \, \mathbf{a}' \, \mathbf{V}_x^{-1} \, \mathbf{a} \right\}
+\end{array}$$
+
+$$\begin{array}{rcl}
+f(\boldsymbol{\mu} - \mathbf{a}) & = & |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} (\boldsymbol{\mu} - \mathbf{a} - \boldsymbol{\mu})' \, \mathbf{V}_x^{-1} \, (\boldsymbol{\mu} - \mathbf{a} - \boldsymbol{\mu}) \right\} \\ \\
+   & = & |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} \, (- \mathbf{a})' \, \mathbf{V}_x^{-1} \, (-\mathbf{a}) \right\} \\ \\
+   & = & |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} \, \mathbf{a}' \, \mathbf{V}_x^{-1} \, \mathbf{a} \right\}
+\end{array}$$
 
 2. La distribución tiene un único máximo en $\boldsymbol{\mu}$.
 
@@ -201,17 +209,18 @@ Dado que $\mathbf{V}_x$ es definida positiva, el término del exponente es siemp
 
 5. Si la $p$ variables tienen distribución conjunta normal multivariada y están incorreladas, entonces son independientes.
 
-6. Si $\mathbf{X} \sim N_p (\boldsymbol{\mu}, \, \mathbf{V})$, entonces, sus marginales $X_i \sim N(\mu_i, \, \sigma^2_i)$.
+6. Si $\mathbf{X} \sim \text{N}_p (\boldsymbol{\mu}, \, \mathbf{V})$, entonces, sus marginales $X_i \sim \text{N}(\mu_i, \, \sigma^2_i)$.
 
 7. Cualquier subconjuto de las marginales de una normal, distribuye normal.
 
-8. Sea $\mathbf{X} = ( \mathbf{X}_1, \mathbf{X}_2 ) \sim N_p(\boldsymbol{\mu; \, \mathbf{V}})$ donde:
+8. Sea $\mathbf{X} = ( \mathbf{X}_1, \mathbf{X}_2 ) \sim \text{N}_p(\boldsymbol{\mu, \, \mathbf{V}})$ donde:
 $$\boldsymbol{\mu} = \left[
 \begin{array}{c}
 \boldsymbol{\mu}_1 \\
 \boldsymbol{\mu}_2
 \end{array}
-\right] \text{ y }
+\right] 
+\,\,\, \text{ y } \,\,\,
 \mathbf{V} = \left[
 \begin{array}{c c}
 \mathbf{V}_{11} & \mathbf{V}_{12} \\
@@ -220,14 +229,14 @@ $$\boldsymbol{\mu} = \left[
 \right]$$
 
 Entonces,
-$$\mathbf{X}_2 | \mathbf{X}_1 \sim N_m \big(\boldsymbol{\mu}_2 + \boldsymbol{V}'_{12} \boldsymbol{V}^{-1}_{11}(\mathbf{x}_1 - \boldsymbol{\mu}_1); \, \boldsymbol{V}_{22} - \boldsymbol{V}'_{12} \boldsymbol{V}^{-1}_{11} \boldsymbol{V}_{12} \big)$$
-$$\mathbf{X}_1 | \mathbf{X}_2 \sim N_n \big(\boldsymbol{\mu}_1 + \boldsymbol{V}^{-1}_{22} \boldsymbol{V}'_{21}(\mathbf{x}_2 - \boldsymbol{\mu}_2); \, \boldsymbol{V}_{11} - \boldsymbol{V}_{21} \boldsymbol{V}^{-1}_{22} \boldsymbol{V}'_{21} \big)$$
+$$\mathbf{X}_2 | \mathbf{X}_1 \sim \text{N}_m \big(\boldsymbol{\mu}_2 + \boldsymbol{V}'_{12} \boldsymbol{V}^{-1}_{11}(\mathbf{x}_1 - \boldsymbol{\mu}_1), \, \boldsymbol{V}_{22} - \boldsymbol{V}'_{12} \boldsymbol{V}^{-1}_{11} \boldsymbol{V}_{12} \big)$$
+$$\mathbf{X}_1 | \mathbf{X}_2 \sim \text{N}_n \big(\boldsymbol{\mu}_1 + \boldsymbol{V}^{-1}_{22} \boldsymbol{V}'_{21}(\mathbf{x}_2 - \boldsymbol{\mu}_2), \, \boldsymbol{V}_{11} - \boldsymbol{V}_{21} \boldsymbol{V}^{-1}_{22} \boldsymbol{V}'_{21} \big)$$
 
 # Inferencia Multivariada
 
 ## Estimación máximo verosimil
 
-El método de MV escoge como estimadores delos parámetros aquellos valores que hacen máxima la probabilidad de obsercervar la muestra obtenida. Supongamos una MAS de $\mathbf{X} \sim f(\mathbf{x}|\boldsymbol{\theta})$ con $\boldsymbol{\theta} \in \mathbb{R}^r$, donde $r \leq pn$. La función de densidad conjunta de la muestra será:
+El método de MV escoge como estimadores de los parámetros aquellos valores que hacen máxima la probabilidad de observar la muestra obtenida. Supongamos una MAS de $\mathbf{X} \sim f(\mathbf{x}|\boldsymbol{\theta})$ con $\boldsymbol{\theta} \in \mathbb{R}^r$, donde $r \leq pn$. La función de densidad conjunta de la muestra será:
 $$f(\mathbf{X}|\boldsymbol{\theta}) = \prod\limits_{i =1}^{n} f(\mathbf{x}_i | \boldsymbol{\theta})$$
 
 Para construir la función de verosimilitud simplemente debe mirarse dicha función como función de $\theta$ dado $\mathbf{x}$:
@@ -272,13 +281,13 @@ Algunas consideraciones finales:
 
 1. $\ell(.)$ solo depende de $\mathbf{x}$ a través de $\mathbf{\bar{x}}$ y $\mathbf{S}$, por lo que $\big(\mathbf{\bar{x}}, \, \mathbf{S}\big)$ es suficiente para $\boldsymbol{\theta} = \big( \boldsymbol{\mu}, \, \mathbf{V}_x  \big)$ 
 
-2. Si $\mathbf{x} \sim N_p(\boldsymbol{\mu}, \, \mathbf{V}_x)$, entonces $\mathbf{\bar{x}} \sim N_p(\boldsymbol{\mu}, \, \mathbf{V}_x / n )$.
+1. Si $\mathbf{x} \sim \text{N}_p(\boldsymbol{\mu}, \, \mathbf{V}_x)$, entonces $\mathbf{\bar{x}} \sim N_p(\boldsymbol{\mu}, \, \mathbf{V}_x / n )$.
 
-3. $\mathbf{S}$ es sesgado, pero $\frac{n}{n - 1} \mathbf{S}$ es insesgado para $\mathbf{V}_x$.
+1. $\mathbf{S}$ es sesgado, pero $\frac{n}{n - 1} \mathbf{S}$ es insesgado para $\mathbf{V}_x$.
 
-4. $\mathbf{S}$ y $\mathbf{\bar{x}}$ son consistentes, eficientes, y asintóticamente normales.
+1. $\mathbf{S}$ y $\mathbf{\bar{x}}$ son consistentes, eficientes, y asintóticamente normales.
 
-## Contraste sobre la mediaa
+## Contraste sobre la media
 
 Consideremos una muestra proveniente de una normal multivariada de media $\boldsymbol{\mu}$, y matriz de covarianzas $\mathbf{V}_x$. Se desea contrastar la hipótesis:
 $$\begin{array}{c}
@@ -298,11 +307,17 @@ $$\ell(H_0) = - \frac{n}{2} \log |\mathbf{S}_0| - \frac{np}{2} $$
 La diferencia será entonces:
 $$\lambda = -2 \ln(RV) = 2 \big[ \ell(H_1) - \ell(H_0) \big] \Rightarrow \lambda = n \log \left( \frac{|\mathbf{S}_0|}{|\mathbf{S}|} \right) \overset{a}{\sim} \chi^2_{p}$$
 
-Los grados de libertad del estadístico corresponden a la diferencia en las dimensiones e que se mueven los parámetros bajo $H_0$ y bajo $H_1$:
+Los grados de libertad del estadístico corresponden a la diferencia en las dimensiones en que se mueven los parámetros bajo $H_0$ y bajo $H_1$:
 
 - Bajo $H_0$: $p + \frac{p(p - 1)}{2} = \frac{p(p + 1)}{2}$
 
-- Bajo $H_1$: $p + \frac{p(p + 1)}{2} = \frac{p(p + 1)}{2}$
+- Bajo $H_1$: $p + \frac{p(p + 1)}{2} = \frac{p(p + 3)}{2}$
+
+Si la cantidad de observaciones no es lo suficientemente alto, y por tanto no puede utilizarse una distribución asintótica para el estimador, entonces se utilizar la distribución $T^2$ de Hotelling donde:
+
+- si $p = 1 \Rightarrow T^2 \rightarrow t_{n-1}$
+
+- si $n \rightarrow +\infty \Rightarrow T^2 \rightarrow \chi^2_{p}$
 
 ## Contraste sobre la matrix de covarianzas
 
@@ -329,7 +344,71 @@ Si $\mathbf{V}_0 = \mathbf{I} \Rightarrow \lambda = - n \log|\mathbf{S}| + n \, 
 
 ### Contraste de independencia
 
+$$\begin{array}{l}
+H_0: \mathbf{V} \text{ diagonal, } \,\,\, \boldsymbol{\mu} \,\, \text{ cualquiera} \\
+H_1: \mathbf{V} \text{ y } \boldsymbol{\mu} \,\, \text{ cualesquiera} 
+\end{array}$$
+
+Bajo $H_0$, $\mathbf{V} = \mathbf{V}_0$, y $\hat{\boldsymbol{\mu}} = \bar{\mathbf{x}}$.
+
+Bajo $H_1$, $\mathbf{\hat{V}}_0 = \text{diag}(\mathbf{S})$, donde $\text{diag}(\mathbf{S})$ tiene términos $s_{ii}$.
+
+El estadístico RV está dado por:
+$$\lambda = n \, \log \left[ \frac{ \prod\limits_{i = 1}^{n} s_{ii} }{ | \mathbf{S} | } \right] + n \, \text{tr}\big( \mathbf{\hat{V}}_0^{-1} \mathbf{S} \big) - np = -n \sum\limits_{i = 1}^{n} \log \lambda_i \overset{a}{\sim} \chi^2_{ \frac{p(p-1)}{2} }$$
+donde $\lambda_i$ son los valores propios de la matriz $\mathbf{R} = \mathbf{\hat{V}}_0^{-1/2} \mathbf{S} \mathbf{\hat{V}}_0^{-1/2}$.
 
 ### Contraste de esfericidad
 
+$$\begin{array}{l}
+H_0: \mathbf{V} = \sigma^2 \, \mathbf{I}, \,\,\, \boldsymbol{\mu} \,\, \text{ cualquiera} \\
+H_1: \mathbf{V} \text{ y } \boldsymbol{\mu} \,\, \text{ cualesquiera} 
+\end{array}$$
+
+Bajo $H_0$: 
+$$\ell(H_0) = - \frac{ np }{ 2 } \log (\sigma^2) - \frac{ n }{ 2 \sigma^2 } \text{tr}(\mathbf{S})$$
+
+$$\frac{ \partial \ell(H_0) }{ \partial \sigma^2 } = - \frac{ np }{ 2 } \, \frac{ 1 }{ \sigma^2 } + \frac{ n \, \text{tr}(\mathbf{S}) }{ 2 \sigma^4 } = 0 \Rightarrow \hat{\sigma}^2 = \frac{ \text{tr}(\mathbf{S}) }{ p }$$
+
+Bajo $H_1$, $\hat{\mathbf{V}}_0 = \text{diag}(\mathbf{S})$ con $s_{ii} = [\mathbf{S}]_{ii}$
+
+Estadístico RV:
+$$\begin{array}{rcl}
+\lambda & = & n \, \log \left[ \frac{ \hat{\sigma}^2 }{ | \mathbf{S} | } \right] + n \, \frac{ \text{tr}(\mathbf{S}) }{ \hat{\sigma}^2 } - n \, p \\ \\
+   & = & np \log (\hat{\sigma}^2) - n \, \log | \mathbf{S} | \sim \chi^2_{ \frac{ (p + 2)(p - 1) }{ 2 } }
+\end{array}$$
+
+### Test de homogeneidad
+
+Aquí se detalla el test de Box-M, una versión multivariada del test de Bartlett. El objetivo es testear si existe evidencia de que las matrices de covarianza de las distintas subpoblaciones en la muestra sean distintas.
+
+$$\begin{array}{l}
+H_0: \mathbf{\Sigma}_1 = \ldots = \mathbf{\Sigma}_G \\
+H_1: \exists \,\, \mathbf{\Sigma}_i \neq \mathbf{\Sigma}_j
+\end{array}$$
+
+Estadístico:
+$$-2(1 - c_1) \ln M \sim \chi^2_v$$
+con:
+$$M = \frac{1}{2} \sum\limits_{g = 1}^{G}(n_g - 1) \log |\mathbf{S}_g| - \frac{1}{2} (n - k) \log |\mathbf{S}|$$
+donde:
+
+- $\mathbf{S}$ es la pooled covariance matrix
+
+- $c_1 = \left[ \sum\limits_{k = 1}^{G} \frac{ 1 }{ n_k - 1 } - \frac{ 1 }{ \sum\limits_{k = 1}^{G} n_k - 1} \right] \left[ \frac{ 2p^2 + 3p - 1 }{ 6(p + 1)(k - 1) } \right]$
+
+- $v = \frac{1}{2}(k - 1)p(p + 1)$
+
+## Test de normalidad
+
+La normalidad multivariante implica la normalidad de las marginales, pero la normalidad de las marginales no implica la normalidad multivariada. Por lo tanto, es importante realizar tests multivariados de normalidad. Existen versiones multivariadas de todos los tests clásicos. Aquí se presenta el test de Mardia, el cual se basa en comparar asimetría y curtosis.
+
+Sean el coeficiente de asimetría $A_p$ y de curtosis $K_p$ tales que:
+$$A_p = \frac{ 1 }{ n^2 } \sum\limits_{i = 1}^{n} \sum\limits_{j = 1}^{n} d_{ij}^3$$
+$$K_p = \frac{ 1 }{ n } \sum\limits_{i = 1}^{n} d_{ii}^2$$
+donde $d_{ij} = (\mathbf{x}_i - \bar{\mathbf{x}})' \mathbf{S}^{-1} (\mathbf{x}_i - \bar{\mathbf{x}})$. Asintóticamente tenemos que:
+$$\frac{ n \, A_p }{ 6 } \sim \chi^2_f \,\,\, \text{ con } \,\,\, f = \frac{ p(p + 1)(p + 2) }{ 6 }$$
+$$K_p \sim \text{N}\left( p(p + 2), \, \frac{ 8p(p + 2) }{ n } \right)$$
+
+
 # Referencias
+
