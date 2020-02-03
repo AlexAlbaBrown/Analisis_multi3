@@ -21,11 +21,13 @@ fontsize: 12pt
 bibliography: References.bib
 biblio-style: plain
 nocite: |
-   @RSLang, @tidyverse, @fnnpack, @wasserman2007all, @rencher1998multivariate, @james2013introduction
+   @RSLang, @tidyverse, @rencher1998multivariate, @james2013introduction, @blanco2006introduccion, @pena2013analisis
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+   echo = TRUE
+)
 ```
 
 # Vectores aleatorios
@@ -190,13 +192,13 @@ y escribiremos que $\mathbf{X} \sim \text{N}_p \big( \boldsymbol{\mu}_x, \, \mat
 1. La distribución es simétrica respecto de $\boldsymbol{\mu}$.
 $$\begin{array}{rcl}
 f(\boldsymbol{\mu} + \mathbf{a}) & = & |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} (\boldsymbol{\mu} + \mathbf{a} - \boldsymbol{\mu})' \, \mathbf{V}_x^{-1} \, (\boldsymbol{\mu} + \mathbf{a} - \boldsymbol{\mu}) \right\} \\ \\
-   & = & |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} \, \mathbf{a}' \, \mathbf{V}_x^{-1} \, \mathbf{a} \right\}
+& = & |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} \, \mathbf{a}' \, \mathbf{V}_x^{-1} \, \mathbf{a} \right\}
 \end{array}$$
 
 $$\begin{array}{rcl}
 f(\boldsymbol{\mu} - \mathbf{a}) & = & |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} (\boldsymbol{\mu} - \mathbf{a} - \boldsymbol{\mu})' \, \mathbf{V}_x^{-1} \, (\boldsymbol{\mu} - \mathbf{a} - \boldsymbol{\mu}) \right\} \\ \\
-   & = & |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} \, (- \mathbf{a})' \, \mathbf{V}_x^{-1} \, (-\mathbf{a}) \right\} \\ \\
-   & = & |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} \, \mathbf{a}' \, \mathbf{V}_x^{-1} \, \mathbf{a} \right\}
+& = & |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} \, (- \mathbf{a})' \, \mathbf{V}_x^{-1} \, (-\mathbf{a}) \right\} \\ \\
+& = & |\mathbf{V}_x|^{-1/2} (2 \pi)^{-p/2} \exp\left\{ - \frac{1}{2} \, \mathbf{a}' \, \mathbf{V}_x^{-1} \, \mathbf{a} \right\}
 \end{array}$$
 
 2. La distribución tiene un único máximo en $\boldsymbol{\mu}$.
@@ -374,7 +376,7 @@ Bajo $H_1$, $\hat{\mathbf{V}}_0 = \text{diag}(\mathbf{S})$ con $s_{ii} = [\mathb
 Estadístico RV:
 $$\begin{array}{rcl}
 \lambda & = & n \, \log \left[ \frac{ \hat{\sigma}^2 }{ | \mathbf{S} | } \right] + n \, \frac{ \text{tr}(\mathbf{S}) }{ \hat{\sigma}^2 } - n \, p \\ \\
-   & = & np \log (\hat{\sigma}^2) - n \, \log | \mathbf{S} | \sim \chi^2_{ \frac{ (p + 2)(p - 1) }{ 2 } }
+& = & np \log (\hat{\sigma}^2) - n \, \log | \mathbf{S} | \sim \chi^2_{ \frac{ (p + 2)(p - 1) }{ 2 } }
 \end{array}$$
 
 ### Test de homogeneidad
