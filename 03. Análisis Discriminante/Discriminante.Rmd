@@ -25,7 +25,7 @@ fontsize: 12pt
 bibliography: References.bib
 biblio-style: plain
 nocite: |
-   @RSLang, @tidyverse, @fnnpack, @wasserman2007all, @rencher1998multivariate, @james2013introduction
+   @RSLang, @tidyverse, @rencher1998multivariate, @james2013introduction, @blanco2006introduccion, @pena2013analisis
 ---
 
 ```{r setup, include=FALSE}
@@ -54,7 +54,7 @@ $$\Pr(g) = \sum\limits_{\substack{ g' = 1 \\ g' \neq g }}^{k} \Pr(g'|g) = 1 - \P
 
 De esta forma entonces, la probabilidad total de clasificación errónea está dada por:
 $$\Pr(R, \, f) = \sum\limits_{g = 1}^{k} \pi_g \Pr(g)$$
-donde $\pi_g$ es la probabilidad a priori de que $i$ pertenzca a al grupo $g$.
+donde $\pi_g$ es la probabilidad a priori de que $i$ pertenzca al grupo $g$.
 
 ## Principio de máxima verosimilitud
 
@@ -65,29 +65,29 @@ $$f(\mathbf{x}_i|g) > f(\mathbf{x}_i|g') \,\,\, \forall g' \neq g \Leftrightarro
 
 La regla consiste en asignar la observación $i$ a la población con mayor probabilidad a posteriori (la probailidad de que $i$ pertenzca a $g$, dado $\mathbf{x}_i$). Utilizando el Teorema de Bayes, tenemos que la probabilidad a posteriori está dada por:
 $$\Pr(i \in g | \mathbf{x} = \mathbf{x}_i) = \frac{ \pi_g \Pr(\mathbf{x}_i | g) }{ \Pr(\mathbf{x}_i) } = \frac{ \pi_g \Pr(\mathbf{x}_i | g) }{ \sum\limits_{g' = 1}^{k} \pi_g' \,\, \Pr(\mathbf{x}_i | g') } = \frac{ \pi_g f(\mathbf{x}_i | g) }{ \sum\limits_{g' = 1}^{k} \pi_{g'} \,\, f(\mathbf{x}_i | g') }$$
-donde $\pi_g$ es la probailidad previa de que $i \in g$. Salvo que información adicional sugiera lo contrario, $\pi_g$ se estimad como la proporción de observaciones en $\mathbf{X}$ que pertenecen a la clase $g$. Esto es, $\hat{\pi}_g = n_g / n$, siendo $n$ la cantidad total de observaciones, y $n_g$ la cantidad de observaciones con variable de respuesta igual a la etiqueta de la clase $g$.
+donde $\pi_g$ es la probailidad previa de que $i \in g$. Salvo que información adicional sugiera lo contrario, $\pi_g$ se estima como la proporción de observaciones en $\mathbf{X}$ que pertenecen a la clase $g$. Esto es, $\hat{\pi}_g = n_g / n$, siendo $n$ la cantidad total de observaciones, y $n_g$ la cantidad de observaciones con variable de respuesta igual a la etiqueta de la clase $g$.
 
 De esta forma, la observación $i$ se asignará al grupo $g$, sí y solo sí:
 $$\Pr(i \in g | \mathbf{x} = \mathbf{x}_i) > \Pr(i \in g' | \mathbf{x} = \mathbf{x}_i) \,\,\, \forall g' \neq g$$
 
 **Normalidad**
 
-Si $\mathbf{x}_i \sim \text{N}_p(\mathbf{\mu}, \, \mathbf{\Sigma})$ su función de densidad viene dada por:
-$$f(\mathbf{x}_i | g) = \frac{ 1 }{ (2 \pi)^{^p/_2} | \mathbf{\Sigma}_g |^{^1/_2} } \, \exp \left\{ - \frac{1}{2} (\mathbf{x}_i - \mathbf{\mu}_g)' \mathbf{\Sigma}_g^{-1} (\mathbf{x}_i - \mathbf{\mu}_g) \right\}$$
+Si $\mathbf{x}_i \sim \text{N}_p(\boldsymbol{\mu}, \, \mathbf{\Sigma})$ su función de densidad viene dada por:
+$$f(\mathbf{x}_i | g) = \frac{ 1 }{ (2 \pi)^{^p/_2} | \mathbf{\Sigma}_g |^{^1/_2} } \, \exp \left\{ - \frac{1}{2} (\mathbf{x}_i - \boldsymbol{\mu}_g)' \mathbf{\Sigma}_g^{-1} (\mathbf{x}_i - \boldsymbol{\mu}_g) \right\}$$
 
-La densidad puede estimarse utilizando los estimadores MV de $\mathbf{\mu}_g$ y $\mathbf{\Sigma}_g$, $\mathbf{\bar{x}}_g$ y $\mathbf{S}_g$ respectivamente, para obtener:
+La densidad puede estimarse utilizando los estimadores MV de $\boldsymbol{\mu}_g$ y $\mathbf{\Sigma}_g$, $\mathbf{\bar{x}}_g$ y $\mathbf{S}_g$ respectivamente, para obtener:
 $$\hat{f}(\mathbf{x}_i | g) = \frac{ 1 }{ (2 \pi)^{^p/_2} | \mathbf{S}_g |^{^1/_2} } \, \exp \left\{ - \frac{1}{2} (\mathbf{x}_i - \mathbf{\bar{x}}_g)' \mathbf{S}_g^{-1} (\mathbf{x}_i - \mathbf{\bar{x}}_g) \right\}$$
 
 Si aplicamos el supuesto de normalidad a la probabilidad posteriori, obtenemos que:
 $$\Pr(i \in g | \mathbf{x} = \mathbf{x}_i) = \frac{ \pi_g \,\, | \mathbf{\Sigma}_g |^{-1/2} \exp\left\{ (-1/2) \, D^2_{ig} \right\} }{ \sum\limits_{g' = 1}^{k} \pi_{g'} \,\, | \mathbf{\Sigma}_{g'} |^{-1/2} \exp\left\{ (-1/2) \, D^2_{ig'} \right\} }$$
-donde $D^2_{ig}$ y $D^2_{ig'}$ son la distancia de Mahalanobis entre la observación $i$ y los grupos $g$ y $g'$ respectivamente. Utilizando los estimadores de $\mathbf{\mu}_g$ y $\mathbf{\Sigma}_g$ mencionadas anteriormente, obtenemos que:
+donde $D^2_{ig}$ y $D^2_{ig'}$ son la distancia de Mahalanobis entre la observación $i$ y los grupos $g$ y $g'$ respectivamente. Utilizando los estimadores de $\boldsymbol{\mu}_g$ y $\mathbf{\Sigma}_g$ mencionados anteriormente, obtenemos que:
 $$\hat{\Pr}(i \in g | \mathbf{x} = \mathbf{x}_i) = \frac{ \hat{\pi}_g \,\, | \mathbf{S}_g |^{-1/2} \exp\left\{ (-1/2) \, \hat{D}^2_{ig} \right\} }{ \sum\limits_{g' = 1}^{k} \hat{\pi}_{g'} \,\, | \mathbf{S}_{g'} |^{-1/2} \exp\left\{ (-1/2) \, \hat{D}^2_{ig'} \right\} }$$
 y la observación $i$ se asignará al grupo $g$, sí, y solo si se cumple que:
 $$\hat{\pi}_g \,\, | \mathbf{S}_g |^{-1/2} \exp\left\{ (-1/2) \, \hat{D}^2_{ig} \right\} > \hat{\pi}_{g'} \,\, | \mathbf{S}_{g'} |^{-1/2} \exp\left\{ (-1/2) \, \hat{D}^2_{ig'} \right\} \,\,\, \forall g' \neq g$$
 
 # Costos
 
-Existen situaciones en las que el error de clasificación es más costo para algunos grupos que para otros. La regla de decisión puede modificarse de forma tal de contemplar estas situaciones de la siguiente forma. Se define un costo para cada error de clasificación, $c(g|g')$. Luego, se asigna $i$ al grupo $g$ sí, y solo si, se cumple que:
+Existen situaciones en las que el error de clasificación es más costoso para algunos grupos que para otros. La regla de decisión puede modificarse de forma tal de contemplar estas situaciones de la siguiente forma. Se define un costo para cada error de clasificación, $c(g|g')$. Luego, se asigna $i$ al grupo $g$ sí, y solo si, se cumple que:
 $$\frac{ f(\mathbf{x}_i | g) }{ f(\mathbf{x}_i | g') } > \frac{ \pi_{g'} \, c(g | g') }{ \pi_{g} \, c(g' | g) } \,\,\, \forall g' \neq g$$
 
 # Errores de clasificación
@@ -104,10 +104,13 @@ donde $m_i$ es la cantidad de observaciones clasificadas errónemente, de las $n
 
 *Leave-one-out cross-validation* consiste en:
 
-- apartar una observación de la muestra.  
-- construir la función discriminante con las $n - 1$ observaciones restantes.  
-- clasificar laa observación apartada y registrar si dicha observación fue correcta o incorrectamente clasificada.  
-- repetir para cada una de las $n$ observaciones  
+- apartar una observación de la muestra.
+
+- construir la función discriminante con las $n - 1$ observaciones restantes.
+
+- clasificar la observación apartada y registrar si dicha observación fue correcta o incorrectamente clasificada.
+
+- repetir para cada una de las $n$ observaciones.
 
 La proporción de observaciones mal clasificadas dentro de cada grupo se define como:
 $$e_{i, \, c} = \frac{a_i}{n_i}$$
@@ -116,32 +119,37 @@ $$e_{i, \, c} = \frac{a_i}{n_i}$$
 
 Existen distintas formas de construir una función discriminante. El AD busca:
 
-- examinar la separación entre grupos.  
-- encontrar el subconjunto de las variables originales que separa los grupos tan bien como el conjunto original.  
-- determinar cuál variable es la que tiene mayor constribución a la discriminación.  
-- interpretar las nuevas dimensiones rrepresentadas por las funciones discriminantes.  
-- re-clasificar individuos.  
-- predecir (asignar nuevos individuos a un grupo).  
+- examinar la separación entre grupos.
+
+- encontrar el subconjunto de las variables originales que separa los grupos tan bien como el conjunto original.
+
+- determinar cuál variable es la que tiene mayor constribución a la discriminación.
+
+- interpretar las nuevas dimensiones representadas por las funciones discriminantes.
+
+- re-clasificar individuos.
+
+- predecir (asignar nuevos individuos a un grupo).
 
 ## AD factorial
 
-El AD factorial consiste en encontrar las combinaciones lineales de los datos, $\mathbf{Z} = \mathbf{X} \mathbf{u}$, que tengan mayor poder discriminante para clasificar las observaciones en $k$ grupos. Las nuevas variables, susceptibles de separar lo máximo posible los $k$ grupos, representan un compromiso entre mínima inercia intra-clase (grupos homogéneos), y máxima incercia inter-clase (grupos separados). Por lo tanto, el objetivo es contrar las variables que maximizen el cociente entre ambas inercias:
+El AD factorial consiste en encontrar las combinaciones lineales de los datos, $\mathbf{Z} = \mathbf{X} \mathbf{u}$, que tengan mayor poder discriminante para clasificar las observaciones en $k$ grupos. Las nuevas variables, susceptibles de separar lo máximo posible los $k$ grupos, representan un compromiso entre mínima inercia intra-clase (grupos homogéneos), y máxima incercia inter-clase (grupos separados). Por lo tanto, el objetivo es encontrar las variables que maximizen el cociente entre ambas inercias:
 $$\frac{ \mathbf{u}' \mathbf{B} \mathbf{u} }{ \mathbf{u}' \mathbf{W} \mathbf{u} }$$
 donde $\mathbf{u}$ son los ejes de inercia que maximizan dicho conciente, y $\mathbf{Z}$ son las coordenadas de los individuos en las nuevas variables (es decir, la proyección de $\mathbf{X}$ en los ejes de inercia). Por lo tanto, el problema a resolver es:
 $$\max\left\{ \frac{ \mathbf{u}' \mathbf{B} \mathbf{u} }{ \mathbf{u}' \mathbf{W} \mathbf{u} } \right\}$$
 
 Condiciones de primer orden (CPO):
-$$\frac{ \partial (\bullet) }{ \partial \mathbf{u}' } = \mathbf{0} \Rightarrow \frac{ 2 \mathbf{B} \mathbf{u} (\mathbf{u}'\mathbf{W} \mathbf{u}) - 2 (\mathbf{u}' \mathbf{B} \mathbf{u}) \mathbf{W} \mathbf{u} }{ (\mathbf{u}'\mathbf{W}\mathbf{u})^2 } = \mathbf{0}$$
+$$\frac{ \partial (\cdot) }{ \partial \mathbf{u}' } = \mathbf{0} \Rightarrow \frac{ 2 \mathbf{B} \mathbf{u} (\mathbf{u}'\mathbf{W} \mathbf{u}) - 2 (\mathbf{u}' \mathbf{B} \mathbf{u}) \mathbf{W} \mathbf{u} }{ (\mathbf{u}'\mathbf{W}\mathbf{u})^2 } = \mathbf{0}$$
 
-Dado que $\mathbf{X}$ es una matriz de $n \times p$, $\mathbf{W}$ y $\mathbf{B}$ son matrices de $n \times n$, mientras que $\mathbf{u}$ es un vector de forma $n \times 1$, por lo que $\mathbf{u}'$ tiene forma $1 \times n$. Tenemos entonces que $\mathbf{u}' \mathbf{B} \mathbf{u}$ y $\mathbf{u}' \mathbf{W} \mathbf{u}$ son escalares. Por lo tanto, las siguientes manipulaciones son válidas:
+Dado que $\mathbf{X}$ es una matriz de $n \times p$, $\mathbf{W}$ y $\mathbf{B}$ son matrices de $n \times n$, mientras que $\mathbf{u}$ es un vector de forma $n \times 1$, por lo que $\mathbf{u}'$ tiene forma $1 \times n$, tenemos entonces que $\mathbf{u}' \mathbf{B} \mathbf{u}$ y $\mathbf{u}' \mathbf{W} \mathbf{u}$ son escalares. Por lo tanto, las siguientes manipulaciones son válidas:
 $$\frac{ 2 \mathbf{B} \mathbf{u} (\mathbf{u}'\mathbf{W} \mathbf{u}) - 2 (\mathbf{u}' \mathbf{B} \mathbf{u}) \mathbf{W} \mathbf{u} }{ (\mathbf{u}'\mathbf{W}\mathbf{u})^2 } = \mathbf{0} \Rightarrow \frac{ \mathbf{B} \mathbf{u} (\mathbf{u}'\mathbf{W} \mathbf{u}) }{ (\mathbf{u}'\mathbf{W}\mathbf{u})^2 } = \frac{ (\mathbf{u}' \mathbf{B} \mathbf{u}) \mathbf{W} \mathbf{u} }{ (\mathbf{u}'\mathbf{W}\mathbf{u})^2 } \Rightarrow$$
 $$\Rightarrow \mathbf{B} \mathbf{u} = \mathbf{W} \mathbf{u} \, \frac{ \mathbf{u}' \mathbf{B} \mathbf{u} }{ \mathbf{u}' \mathbf{W} \mathbf{u} } \Rightarrow \mathbf{W}^{-1} \mathbf{B} \mathbf{u} = \mathbf{u} \, \frac{ \mathbf{u}' \mathbf{B} \mathbf{u} }{ \mathbf{u}' \mathbf{W} \mathbf{u} }$$
-dond el último paso lo podemos hacer dado que sabemos que $\mathbf{W}$ es invertible. Luego, si definimos $\lambda = \frac{ \mathbf{u}' \mathbf{B} \mathbf{u} }{ \mathbf{u}' \mathbf{W} \mathbf{u} }$ obtenemos que:
+donde el último paso lo podemos hacer dado que sabemos que $\mathbf{W}$ es invertible. Luego, si definimos $\lambda = \frac{ \mathbf{u}' \mathbf{B} \mathbf{u} }{ \mathbf{u}' \mathbf{W} \mathbf{u} }$ obtenemos que:
 $$\mathbf{W}^{-1} \mathbf{B} \mathbf{u} = \lambda \, \mathbf{u}$$
 
-Hallamos entonces que $\mathbf{u}$ es entonces el vector propio asociado al máximo valor propio de la matriz $\mathbf{W}^{-1} \mathbf{B}$, mientras que el valor propio $\lambda$ representa la máxima varianza inter-clases $\mathbf{u}' \mathbf{B} \mathbf{u}$ de la nueva variable $Z$.
+Hallamos entonces que $\mathbf{u}$ es el vector propio asociado al máximo valor propio de la matriz $\mathbf{W}^{-1} \mathbf{B}$, mientras que el valor propio $\lambda$ representa la máxima varianza inter-clases $\mathbf{u}' \mathbf{B} \mathbf{u}$ de la nueva variable $Z$.
 
-En total, pueden hallarse $r = \min(k - 1, \, p)$ valores y vectores propios no nulos. Llamamos $\lambda_1, \, \lambda_2, \, \ldots, \, \lambda_r$ a los valores propios, y $\mathbf{u}_1, \, \mathbf{u}_2, \ldots, \, \mathbf{u}_r$ a los vectores propios asociados, tales que $\lambda_1 > \lambda_2 > \ldots > \lambda_r$. Las variables $\mathbf{Z}_j = \mathbf{X} \mathbf{u}_j$ proporcionan la máxima separación para discriminar entre los $k$ grupos. Esta variables son incorreladas, dado que se construyen de forma secuencial y de manera ortogonal. Es decir, $\mathbf{u}_1$ es tal que la proyección de los grupos sobre si misma tiene máxima separación relativa. La segunda dirección, $\mathbf{u}_2$, se construye de forma tal de que la separación entre grupos sea máxima, y sea ortogonal a la dirección determinada por $\mathbf{u}_1$ (esto es, $\langle \mathbf{u}_1, \, \mathbf{u}_2 \rangle = 0$).
+En total, pueden hallarse $r = \min(k - 1, \, p)$ valores y vectores propios no nulos. Llamamos $\lambda_1, \, \lambda_2, \, \ldots, \, \lambda_r$ a los valores propios, y $\mathbf{u}_1, \, \mathbf{u}_2, \ldots, \, \mathbf{u}_r$ a los vectores propios asociados, tales que $\lambda_1 > \lambda_2 > \ldots > \lambda_r$. Las variables $\mathbf{Z}_j = \mathbf{X} \mathbf{u}_j$ proporcionan la máxima separación para discriminar entre los $k$ grupos. Estas variables son incorreladas, dado que se construyen de forma secuencial y de manera ortogonal. Es decir, $\mathbf{u}_1$ es tal que la proyección de los grupos sobre si misma tiene máxima separación relativa. La segunda dirección, $\mathbf{u}_2$, se construye de forma tal de que la separación entre grupos sea máxima, y sea ortogonal a la dirección determinada por $\mathbf{u}_1$ (esto es, $\langle \mathbf{u}_1, \, \mathbf{u}_2 \rangle = 0$).
 
 Para determinar con cuántas funciones discriminantes trabajar se calcula la variación explicada por ellas, siendo $\frac{ \lambda_1 }{ \sum\limits_{j = 1}^{r} \lambda_j }$ la de la primera, $\frac{ \lambda_1 + \lambda_2 }{ \sum\limits_{j = 1}^{r} \lambda_j }$ la primera y la segunda juntas, y así sucesivamente. La correlación entre las variables orginales y las combinaciones lineales establece la importancia de cada una de las variables originales para discriminar.
 
@@ -149,10 +157,10 @@ Para determinar con cuántas funciones discriminantes trabajar se calcula la var
 
 Se asume que cada grupo tiene una distribución normal $p$-variada.
 $$\begin{array}{c}
-\mathbf{x}_1 \sim \text{N}_p(\mathbf{\mu}_1, \, \mathbf{\Sigma}_1) \\
-\mathbf{x}_2 \sim \text{N}_p(\mathbf{\mu}_2, \, \mathbf{\Sigma}_2) \\
+\mathbf{x}_1 \sim \text{N}_p(\boldsymbol{\mu}_1, \, \mathbf{\Sigma}_1) \\
+\mathbf{x}_2 \sim \text{N}_p(\boldsymbol{\mu}_2, \, \mathbf{\Sigma}_2) \\
 \vdots \\
-\mathbf{x}_k \sim \text{N}_p(\mathbf{\mu}_k, \, \mathbf{\Sigma}_k) \\
+\mathbf{x}_k \sim \text{N}_p(\boldsymbol{\mu}_k, \, \mathbf{\Sigma}_k) \\
 \end{array}$$
 
 ### AD lineal
@@ -163,15 +171,15 @@ $$\mathbf{\Sigma}_1 = \mathbf{\Sigma}_2 = \ldots = \mathbf{\Sigma}_k$$
 Sabemos que para aplicar la regla de probabilidad a posteriori, se debe maximizar la probabilidad condicional $\Pr(i \in g | \mathbf{x} = \mathbf{x}_i)$. Sabemos tambien que maximizar dicha probabilidad condicional es equivalente a maximizar $\pi_g \, \exp\left\{ - \frac{1}{2} D_{ig}^2 \right\}$. Definimos la función $L_{ig}$ como el logaritmo de nuestra función objetivo, esto es:
 $$\begin{array}{rcl}
 L_{ig} & = & \log \pi_g - \frac{1}{2} D_{ig}^2 \\ \\
-   & = & \log \pi_g - \frac{1}{2} \left[ (\mathbf{x}_i - \mathbf{\mu}_g)' \mathbf{\Sigma}^{-1} ((\mathbf{x}_i - \mathbf{\mu}_g)) \right] \\ \\
-   & = & \log \pi_g - \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \mathbf{\mu}_g - \frac{1}{2} \mathbf{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{\mu}_g
+   & = & \log \pi_g - \frac{1}{2} \left[ (\mathbf{x}_i - \boldsymbol{\mu}_g)' \mathbf{\Sigma}^{-1} ((\mathbf{x}_i - \boldsymbol{\mu}_g)) \right] \\ \\
+   & = & \log \pi_g - \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \boldsymbol{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \boldsymbol{\mu}_g - \frac{1}{2} \boldsymbol{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \boldsymbol{\mu}_g
 \end{array}$$
-dado que $\mathbf{\mu}_g$ y $\mathbf{\Sigma}$ son desconocidos, utilizamos sus estimadores MV. Adicionalmente, dado que $\mathbf{\Sigma}$ es una matrix simétrica, tenemos que $\frac{1}{2} \mathbf{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \mathbf{\mu}_g = \mathbf{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i$. Por útimo, dado que el vector $\mathbf{x}_i$ es el mismo para todos los grupo, el término $\mathbf{x}'_i \, \mathbf{S}^{-1} \, \mathbf{x}_i$ puede descartarse ya que es constante. De esta forma, obtenemos que la función $L_{ig}$ está dada por
+dado que $\boldsymbol{\mu}_g$ y $\mathbf{\Sigma}$ son desconocidos, utilizamos sus estimadores MV. Adicionalmente, dado que $\mathbf{\Sigma}$ es una matriz simétrica, tenemos que $\frac{1}{2} \boldsymbol{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \boldsymbol{\mu}_g = \boldsymbol{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i$. Por útimo, dado que el vector $\mathbf{x}_i$ es el mismo para todos los grupo, el término $\mathbf{x}'_i \, \mathbf{S}^{-1} \, \mathbf{x}_i$ puede descartarse ya que es constante. De esta forma, obtenemos que la función $L_{ig}$ está dada por
 $$L_{ig} = \log \hat{\pi}_g + \mathbf{\bar{x}}'_g \, \mathbf{S}^{-1} \, \mathbf{x}_i - \frac{1}{2} \mathbf{\bar{x}}'_g \, \mathbf{S}^{-1} \, \mathbf{\bar{x}}_g$$
 
 La función $L_{ig}$ es la conocida como **función discriminante lineal**. El valor que $L_{ig}$ toma es conocido como el **score** de la observación $i$ en el grupo $g$. La misma es lineal en las $x$.
 
-La función que permite determinar en qué grupo clasificar una observación es llamada **función de la clasificación**. Para hallar, partimos de la desigualdad derivada en la sección de reglas de decisión: la observación $i$ se asigna al grupo $g$, sí, y solo si,
+La función que permite determinar en qué grupo clasificar una observación es llamada **función de la clasificación**. Para hallarla, partimos de la desigualdad derivada en la sección de reglas de decisión: la observación $i$ se asigna al grupo $g$, sí, y solo si,
 $$\Pr(i \in g | \mathbf{x} = \mathbf{x}_i) > \Pr(i \in g' | \mathbf{x} = \mathbf{x}_i) \,\,\, \forall g \neq g'$$
 
 Para el caso de la normalidad con igualdad de matrices de covarianzas, sabemos que esto es equivalente a asignar la observación $i$ al grupo $g$ si se cumple que:
@@ -189,7 +197,7 @@ L_{ig} & > & L_{ig'} \\ \\
 \underbrace { \left( \mathbf{\bar{x}}_g - \mathbf{\bar{x}}_{g'} \right)' \mathbf{S}^{-1} \left[ \mathbf{x}_i - \frac{1}{2} \left( \mathbf{\bar{x}}_g - \mathbf{\bar{x}}_{g'} \right) \right] }_{ L_{igg'} } & > & \log \left( \frac{ \hat{\pi}_{g'} }{ \hat{\pi}_{g} } \right)
 \end{array}$$
 
-Por lo tanto, la región de clasificación queda determinada por los $k - 1$ hiperplanos definidos por las inequaciones de la forma
+Por lo tanto, la región de clasificación queda determinada por los $k - 1$ hiperplanos definidos por las inecuaciones de la forma
 $$R_{gg'}: \,\, L_{igg'} > \log \left( \frac{ \hat{\pi}_{g'} }{ \hat{\pi}_{g} } \right)$$
 Los bordes de estas regiones están determinadas por las ecuaciones $L_{igg'} = \log \left( \frac{ \hat{\pi}_{g'} }{ \hat{\pi}_{g} } \right)$, y en ellos, no se cuenta con regla de decisión.
 
@@ -198,10 +206,10 @@ $$R_{gg'}: \,\, L_{igg'} > \log \left( \frac{ \hat{\pi}_{g'} \, c(g | g') }{ \ha
 
 ### AD cuadrático
 
-A diferencia del ADL, el cuadrático no asume la igualdad de matrices de covarianzas. No obstante ello, el problem se mantiene igual,
+A diferencia del ADL, el cuadrático no asume la igualdad de matrices de covarianzas. No obstante ello, el planteo del problema se mantiene incambiado:
 $$\max\big\{ \Pr(i \in g | \mathbf{x} = \mathbf{x}_i) \big\} = \max\left\{ \pi_g \, \exp\left\{ - \frac{1}{2} D_{ig}^2 \right\} \left| \mathbf{\Sigma}_g \right|^{-1/2} \right\}$$
 
-Definimos la **función discriminante cuadrática** aplicando logarítmos y utilizando los estimadores MV para $\mathbf{\mu}_g$ y $\mathbf{\Sigma}_g$ en la función objetivo. De esta forma, tenemos que:
+Definimos la **función discriminante cuadrática** aplicando logarítmos y utilizando los estimadores MV para $\boldsymbol{\mu}_g$ y $\mathbf{\Sigma}_g$ en la función objetivo. De esta forma, tenemos que:
 $$\begin{array}{rcl}
 Q_{ig} & = & \pi_g \, \exp\left\{ - \frac{1}{2} D_{ig}^2 \right\} \left| \mathbf{\Sigma}_g \right|^{-1/2} \\ \\
    & = & \log \hat{\pi}_g - \frac{1}{2} \hat{D}_{ig}^2 - \frac{1}{2} \log |\mathbf{S}_g| \\ \\
@@ -209,13 +217,13 @@ Q_{ig} & = & \pi_g \, \exp\left\{ - \frac{1}{2} D_{ig}^2 \right\} \left| \mathbf
    & = & \log \hat{\pi}_g - \frac{1}{2} \log |\mathbf{S}_g| - \frac{1}{2} \mathbf{x}_i' \mathbf{S}_g^{-1} \mathbf{x}_i + \frac{1}{2} \mathbf{x}_i' \mathbf{S}_g^{-1} \mathbf{\bar{x}}_g + \frac{1}{2} \mathbf{\bar{x}}_g' \mathbf{S}_g^{-1} \mathbf{x}_i - \frac{1}{2} \mathbf{\bar{x}}_g' \mathbf{S}_g^{-1} \mathbf{\bar{x}}_g
 \end{array}$$
 
-La $Q_{ig}$ se utiliza para calcular el **score**de la observación $i$ en el grupo $g$, para cada grupo $g = 1, \, \ldots, k$. Así entonces, $i$ se asigna al grupo $g$, sí, y solo si, $Q_{ig} > Q_{ig'} \,\,\, \forall g \neq g'$.
+La función $Q_{ig}$ se utiliza para calcular el **score** de la observación $i$ en el grupo $g$, para cada grupo $g = 1, \, \ldots, \, k$. Así entonces, $i$ se asigna al grupo $g$, sí, y solo si, $Q_{ig} > Q_{ig'} \,\,\, \forall g \neq g'$.
 
 ### Comparación entre LDA y QDA
 
 La diferencia estadística entre LDA y QDA radica en el bias-variance trade-off. Cuando se cuenta con $p$ variables, la estimación de la matriz de covarianzas requiere estimar $p(p + 1) / 2$ parámetros para LDA, pero $K p (p + 1) / 2$ parámetros para QDA.
 
-LDA es un método menos flexible que QDA y, consequentemente, tiene menor varianza en la estimación de sus parámetros. Si bien esto puede derivar en una mejor capacidad predictiva en la clasificación, también puede generar grandes sesgos en los casos en que el supuesto de homocedasticidad no sea creible
+LDA es un método menos flexible que QDA y, consequentemente, tiene menor varianza en la estimación de sus parámetros. Si bien esto puede derivar en una mejor capacidad predictiva en la clasificación, también puede generar grandes sesgos en los casos en que el supuesto de homocedasticidad no sea creible.
 
 ## AD probabilístico (distribución desconocida)
 
@@ -227,28 +235,28 @@ Por lo que sabemos que:
 $$\begin{array}{ccccc}
 \Pr(Y_i = 1) = \pi_i & & \Pr(Y_i = 0) = 1 - \pi_i & & \E(Y_i | X) = \pi_i
 \end{array}$$
-$$\Pr(Y_i = 1 | \mathbf{x} = \mathbf{x}_i) = \pi_i = \frac{ e^{\mathbf{x}_i' \beta} }{ 1 + e^{\mathbf{x}_i' \beta} }$$
+$$\Pr(Y_i = 1 | \mathbf{x} = \mathbf{x}_i) = \pi_i = \frac{ e^{\mathbf{x}_i' \boldsymbol{\beta}} }{ 1 + e^{\mathbf{x}_i' \boldsymbol{\beta}} }$$
 
 Este modelo se puede linealizar utilizando las *transformación Logit*, y encontramos que:
-$$\log\left( \frac{\pi_i }{ 1 - \pi_i } \right) = \mathbf{x}_i' \beta$$
+$$\log\left( \frac{\pi_i }{ 1 - \pi_i } \right) = \mathbf{x}_i' \boldsymbol{\beta}$$
 
-Al cociente $\frac{\pi_i }{ 1 - \pi_i } = e^{\mathbf{x}_i' \beta}$ se lo denomina *odds*, y se lo puede conciderar como una medida de riesgo. Es el cociente entre la probabilidad de éxito $\pi_i$ y la probabilidad de fracaso $1 - \pi_i$.
+Al cociente $\frac{\pi_i }{ 1 - \pi_i } = e^{\mathbf{x}_i' \boldsymbol{\beta}}$ se lo denomina *odds*, y se lo puede conciderar como una medida de riesgo. Es el cociente entre la probabilidad de éxito $\pi_i$ y la probabilidad de fracaso $1 - \pi_i$.
 
 Para hallar estimaciones de los parámetros se utiliza el método de máxima verosimilitud. Dado que $Y_i \sim \text{Bernoulli}(\pi_i)$, su función de densidad está dada por:
 $$f(Y_i) = \pi_i^{Y_i} \, \big( 1 - \pi_i \big)^{1 - Y_i}$$
 
 Si asumimos que las variables $Y_i$ son independientes, tenemos que su función de verosimilitud está dada por:
 $$\mathscr{L}(\beta) = \prod\limits_{i = 1}^{n} f(Y_i) = \prod\limits_{i = 1}^{n} \pi_i^{Y_i} \, \big( 1 - \pi_i \big)^{1 - Y_i}$$
-y su log-verosimiilitud será:
+y su log-verosimilitud será:
 $$\begin{array}{rcl}
-\ell(\beta) & = & \sum\limits_{i = 1}^{n} Y_i \log\left( \frac{ \pi_i }{ 1 - \pi_i } \right) + \sum\limits_{i = 1}^{n} \log \big( 1 - Y_i \big) \\ \\
-   & = & \sum\limits_{i = 1}^{n} Y_i \mathbf{x}_i' \beta + \sum\limits_{i = 1}^{n} \log \big( 1 - Y_i \big)
+\ell(\boldsymbol{\beta}) & = & \sum\limits_{i = 1}^{n} Y_i \log\left( \frac{ \pi_i }{ 1 - \pi_i } \right) + \sum\limits_{i = 1}^{n} \log \big( 1 - Y_i \big) \\ \\
+   & = & \sum\limits_{i = 1}^{n} Y_i \mathbf{x}_i' \boldsymbol{\beta} + \sum\limits_{i = 1}^{n} \log \big( 1 - Y_i \big)
 \end{array}$$
 
 Las estimaciones de los coeficientes se obtienen resolviendo las CPO:
-$$\frac{ \partial \ell(\beta) }{ \partial \beta } = 0$$
+$$\frac{ \partial \ell(\boldsymbol{\beta}) }{ \partial \boldsymbol{\beta} } = 0$$
 utilizando algorítmos numéricos, por ejemplo Newton-Raphson. Los valores estimados de $Y_i$ se obtienen utilizando las estimaciones de los parámetros:
-$$\hat{\pi}_i = \frac{ e^{\mathbf{x}_i' \hat{\mathbf{\beta}}} }{ 1 + e^{\mathbf{x}_i' \hat{\mathbf{\beta}}} }$$
+$$\hat{\pi}_i = \frac{ e^{\mathbf{x}_i' \boldsymbol{\hat{\beta}}} }{ 1 + e^{\mathbf{x}_i' \boldsymbol{\hat{\beta}}} }$$
 
 Debido a que el AD logístico se trata de un modelo, se pueden realizar pruebas de significación del modelo, de los parámetros y de la bondad de ajuste. Las pruebas de significación tienen la forma habitual:
 $$\begin{array}{lcc}
@@ -274,7 +282,7 @@ H_1) \,\,\, \beta_k \neq 0
 y el estadístico se define como:
 $$W = \frac{ \hat{\beta}_k }{ \hat{\sigma}_{\hat{\beta}_k} } \stackrel{a}{\sim} \text{N}(0, \, 1)$$
 
-Una vez estimado el modelo y calculadas las predicciones $\hat{\pi}_i$, se debe decidir cuales clasificar como éxito ($Y_i = 1$) y cuales como fracaso ($Y_i = 0$). Salvo casos en que otra información esté disponible, lo usual es tomar 0,5 como punto de corte. De esta forma entonces:
+Una vez estimado el modelo y calculadas las predicciones $\hat{\pi}_i$, se debe decidir cuáles clasificar como éxito ($Y_i = 1$) y cuáles como fracaso ($Y_i = 0$). Salvo casos en que otra información esté disponible, lo usual es tomar 0,5 como punto de corte. De esta forma entonces:
 $$\hat{Y}_i = \left\{ 
 \begin{array}{rcl}
 1 & \text{si} & \hat{\pi}_i \geq 0.5 \\
@@ -282,9 +290,9 @@ $$\hat{Y}_i = \left\{
 \end{array}\right.$$
 
 La acuracidad de predicción de un modelo de respuesta discreta suele medirse mediante la *sensibilidad* y la *especificidad*, donde:
-$$\text{sensibilidad} = \frac{ \#(\text{éxitos observadors clasificados como éxitos}) }{ \#(\text{éxitos observados}) }$$
+$$\text{sensibilidad} = \frac{ \#(\text{éxitos observados clasificados como éxitos}) }{ \#(\text{éxitos observados}) }$$
 
-$$\text{especificidad} = \frac{ \#(\text{fracasos observadors clasificados como fracasos}) }{ \#(\text{fracasos observados}) }$$
+$$\text{especificidad} = \frac{ \#(\text{fracasos observados clasificados como fracasos}) }{ \#(\text{fracasos observados}) }$$
 
 Estos resultados suelen mostrarse en la matriz de confusión (observados Vs. predichos) y/o en la curva ROC (sensibilidad Vs. 1 - especificidad). Estos indicadores también se utilizar para el ADL y el ADC.
 
@@ -294,27 +302,27 @@ Si la variable de respuesta tiene más de dos categorías, existen varias formas
 
 #### Logits acumulados (modelos proporcionales)
 
-El ajuste se basa en que la influencia de las variables explicativas en la variable de respuesta es independienete del punto de corto del logit acumulado. El modelo tiene la siguiente especificación:
-$$logit(\theta_{ik}) = \alpha_k + \mathbf{x}_i' \beta$$
+El ajuste se basa en que la influencia de las variables explicativas en la variable de respuesta es independienete del punto de corte del logit acumulado. El modelo tiene la siguiente especificación:
+$$logit(\theta_{ik}) = \alpha_k + \mathbf{x}_i' \boldsymbol{\beta}$$
 donde $i$ indica la observación y $k$ la sub-población o grupo. Los modelos tienen entonces la siguiente forma:
 $$\begin{array}{ccccc}
-logit(\theta_{i1}) & = & \log \left( \frac{ \pi_{i1} }{ \pi_{i2} + \pi_{i3} + \ldots + \pi_{ik} } \right) & = & \mathbf{x}_i' \beta \\ \\
-logit(\theta_{i2}) & = & \log \left( \frac{ \pi_{i1} + \pi_{i2} }{ \pi_{i3} + \pi_{i4} + \ldots + \pi_{ik} } \right) & = & \mathbf{x}_i' \beta \\ \\
+logit(\theta_{i1}) & = & \log \left( \frac{ \pi_{i1} }{ \pi_{i2} + \pi_{i3} + \ldots + \pi_{ik} } \right) & = & \mathbf{x}_i' \boldsymbol{\beta} \\ \\
+logit(\theta_{i2}) & = & \log \left( \frac{ \pi_{i1} + \pi_{i2} }{ \pi_{i3} + \pi_{i4} + \ldots + \pi_{ik} } \right) & = & \mathbf{x}_i' \boldsymbol{\beta} \\ \\
 \vdots & & \vdots & & \vdots \\ \\
-logit(\theta_{ik-1}) & = & \log \left( \frac{ \pi_{i1} + \pi_{i2} + \ldots + \pi_{ik-1} }{ \pi_{ik} } \right) & = & \mathbf{x}_i' \beta \\ \\
+logit(\theta_{ik-1}) & = & \log \left( \frac{ \pi_{i1} + \pi_{i2} + \ldots + \pi_{ik-1} }{ \pi_{ik} } \right) & = & \mathbf{x}_i' \boldsymbol{\beta} \\ \\
 \end{array}$$
 donde $\pi_{ig}$ es la probabilidad de que la observación $i$ pertenezca al grupo $g$.
 
 #### Logits generalizados
 
 Se utiliza una categoría como referencia. Para cada categoría se ajusta un modelo logit. Existen por lo tanto $K - 1$ juegos de parámetros para cada uno de los $K - 1$ modelos de la forma:
-$$logit_{ig} = \log \left( \frac{ \pi_{ig} }{ \pi_{iK} } \right) = \mathbf{x}_{ig}' \beta_g$$
+$$logit_{ig} = \log \left( \frac{ \pi_{ig} }{ \pi_{iK} } \right) = \mathbf{x}_{ig}' \boldsymbol{\beta}_g$$
 donde $\pi_{ig}$ es la probabilidad de que la observación $i$ pertenezca al grupo $g = 1, \, \ldots, \, K$.
 
 #### Logits de categorías adyacentes
 
-También existen $K - 1$ modelos, pero cada modelo compara su categoría, con la categoría siguiente.
-$$logit_{i, \, g} = \log \left( \frac{ \pi_{i, \, g-1} }{ \pi_{i, \, g} } \right) = \mathbf{x}_{i, \, g - 1}' \beta_{g-1}$$
+También existen $K - 1$ modelos, pero cada modelo compara su categoría, con la categoría anterior.
+$$logit_{i, \, g} = \log \left( \frac{ \pi_{i, \, g-1} }{ \pi_{i, \, g} } \right) = \mathbf{x}_{i, \, g - 1}' \boldsymbol{\beta}_{g-1}$$
 donde $\pi_{i, \,g}$ es la probabilidad de que la observación $i$ pertenezca al grupo $g = 2, \, \ldots, \, K$.
 
 # Referencias
