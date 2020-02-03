@@ -227,11 +227,203 @@ Un método gráfico implíca graficar los valores propios de forma ordenada (nú
 
 Generalmente, no se suele trabajar con más de 3 ejes, dado que de esta forma el resuultado puede graficarse en un *biplot*. En él se grafican tanto los loadiings (contrubución de cada variable original a la conformación del eje factoral), así como también los scores (corrdenadas de los induviduos proyectados sobre los ejes factoriales).
 
+\newpage
+
 # Análisis de Correspondencias Simples
 
+ACS es una técnica factorial utilizada para estudiar la independencia entre variables cualitativas. A diferencia de un test chi-cuadrado, ACS busca explicar cuáles son las modalidades de las variables que se encuentran asociadas entre si.
 
+El análisis parte de una tabla de contingencia, construye los perfiles filas y columnas, y aplica ACP a estas nuevas tablas.
+
+## Los datos
+
+Partimos de una tabla de contingencias. Esta contiene los conteos de individuos con modalidad $i$ en la variable 1 y modalidad $j$ en la variable 2.
+
+\begin{center}
+  \begin{tabular}{ c | ccccc | c }
+             & 1        & $\cdots$ & $j$                    & $\cdots$ & $J$      & Total                  \\ \hline
+    1        &          &          & $\vdots$               &          &          & $\vdots$               \\
+    $\vdots$ &          &          & $\vdots$               &          &          & $\vdots$               \\
+    $i$      & $\cdots$ & $\cdots$ & $x_{ij}$               & $\cdots$ & $\cdots$ & $\sum\limits_j x_{ij}$ \\
+    $\vdots$ &          &          & $\vdots$               &          &          & $\vdots$               \\
+    $I$      &          &          & $\vdots$               &          &          & $\vdots$               \\ \hline
+    Total    & $\cdots$ & $\cdots$ & $\sum\limits_i x_{ij}$ & $\cdots$ & $\cdots$ & $n = \sum\limits_{ij} x_{ij}$
+  \end{tabular}
+\end{center}
+
+Para realizar ACS primero debemos computar la tabla de frecuencias relativas, donde:
+
+- La frecuencia relativa de las  observaciones con modalidades $ij$ está dada por: $f_{ij} = x_{ij} / n$
+
+- La fila de "totales" mide la frecuencia marginal de cada modalidad de la variable 2 (columnas), dada por:
+$$f_{.j} = \frac{1}{n} \sum\limits_i x_{ij}$$
+
+- La columna de "totales" mide la frecuencia marginal de cada modalidad de la variable 1 (filas), dada por:
+$$f_{i.} = \frac{1}{n} \sum\limits_j x_{ij}$$
+
+- La celda de cantidad de observaciones ($n$), será ahora igual a 1.
+
+\begin{center}
+  \begin{tabular}{ c | ccccc | c }
+             & 1        & $\cdots$ & $j$      & $\cdots$ & $J$      &          \\ \hline
+    1        &          &          & $\vdots$ &          &          & $\vdots$ \\
+    $\vdots$ &          &          & $\vdots$ &          &          & $\vdots$ \\
+    $i$      & $\cdots$ & $\cdots$ & $f_{ij}$ & $\cdots$ & $\cdots$ & $f_{i.}$ \\
+    $\vdots$ &          &          & $\vdots$ &          &          & $\vdots$ \\
+    $I$      &          &          & $\vdots$ &          &          & $\vdots$ \\ \hline
+             & $\cdots$ & $\cdots$ & $f_{.j}$ & $\cdots$ & $\cdots$ & 1
+  \end{tabular}
+\end{center}
+
+Se trabaja con las frecuencias relativas dado que se busca estudiar la dependencia. En una tabla de frecuencias, si las variables son independientes, se cumple que, para toda modalidad conjunta, la frecuencia relativa de dicha modalidad conjunta, es igual al producto de sus frecuencias marginales:
+$$f_{ij} = f_{i.} \, f_{.j} \,\,\, \forall i,j$$
+
+En caso de que esto no se cumpla, podemos decir que existe una asociación entre las variables:
+
+- Si $f_{ij} > f_{i.} \, f_{.j}$, entonces diremos que las modalidades $i$ y $j$ se atraen.
+
+- Si $f_{ij} < f_{i.} \, f_{.j}$, entonces diremos que las modalidades $i$ y $j$ se repelen.
+
+## Perfiles
+
+Para realizar ACS construimos los perfiles de filas y de columnas. El perfil filas se construye dividiendo las frecuencias relativas por la frecuencia marginal de la $i$-ésima fila, $f_{i.}$. Por lo tanto, la columna de frecuencias marginales vale 1 para todas las filas, y no existe una fila de frecuencias marginales.
+
+\begin{center}
+  \begin{tabular}{ c | ccccc | c }
+             & 1        & $\cdots$ & $j$               & $\cdots$ & $J$      &          \\ \hline
+    1        &          &          & $\vdots$          &          &          & $1$      \\
+    $\vdots$ &          &          & $\vdots$          &          &          & $\vdots$ \\
+    $i$      & $\cdots$ & $\cdots$ & $f_{ij} / f_{i.}$ & $\cdots$ & $\cdots$ & $1$      \\
+    $\vdots$ &          &          & $\vdots$          &          &          & $\vdots$ \\
+    $I$      &          &          & $\vdots$          &          &          & $1$      \\
+  \end{tabular}
+\end{center}
+
+El perfil columnas se construye dividiendo las frecuencias relativas por la frecuencia marginal de la $j$-ésima columna, $f_{.j}$. Por lo tanto, la fila de frecuencias marginales vale 1 para todas las columnas, y no existe una columna de frecuencias marginales.
+
+\begin{center}
+  \begin{tabular}{ c | ccccc }
+             & 1        & $\cdots$ & $j$               & $\cdots$ & $J$      \\ \hline
+    1        &          &          & $\vdots$          &          &          \\
+    $\vdots$ &          &          & $\vdots$          &          &          \\
+    $i$      & $\cdots$ & $\cdots$ & $f_{ij} / f_{.j}$ & $\cdots$ & $\cdots$ \\
+    $\vdots$ &          &          & $\vdots$          &          &          \\
+    $I$      &          &          & $\vdots$          &          &          \\ \hline
+             & $1$      & $\cdots$ & $1$               & $\cdots$ & $1$
+  \end{tabular}
+\end{center}
+
+Esto permite un análisis por perfil (frecuencia condicional). Si la independencia se cumple, entonces todas las filas serán proporcionales:
+$$f_{ij} = f_{i.} \, f_{.j} \Rightarrow \frac{ f_{ij} }{ f_{i.} } = f_{.j} \,\,\, \forall i,j$$
+
+Análogamente, si las variables son independientes, todas las columnas serán proporcionales:
+$$f_{ij} = f_{i.} \, f_{.j} \Rightarrow \frac{ f_{ij} }{ f_{.j} } = f_{i.} \,\,\, \forall i,j$$
+
+Si las variables son independientes, el ACS carece de utilidad. Esto se testea mediante la prueba de independencia chi-cuadrado cuyo estadístico de está dado por:
+$$\chi^{2} = \sum_{ij} \frac{ \#(\text{observados - esperados})^2 }{ \#\text{esperados} } = \sum_{ij} \frac{ (n \, f_{ij} - n \, f_{i.} \, f_{.j})^2 }{ n \, f_{i.} \, f_{.j} } = n \, \phi^2$$
+donde $\phi$ mide la desviación entre la cantidad de observaciones esperadas en las modalidads conjuntas, y las observadas.
+
+El análisis utilizando frecuencias condicionales nos permite comparar los valores de una fila (o columna) con la fila (o columna) de frecuencias marginales. Esta fila (columna) es conocida como el baricentro de los datos en el perfil columnas (filas).
+
+## Nubes de perfiles
+
+Cada uno de los perfiles define un espacio de dimensión igual a la cantidad de modalidades de la variable que representa. Así entonces, el perfil filas puede verse como $I$ vectores en $\mathbb{R}^{J}$ (cada vector tiene $J$ componentes). Análogamente, el perfile columnas puede verse como $J$ vectores en $\mathbb{R}^{I}$ (cada vector tiene $I$ componentes).
+
+Cada uno de estos conjuntos de vectores "definen" un elipsoide en su respectivo espacio, con el perfil medio como (bari)centro del mismo. Al igual que en ACP, el objetivo es entonces encontrar los ejes de inercia de cada uno de los perfiles. También al igual que en ACP, el primer eje factorial será aquel que capture mayor inercia. El segundo, será aquel que capture mayor inercia luego del primero, y sea ortogonal al primero.
+
+## Distancia $\chi^2$
+
+Luego de centrar las nubes, y para poder hallar los ejes, debemos poder medir distancias entre los perfiles en los respectivos espacios. Utilizamos la distancia $\chi^2$ para esto. Para dos perfiles fila $i$ y $l$, la misma se define como:
+$$d^2_{\chi^2}(i, \, l) = \sum\limits_{j = 1}^{J} \frac{1}{f_{.j}} \left( \frac{ f_{ij} }{ f_{i.} } - \frac{ f_{lj} }{ f_{l.} } \right)^2$$
+
+Análogamente, para dos perfiles columna $j$ y $k$, la misma se define como:
+$$d^2_{\chi^2}(j, \, k) = \sum\limits_{i = 1}^{I} \frac{ 1 }{ f_{i.} } \left( \frac{ f_{ij} }{ f_{.j} } - \frac{ f_{ik} }{ f_{.k} } \right)^2$$
+
+Se utiliza esta distancia porque cumple con la propiedad de *equvalencia distribucional*. Esta propiedad implica que si dos filas son proporcionales, entonces la distancia entre dos columnas no se modifica si se agrupan dichas filas y se le asigna a la nueva fila un peso igual a la suma de los pesos de las filas agregadas. El mismo argumento funciona para dos columnas.
+
+Si dos filas cualesquiera $i$ y $h$ cumplen con que:
+$$\frac{ f_{ij} }{ f_{i.} } = \frac{ f_{hj} }{ f_{h.} } \,\,\, \forall j$$
+entonces decimos que $i$ y $j$ son distribucionalmente equivalentes.
+
+De forma análoga a como se midió la distancia entre dos perfiles filas o columnas, se puede medir la distancia entre un perfil fila o columna y el respectivo baricentro de su nube:
+$$d^2_{\chi^2}(i, \, G_I) = \sum\limits_{j = 1}^{J} \frac{ 1 }{ f_{.j} } \left( \frac{ f_{ij} }{ f_{i.} } - f_{.j} \right)^2$$
+$$d^2_{\chi^2}(j, \, G_J) = \sum\limits_{i = 1}^{I} \frac{ 1 }{ f_{i.} } \left( \frac{ f_{ij} }{ f_{.j} } - f_{i.} \right)^2$$
+
+Dado que de haber independencia todos los perfiles son proporcionales (e iguales a su baricentro), de las fórumlas anteriores puede verse que la independencia implíca que la distancia entre todos perfiles y su baricentro será cero.
+
+## Inercias y Proyecciones
+
+Las inercias de las nubes respecto de sus baricentros se calculan como la suma sobre todos los puntos, del producto entre la masa y la distancia. Entonces para le perfil filas:
+$$\begin{array}{rcl}
+\text{Inercia}(N_I) & = & \sum\limits_{i = 1}^{I} \text{inercia}(i) \\ \\
+   & = & \sum\limits_{i = 1}^{I} f_{i.} \, d^2_{\chi^2}(i, \, G_I) \\ \\
+   & = & \sum\limits_{i = 1}^{I} f_{i.} \left( \sum\limits_{j = 1}^{J} \frac{1}{f_{.j}} \left( \frac{ f_{ij} }{ f_{i.} } - f_{.j} \right)^2 \right) \\ \\
+   & = & \sum\limits_{i = 1}^{I} \sum\limits_{j = 1}^{J} \frac{ f_{i.} }{ f_{.j} } \left( \frac{ f_{ij} }{ f_{i.} } - f_{.j} \right)^2 \\ \\
+   & = & \sum\limits_{i = 1}^{I} \sum\limits_{j = 1}^{J} \frac{ (f_{ij} - f_{i.} \, f_{.j})^2 }{ f_{i.} \, f_{.j} } \\ \\
+   & = & \frac{ \chi^2 }{ n } = \phi^2
+\end{array}$$
+
+Y para el perfil columnas:
+$$\begin{array}{rcl}
+\text{Inercia}(N_J) & = & \sum\limits_{j = 1}^{J} \text{inercia}(j) \\ \\
+   & = & \sum\limits_{j = 1}^{J} f_{.j} \, d^2_{\chi^2}(j, \, G_J) \\ \\
+   & = & \sum\limits_{j = 1}^{J} f_{.j} \left( \sum\limits_{i = 1}^{I} \frac{ 1 }{ f_{i.} } \left( \frac{ f_{ij} }{ f_{.j} } - f_{i.} \right)^2 \right) \\ \\
+   & = & \sum\limits_{j = 1}^{J} \sum\limits_{i = 1}^{I} \frac{ f_{.j} }{ f_{i.} } \left( \frac{ f_{ij} }{ f_{i.} } - f_{i.} \right)^2 \\ \\
+   & = & \sum\limits_{j = 1}^{J} \sum\limits_{i = 1}^{I} \frac{ (f_{ij} - f_{i.} \, f_{.j})^2 }{ f_{i.} \, f_{.j} } \\ \\
+   & = & \frac{ \chi^2 }{ n } = \phi^2
+\end{array}$$
+
+Vemos entonces que la inercia total es igual tanto para la nube de filas como para la nube de columnas, y se corresponde con $\phi^2$. Esta igualdad entre la inercia de ambas nubes implíca que realizar ACS con perfiles filas es igual a que realizar ACS con perfiles columnas. Esto lo distingue de ACP y se debe a que tanto en las filas como en las columnas de la tabla de contingencia tenemos objetos de la misma naturaleza (variables).
+
+Para cosntruir la proyección factorial se realiza ACP con cada nube. Esto implica que los ejes de máxima inercia se hallan utilizando la descomposición de las tablas de perfiles en valores y vectores propios. De esta forma entonces, la inercia asociada al eje $s$, es $\lambda_s$.
+
+Al igual que con ACP, las proyecciones factoriales se pueden graficar en un *biplot*. Los perfiles que sean cercanos al baricentro de su nube apareceran graficados cerca del origen del biplot.
+
+La calidad de la representación de la nube $N_I$ se mide por el porcentaje de inercia capturado por el eje $s$:
+$$\frac{ \lambda_s }{ \sum\limits_{k = 1}^{K} \lambda_k } = \frac{ \lambda_s }{ \phi^2 }$$
+La inercia capturada por los primeros $M$ ejes factoriales está dada por:
+$$\sum\limits_{m = 1}^{M} \frac{ \lambda_s }{ \phi^2 }$$
+
+Para seleccionar con cuántos ejes factoriales trabjar podemos utilizar un *screeplot*, al igual que con PCA, y buscar el codo del mismo.
+
+En ACS, los valores propios de la tabla de perfiles están siempre acotados entre 0 y 1. Cuando un valor propio es exactamente 1, la tabla de perfiles es diagonal por bloques. Si el primer valor propio $\lambda_1 \ll 1$ entonces no existen indicios de que una asociación exclusva entre las variables.
+
+Dado que los valores propios están acotados entre 0 y 1, $0 \leq \lambda_s \leq 1 \,\,\, \forall s$, $\phi^2$ (la suma de las inercias) está acotado entre 0 y la máxima cantidad de ejes factoriales, $\min(J - 1, \, I - 1)$. Dado esto, en ACS deben estudiarse las inercias antes de intentar interpretar los resultados en un biplot.
+
+## Representación simultánea e interpretación
+
+Dado que en ACS se trabaja con objetos del mismo tipo (modalidades de variables cualitativas), podemos analizar las filas y las columnas de forma simultánea. Esta dualidad queda plasmada en las fórmulas de transición, las cuales vinculan las proyecciones de ambas nubes.
+
+$$F_s(i) = \frac{ 1 }{ \sqrt{\lambda_s} } \sum\limits_{j = 1}^{J} \frac{ f_{ij} }{ f_{i.} } \, G_s(j)$$
+$$G_s(j) = \frac{ 1 }{ \sqrt{\lambda_s} } \sum\limits_{j = 1}^{J} \frac{ f_{ij} }{ f_{.j} } \, F_s(i)$$
+donde:
+
+- $F_s(i)$ es la proyección de la fila $i$ sobre el $s$-ésimo eje de $N_I$.
+
+- $G_s(j)$ es la proyección de la columna $j$ sobre el $s$-ésimo eje de $N_J$.
+
+- $\lambda_s$ es el valor propio de orden $s$ en cada uno de los ejes.
+
+De estas fórumlas se desprende que una fila (columna) está cercana a las columnas (filas) con las que cuales más se asocia. Si un valor propio es 1, entonces una columna (fila) está en el baricentro de las filas (columnas).
+
+ACS no dice nada sobre la significación estadística de un vínculo. La fuerza de la relación queda plasmada en el valor de los valores propios, mientras que el tipo de relación queda plasmada en las posiciones relativas de las proyecciones en el plano factorial.
+
+La calidad de representación de un punto (o de una nube) se puede medir mediaante el ratio entre la inercia proyectada del punto $i$ en el eje $u_s$ y la inercia total del punto $i$. Esta medida se el cuadrado del coseno del ángulo que forman el vector original y el eje de proyección:
+$$\frac{ \text{inercia proyectada de la modalidad } i \text{ sobre el eje } u_s }{ \text{inercia total de la modalidad } i } = \cos^2(i, \, u_s)$$
+Cuando el coseno es cercano a 1, entonces la modalidad $i$ está bien representada en el eje $u_s$. Si en cambio se quiere saber si la modalidad está bien representada en los primeros $K$ ejes, se deben sumar los cosenos cuadrados. Solo las modalidades bien representadas (cerca de los bordes del círculo) pueden interpretarse correctamente.
+
+Otro indicador que se debee estudiar es la contribución a la construcción de los ejes factoriales que cada modalidad tiene. Esta se mide respecto de la inercia del eje. Si una modalidad aporta más inercia que la media, entonces contrubuye a su formación.
+$$\text{ctr}_s(i) = \frac{ \text{inercia}(i) }{ \lambda_s }$$
+
+La contrubución también puede verse en el biplot, por lo que si todas las modalidades están bien representadas, analizar las contribuciones no aporta demasiado.
+
+Por últimoo, una medida que permite cuantificar la intensidad de la relación es la V de Cramer. A diferencia de $\phi^2$, esta medida está estandarizada por la cantidad máxima de ejes factoriales,
+$$\text{Cramer's V} = \frac{ \phi^2 }{ \min(I - 1, \, J - 1) } \in [0, \, 1]$$
+
+\newpage
 
 # Análisis de Correspondencias Múltiple
+
 
 
 # Referencias
