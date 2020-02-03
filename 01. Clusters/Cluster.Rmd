@@ -21,7 +21,7 @@ fontsize: 12pt
 bibliography: References.bib
 biblio-style: plain
 nocite: |
-   @RSLang, @tidyverse, @fnnpack, @rencher1998multivariate, @james2013introduction
+   @RSLang, @tidyverse, @rencher1998multivariate, @james2013introduction, @blanco2006introduccion, @pena2013analisis
 ---
 
 ```{r setup, include=FALSE}
