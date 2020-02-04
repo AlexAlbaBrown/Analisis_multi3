@@ -35,10 +35,15 @@ knitr::opts_chunk$set(
 El objetivo general del análisis de clusters es formar grupos (**clusters**) de acuerdo a las características de interés. El procedimiento general puede describirse de la siguiente manera: 
 
 - Se parte de la matriz de datos $\boldsymbol{X}_{I \times J}$, generalmente estandarizada.  
+
 - Se define alguna forma de medir similitudes entre los individuos (medida de distancia).  
+
 - Se crea la matriz $\boldsymbol{D}_{I \times I}$ donde el elemento $d_{ij}$ mide el grado de similitud entre los individous $i$ y $j$.  
+
 - Se definen algoritmos de clasificación.  
+
 - Se definen stopping rules.  
+
 - Se selecciona el número de grupos en función de las características consideradas.  
 
 El análisis de clusters forma parte de los llamados métodos de clasificación no supervisada. 
@@ -177,7 +182,7 @@ $$ F_{p(k-1); \, p(n-k)} = \frac{ \text{tr}(B) / (k-1) }{ \text{tr}(W) / (n-k) }
 
 \item $\boldsymbol{pseudo-t^2}$:
 $$ t^2 = \frac{ \text{tr}(W_{G,L}) - \big[ \text{tr}(W_G) + \text{tr}(W_L) \big] }{ \big[ \text{tr}(W_G) + \text{tr}(W_L) \big] / (n_G + n_L - 2) } $$
-Si al pasar de $k+1$ a $k$ grupos el ínidic presenta una caída muy grande, entonces nos quedamos con $k+1$ grupos. La idea es que el aumento de la heterogeneidad es demasiado grande y no conviene unir los grupos.
+Si al pasar de $k+1$ a $k$ grupos el índice presenta una caída muy grande, entonces nos quedamos con $k+1$ grupos. La idea es que el aumento de la heterogeneidad es demasiado grande y no conviene unir los grupos.
 
 \end{itemize}
 
