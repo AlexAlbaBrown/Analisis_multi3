@@ -1,6 +1,6 @@
 # multivar1
 
-![experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)
+![archived](https://img.shields.io/badge/lifecycle-archived-red.svg)
 
 Prácticos, trabajos, talleres y resúmenes del curso de Análisis Multivariado I  
 IESTA - FCEA - Udelar  
