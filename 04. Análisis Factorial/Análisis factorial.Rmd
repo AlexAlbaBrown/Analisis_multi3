@@ -26,7 +26,7 @@ fontsize: 12pt
 bibliography: References.bib
 biblio-style: plain
 nocite: |
-   @RSLang, @tidyverse, @fnnpack, @wasserman2007all, @rencher1998multivariate, @james2013introduction
+   @RSLang, @tidyverse, @rencher1998multivariate, @james2013introduction, @blanco2006introduccion, @pena2013analisis
 ---
 
 ```{r setup, include=FALSE}
@@ -75,6 +75,8 @@ p_{1} & \ldots & 0 \\
 \end{bmatrix}
 \end{array}$$
 
+\newpage
+
 Estas matrices actuarán de pesos o métricas en cada análisis según la siguiente tabla:
 
 |                  | Espacio        | Métrica      | Pesos        |
@@ -88,9 +90,9 @@ $$d^2(i, \, k) = \sum\limits_{j = 1}^{J} (x_{ij} - x_{kj})^2 m_j$$
 Sea $\mathbf{u}_s$ un vector director de un eje cualquiera de $\mathbb{R}^{J}$. Definimos el vetor de coordenadas proyectadas sobre $\mathbf{u}_s$, al que llamaremos $\mathbf{F}_s(i)$, como:
 $$\mathbf{F}_s(i) = \mathbf{x}_i' \mathbf{M} \mathbf{u}_s$$
 Nótese que $\mathbf{x}_i'$ es de forma $1 \times J$, $\mathbf{M}$ es una matriz de forma $J \times J$, $\mathbf{u}_s$ es de forma $J \times 1$. $\mathbf{F}_s(i)$ es un escalar. Este número representa la proyección del $i$-ésimo individuo sobre el eje de inercia $\mathbf{u}_s$. Visto en forma matricial:
-$$\mathbf{F}_s = \mathbf{X} \mathbf{M} \mathbf{u}_s \,\,\, \text{con} s = 1, \, \ldots, \, J$$
+$$\mathbf{F}_s = \mathbf{X} \mathbf{M} \mathbf{u}_s \,\,\, \text{con } s = 1, \, \ldots, \, J$$
 
-Nótenes que omitimos la mención al $i$-ésimo individuo en $\mathbf{F}_s$. Esto se debe a que $\mathbf{X}$ es una matriz de tamaño $I \times J$, por lo que $\mathbf{F}_s$ es un vector de dimensión $I \times 1$, donde su $i$-ésima entrada es la proyección del $i$-ésimo individuo sobre el eje de inercia $\mathbf{u}_s$.
+Nótese que omitimos la mención al $i$-ésimo individuo en $\mathbf{F}_s$. Esto se debe a que $\mathbf{X}$ es una matriz de tamaño $I \times J$, por lo que $\mathbf{F}_s$ es un vector de dimensión $I \times 1$, donde su $i$-ésima entrada es la proyección del $i$-ésimo individuo sobre el eje de inercia $\mathbf{u}_s$.
 
 Podemos entonces definir la *inercia de la nube proyectada* como:
 $$\text{inercia} = \mathbf{F}_s' \mathbf{D} \mathbf{F}_s$$
@@ -102,6 +104,8 @@ $$\max\limits_u \{ \text{inercia} \} = \max\limits_u \left\{ \mathbf{u}_s' \math
 
 Si la métrica es euclidea, $\mathbf{M}$ es la matriz identidad, y el problema se reduce a hallar un vector $\mathbf{u}$ tal que $\mathbf{u}' \mathbf{u} = 1$ que maximice la inercia:
 $$\max\limits_u \{ \text{inercia} \} = \max\limits_u \left\{ \mathbf{u}' \mathbf{X}' \mathbf{D} \mathbf{X} \mathbf{u} \right\}$$
+
+\newpage
 
 Dado que $\mathbf{X}' \mathbf{D} \mathbf{X}$ es simétrica:
 
@@ -118,7 +122,81 @@ $$\mathbf{U}' \mathbf{X}' \mathbf{D} \mathbf{X} \mathbf{U} = \mathbf{\Lambda} \R
 
 ## Desarrollo por $N_J$
 
+El cálculo de los ejes de inercia y de los factores de la nube de las columnas es absolutamente idéntico al realizado para la nube de filas. Basta con cambiar de lugar $\mathbf{X}$ con $\mathbf{X}'$ y $\mathbf{M}$ con $\mathbf{D}$. En este espacio se busca una sucesión de vectores $\mathbf{v}_s$ donde cada uno maximiza la función objetivo
+$$\mathbf{v}_s \, \mathbf{D} \, \mathbf{X} \, \mathbf{M} \, \mathbf{X}' \, \mathbf{D} \, \mathbf{v}_s$$
+con la doble condición de ser unitario, $\mathbf{v}_s' \, \mathbf{D} \, \mathbf{v}_s = 1$ y ortogonal a los vectores ya encontrados. La solución viene dada por la ecuación:
+$$\mathbf{X} \, \mathbf{M} \, \mathbf{X}' \, \mathbf{D} \, \mathbf{v}_s = \mu_s \, \mathbf{v}_s$$
+la cual expresa que $\mathbf{v}_s$ es el vector propio unitario de $\mathbf{X} \, \mathbf{M} \, \mathbf{X}' \, \mathbf{D}$ asociado al valor propio $\mu_s$.
+
+La comparación de las ecuaciones de ambas nubes muestra que:
+
+- $\mu_s = \lambda_s$, es decir, las incercias proyectadas son las mismas.
+
+- los factores $\mathbf{F}_s$ y los ejes $\mathbf{v}_s$ son vectores propios asociados al mismo valor propio.
+
+Del análisis conjunto de ejes y factores surgen las relaciones:
+$$\begin{array}{ccc}
+\mathbf{u}_s = \frac{1}{\sqrt{\lambda}_s} \, \mathbf{G}_s & & \mathbf{v}_s = \frac{1}{\sqrt{\lambda}_s} \, \mathbf{F}_s \\ \\
+\mathbf{F}_s = \frac{ 1 }{ \sqrt{\lambda_s} } \mathbf{X} \, \mathbf{M} \, \mathbf{G}_s & & \mathbf{G}_s = \frac{ 1 }{ \sqrt{\lambda_s} } \mathbf{X}' \, \mathbf{D} \, \mathbf{F}_s
+\end{array}$$
+
+\newpage
+
+La siguiente tabla resume lo hallado.
+
+\begin{center}
+  \begin{tabular}{| l | c | c |}
+      \hline
+                               & Nube $N_I$                & Nube $N_J$                 \\ \hline \hline
+      Espacio                  & $\mathbb{R}^J$            & $\mathbb{R}^I$             \\
+      Métrica                  & $\mathbf{M}_{J \times J}$ & $\mathbf{D}_{I \times I}$  \\
+      Coordenadas              & $\mathbf{X}_{I \times J}$ & $\mathbf{X}_{J \times I}'$ \\
+      Pesos                    & $\mathbf{D}_{I \times I}$ & $\mathbf{M}_{J \times J}$  \\ \hline
+      Ejes de inercia          & $\mathbf{u}_s$            & $\mathbf{v}_s$             \\
+      Ecuación                 & $\mathbf{X}' \mathbf{D} \mathbf{X} \mathbf{M} \mathbf{u}_s = \lambda_s \mathbf{u}_s$ & $\mathbf{X} \mathbf{M} \mathbf{X}' \mathbf{D} \mathbf{v}_s = \lambda_s \mathbf{v}_s$ \\
+      Norma                    & $||\mathbf{u}_s||_{\mathbf{M}} = 1$ & $||\mathbf{v}_s||_{\mathbf{D}} = 1$ \\ \hline
+      Factores                 & $\mathbf{F}_s = \mathbf{X} \mathbf{M} \mathbf{u}_s$ & $\mathbf{G}_s = \mathbf{X}' \mathbf{D} \mathbf{v}_s$ \\
+      Ecuaciones               & $\mathbf{X} \mathbf{M} \mathbf{X}' \mathbf{D} \mathbf{F}_s = \lambda_s \mathbf{F}_s$ & $\mathbf{X}' \mathbf{D} \mathbf{X} \mathbf{M} \mathbf{G}_s = \lambda_s \mathbf{G}_s$ \\
+      Norma                    & $||\mathbf{F}_s||_{\mathbf{D}} = \sqrt{\lambda_s}$ & $||\mathbf{G}_s||_{\mathbf{M}} = \sqrt{\lambda_s}$ \\
+      Ortogonalidad            & $\sum_i F_t(i) \, F_s(i) p_i = 0 \text{ si } s \neq t$ & $\sum_j G_t(j) \, G_s(j) m_j = 0 \text{ si } s \neq t$ \\ \hline
+      Inercio sobre el eje $s$ & $\lambda_s$ & $\lambda_s$ \\
+      Inercia total            & $\sum_s \lambda_s$ & $\sum_s \lambda_s$ \\ \hline
+      Fórmulas de transición   & $\mathbf{u}_s = \lambda_s^{-1} \mathbf{G}_s$ & $\mathbf{v}_s = \lambda_s^{-1} \mathbf{F}_s$ \\ \hline
+  \end{tabular}
+\end{center}
+
 ## Interpretación de resultados
+
+### Calidad de la representación de una nube por un sub-espacio
+
+Mide el porcentaje de inercia explicada por un cierto sub-espacio respecto a la inercia total. Así, por ejemplo, la inercia explicada por el primer eje es:
+$$\frac{\lambda_1}{ \sum_s \lambda_s}$$
+
+De igual manera, la de los primeros dos ejes (primer plano):
+$$\frac{\lambda_1 + \lambda_2}{ \sum_s \lambda_s}$$
+y así sucesivamente.
+
+### Calidad de representación de un elemento
+
+**En un eje**
+
+Sea $Q_s(i)$ el cociente entre la inercia de la proyección del elemento $i$ en el eje $s$ y la inercia total de $i$:
+$$Q_s(i) = \cos^2(\theta)$$
+donde $\theta$ es el ángulo que forman el vector original y la proyección en el eje $s$.
+
+\newpage
+
+**En el plano**
+
+Es la suma de los cosenos cuadrados de la proyección en cada eje:
+$$Q_s(i) = \sum_s \cos^2(\theta)$$
+
+### Contribución de un elemento a la inercia de un eje
+
+La inercia proyectada (máxima por construcción) puede descomponerse punto por punto. La contribución del individuo $i$ al eje $s$ se mide a través del cociente entre la inercia del elemento $i$ sobre el eje $s$ y la inercia del eje $s$:
+$$ctr_s(i) = \frac{ p_i \, [ F_s(i) ]^2 }{ \lambda_s }$$
+
+Este indicador se generaliza a sub-conjuntos de elementos, donde la contribución de estos a la inercia será la suma de las inercias de los elementos que lo componen.
 
 # Análisis de Componentes Principales
 
@@ -140,7 +218,7 @@ Al vector $\mathbf{z}_1 = (z_{11}, \, z_{21}, \, \ldots, \, z_{n1})'$ le llamamo
 
 Para hallar la segunda componente principal, debemos hallar los scores que maximizan la varianza, siendo el nuevo vector ortogonal al vector $\mathbf{z}_1$.
 $$\max\limits_{\phi_2} = \left\{ \frac{1}{n} \sum\limits_{i = 1}^{n} z_{i2}^2 \right\} = \max\limits_{\phi_2} = \left\{ \frac{1}{n} \sum\limits_{i = 1}^{n} \left( \sum\limits_{j = 1}^{p} \phi_{j2} x_{ij} \right)^2 \right\}$$
-$$\text{sujeto a} \,\,\,\,\,\, \sum\limits_{j = 1}^{p} \mathbf{\phi}_j^2 = 1 \,\,\,\,\,\, \text{y} \,\,\,\,\,\, \langle \mathbf{z}_1, \, \mathbf{z}_2 \rangle= 0$$
+$$\text{sujeto a} \,\,\,\,\,\, \sum\limits_{j = 1}^{p} \mathbf{\phi}_j^2 = 1 \,\,\,\,\,\, \text{y} \,\,\,\,\,\, \mathbf{z}_1' \mathbf{z}_2 = 0$$
 
 Se procede de esta forma hasta hallar todos los ejes $\mathbf{z}_j$, hasta un máximo de $p$ ejes.
 
@@ -213,7 +291,7 @@ $$\Cor(\mathbf{z}_j, \mathbf{x}_i) = \frac{ \lambda_j a_{ij} }{ \frac{1}{n} \sqr
 
 ## Elección de la cantidad de ejes
 
-Un criterio utilizado para seleccionar la cantidad de ejes con los que quedarse luego del análisis es seleccionar aquellos que capturen un determinado porcentaje de la variabilidad.
+Un criterio utilizado para seleccionar la cantidad de ejes con los que quedarse luego del análisis, es seleccionar aquellos que capturen un determinado porcentaje de la variabilidad.
 
 $$\sum\limits_{i = 1}^{p} \V(\mathbf{z}_i) = \sum\limits_{i = 1}^{p} \lambda_i = \text{tr}( \mathbf{\Sigma}_{\mathbf{Z}} ) = \text{tr}( \mathbf{A}' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{A} ) = \text{tr}( \mathbf{\Sigma}_{\mathbf{X}} \mathbf{A} \mathbf{A}' ) = \text{tr}( \mathbf{\Sigma}_{\mathbf{X}} \mathbf{A} \mathbf{A}^{-1} ) = \text{tr}( \mathbf{\Sigma}_{\mathbf{X}} )$$
 
@@ -225,7 +303,7 @@ $$\sum\limits_{i = 1}^{m} \left( \frac{ \lambda_i }{ \sum\limits_{i = 1}^{p} \la
 
 Un método gráfico implíca graficar los valores propios de forma ordenada (número de valor propio en el eje $x$, valor del valor propio en el eje $y$), y se seleccionan los ejes hasta el codo del gráfico.
 
-Generalmente, no se suele trabajar con más de 3 ejes, dado que de esta forma el resuultado puede graficarse en un *biplot*. En él se grafican tanto los loadiings (contrubución de cada variable original a la conformación del eje factoral), así como también los scores (corrdenadas de los induviduos proyectados sobre los ejes factoriales).
+Generalmente, no se suele trabajar con más de 3 ejes, dado que de esta forma el resultado puede graficarse en un *biplot*. En él se grafican tanto los loadiings (contrubución de cada variable original a la conformación del eje factoral), así como también los scores (corrdenadas de los induviduos proyectados sobre los ejes factoriales).
 
 \newpage
 
@@ -321,13 +399,13 @@ $$f_{ij} = f_{i.} \, f_{.j} \Rightarrow \frac{ f_{ij} }{ f_{.j} } = f_{i.} \,\,\
 
 Si las variables son independientes, el ACS carece de utilidad. Esto se testea mediante la prueba de independencia chi-cuadrado cuyo estadístico de está dado por:
 $$\chi^{2} = \sum_{ij} \frac{ \#(\text{observados - esperados})^2 }{ \#\text{esperados} } = \sum_{ij} \frac{ (n \, f_{ij} - n \, f_{i.} \, f_{.j})^2 }{ n \, f_{i.} \, f_{.j} } = n \, \phi^2$$
-donde $\phi$ mide la desviación entre la cantidad de observaciones esperadas en las modalidads conjuntas, y las observadas.
+donde $\phi^2$ mide la desviación entre la cantidad de observaciones esperadas en las modalidads conjuntas, y las observadas.
 
 El análisis utilizando frecuencias condicionales nos permite comparar los valores de una fila (o columna) con la fila (o columna) de frecuencias marginales. Esta fila (columna) es conocida como el baricentro de los datos en el perfil columnas (filas).
 
 ## Nubes de perfiles
 
-Cada uno de los perfiles define un espacio de dimensión igual a la cantidad de modalidades de la variable que representa. Así entonces, el perfil filas puede verse como $I$ vectores en $\mathbb{R}^{J}$ (cada vector tiene $J$ componentes). Análogamente, el perfile columnas puede verse como $J$ vectores en $\mathbb{R}^{I}$ (cada vector tiene $I$ componentes).
+Cada uno de los perfiles define un espacio de dimensión igual a la cantidad de modalidades de la variable que representa. Así entonces, el perfil filas puede verse como $I$ vectores en $\mathbb{R}^{J}$ (cada vector tiene $J$ componentes). Análogamente, el perfil columnas puede verse como $J$ vectores en $\mathbb{R}^{I}$ (cada vector tiene $I$ componentes).
 
 Cada uno de estos conjuntos de vectores "definen" un elipsoide en su respectivo espacio, con el perfil medio como (bari)centro del mismo. Al igual que en ACP, el objetivo es entonces encontrar los ejes de inercia de cada uno de los perfiles. También al igual que en ACP, el primer eje factorial será aquel que capture mayor inercia. El segundo, será aquel que capture mayor inercia luego del primero, y sea ortogonal al primero.
 
@@ -375,20 +453,22 @@ $$\begin{array}{rcl}
 
 Vemos entonces que la inercia total es igual tanto para la nube de filas como para la nube de columnas, y se corresponde con $\phi^2$. Esta igualdad entre la inercia de ambas nubes implíca que realizar ACS con perfiles filas es igual a que realizar ACS con perfiles columnas. Esto lo distingue de ACP y se debe a que tanto en las filas como en las columnas de la tabla de contingencia tenemos objetos de la misma naturaleza (variables).
 
-Para cosntruir la proyección factorial se realiza ACP con cada nube. Esto implica que los ejes de máxima inercia se hallan utilizando la descomposición de las tablas de perfiles en valores y vectores propios. De esta forma entonces, la inercia asociada al eje $s$, es $\lambda_s$.
+Para construir la proyección factorial se realiza ACP con cada nube. Esto implica que los ejes de máxima inercia se hallan utilizando la descomposición de las tablas de perfiles en valores y vectores propios. De esta forma entonces, la inercia asociada al eje $s$, es $\lambda_s$.
 
 Al igual que con ACP, las proyecciones factoriales se pueden graficar en un *biplot*. Los perfiles que sean cercanos al baricentro de su nube apareceran graficados cerca del origen del biplot.
 
 La calidad de la representación de la nube $N_I$ se mide por el porcentaje de inercia capturado por el eje $s$:
 $$\frac{ \lambda_s }{ \sum\limits_{k = 1}^{K} \lambda_k } = \frac{ \lambda_s }{ \phi^2 }$$
 La inercia capturada por los primeros $M$ ejes factoriales está dada por:
-$$\sum\limits_{m = 1}^{M} \frac{ \lambda_s }{ \phi^2 }$$
+$$\sum\limits_{m = 1}^{M} \frac{ \lambda_m }{ \phi^2 }$$
 
-Para seleccionar con cuántos ejes factoriales trabjar podemos utilizar un *screeplot*, al igual que con PCA, y buscar el codo del mismo.
+Para seleccionar con cuántos ejes factoriales trabajar podemos utilizar un *screeplot*, al igual que con PCA, y buscar el codo del mismo.
 
 En ACS, los valores propios de la tabla de perfiles están siempre acotados entre 0 y 1. Cuando un valor propio es exactamente 1, la tabla de perfiles es diagonal por bloques. Si el primer valor propio $\lambda_1 \ll 1$ entonces no existen indicios de que una asociación exclusva entre las variables.
 
 Dado que los valores propios están acotados entre 0 y 1, $0 \leq \lambda_s \leq 1 \,\,\, \forall s$, $\phi^2$ (la suma de las inercias) está acotado entre 0 y la máxima cantidad de ejes factoriales, $\min(J - 1, \, I - 1)$. Dado esto, en ACS deben estudiarse las inercias antes de intentar interpretar los resultados en un biplot.
+
+\newpage
 
 ## Representación simultánea e interpretación
 
@@ -408,21 +488,21 @@ De estas fórumlas se desprende que una fila (columna) está cercana a las colum
 
 ACS no dice nada sobre la significación estadística de un vínculo. La fuerza de la relación queda plasmada en el valor de los valores propios, mientras que el tipo de relación queda plasmada en las posiciones relativas de las proyecciones en el plano factorial.
 
-La calidad de representación de un punto (o de una nube) se puede medir mediaante el ratio entre la inercia proyectada del punto $i$ en el eje $u_s$ y la inercia total del punto $i$. Esta medida se el cuadrado del coseno del ángulo que forman el vector original y el eje de proyección:
-$$\frac{ \text{inercia proyectada de la modalidad } i \text{ sobre el eje } u_s }{ \text{inercia total de la modalidad } i } = \cos^2(i, \, u_s)$$
-Cuando el coseno es cercano a 1, entonces la modalidad $i$ está bien representada en el eje $u_s$. Si en cambio se quiere saber si la modalidad está bien representada en los primeros $K$ ejes, se deben sumar los cosenos cuadrados. Solo las modalidades bien representadas (cerca de los bordes del círculo) pueden interpretarse correctamente.
+La calidad de representación de un punto (o de una nube) se puede medir mediaante el ratio entre la inercia proyectada del punto $i$ en el eje $\mathbf{u}_s$ y la inercia total del punto $i$. Esta medida se el cuadrado del coseno del ángulo que forman el vector original y el eje de proyección:
+
+$$\frac{ \text{inercia proyectada de la modalidad } i \text{ sobre el eje } \mathbf{u}_s }{ \text{inercia total de la modalidad } i } = \cos^2(i, \, \mathbf{u}_s)$$
+
+Cuando el coseno es cercano a 1, entonces la modalidad $i$ está bien representada en el eje $\mathbf{u}_s$. Si en cambio se quiere saber si la modalidad está bien representada en los primeros $K$ ejes, se deben sumar los cosenos cuadrados. Solo las modalidades bien representadas (cerca de los bordes del círculo) pueden interpretarse correctamente.
 
 Otro indicador que se debee estudiar es la contribución a la construcción de los ejes factoriales que cada modalidad tiene. Esta se mide respecto de la inercia del eje. Si una modalidad aporta más inercia que la media, entonces contrubuye a su formación.
 $$\text{ctr}_s(i) = \frac{ \text{inercia}(i) }{ \lambda_s }$$
 
 La contrubución también puede verse en el biplot, por lo que si todas las modalidades están bien representadas, analizar las contribuciones no aporta demasiado.
 
-Por últimoo, una medida que permite cuantificar la intensidad de la relación es la V de Cramer. A diferencia de $\phi^2$, esta medida está estandarizada por la cantidad máxima de ejes factoriales,
+Por últimoo, una medida que permite cuantificar la intensidad de la relación es la V de Cramer. A diferencia de $\phi^2$, esta medida está estandarizada por la cantidad máxima de ejes factoriales:
 $$\text{Cramer's V} = \frac{ \phi^2 }{ \min(I - 1, \, J - 1) } \in [0, \, 1]$$
 
-\newpage
-
-# Análisis de Correspondencias Múltiple
+# Análisis de Correspondencias Múltiples
 
 En ACM volvemos a trabajar con una matriz de datos con $I$ individuos y $J$ variables. A diferencia de ACP, ahora las $J$ columnas son variables cuantitativas. $v_{ij}$ es el valor del $i$-ésimo individuo en la $j$-ésima variable.
 
@@ -452,8 +532,8 @@ A partir de estos datos se construyen tablas disjuntas. En una tabla disjunta, l
   \end{tabular}
 \end{center}
 
-Entonces, si la $j$-ésima variable tiene $K$ modalidades distintas, se agregan $K_j$ columnas a la tabla. La tabla tendrá entonces tantas columnas como la suma de las modalidades de cada variable. $y_{ik} = 1$ si el individuo $i$ presenta la modalidad $k$ en la variable $j$, o 0 en otro caso. Por lo tanto, en las $K_j$ columnas que representan a la variable $j$, cada individuo estará conformardo por un vector de ceros con un único 1 en la modalidad de dicho individuo.
+Entonces, si la $j$-ésima variable tiene $K$ modalidades distintas, se agregan $K_j$ columnas a la tabla. La tabla tendrá entonces tantas columnas como la suma de las modalidades de cada variable. $y_{ik} = 1$ si el individuo $i$ presenta la modalidad $k$ en la variable $j$, o 0 en otro caso. Por lo tanto, en las $K_j$ columnas que representan a la variable $j$, cada individuo estará conformado por un vector de ceros con un único 1 en la modalidad de dicho individuo.
 
-La columna marginal valdrá $J$ para todos los indiviuos (en caso de no existir no respuesta) dado que cada individuo tiene $J$ unos y el resto ceros. La fila de marginales vale $I$ para cada una de las $J$ variables (de nuevo, asumiendo que no existe no respuesta). La marginal de cada una de las $k$ modalidades de la variable $j$ vale $I \, p_k$ donde $p_k$ representa la proporción de individuos con modalidad $k$ en la variable $j$.
+La columna marginal valdrá $J$ para todos los indiviuos (en caso de no existir no respuesta) dado que cada individuo tiene $J$ unos y el resto ceros. La fila de marginales vale $I$ para cada una de las $J$ variables (de nuevo, asumiendo que no existe no respuesta). La marginal de cada una de las $k$ modalidades de la variable $j$ vale $I p_k$ donde $p_k$ representa la proporción de individuos con modalidad $k$ en la variable $j$.
 
 # Referencias
