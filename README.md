@@ -1,8 +1,8 @@
 # Análisis Multivariado 1
 
 ![archived](https://img.shields.io/badge/lifecycle-archived-red.svg)  
-![languages](https://img.shields.io/github/languages/count/daczarne/multivariado1)  
-![top language](https://img.shields.io/github/languages/top/daczarne/multivariado1)   
+![languages](https://img.shields.io/github/languages/count/daczarne/udelar_analisis_multivariado_1)  
+![top language](https://img.shields.io/github/languages/top/daczarne/udelar_analisis_multivariado_1)   
 
 Prácticos, trabajos, talleres y resúmenes del curso de Análisis Multivariado I  
 IESTA - FCEA - Udelar  
