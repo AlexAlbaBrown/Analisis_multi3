@@ -1,0 +1,23 @@
+---
+title: "Entrega ACS y ACM"
+author: "Daniel Czarnievicz"
+date: "July 2, 2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Ejercicio ACS
+
+1. No, no lo son. La primer salida corresponde al test de independencia de Pearson cuya hipótesis nula es la indpendencia entre las variables. Este está siendo rechazado al 5% dado que su p-valor es aproximadamente cero.
+
+2. 
+a) Se podrán obtener como máximo tres ejes de inercia. Si la tabal de contingencia la pensamos como una matriz del espacio $M_{I \times J}$ entonces la mayor cantidad de ejes de inercia será tres debido a que al trabajar con frecuencias relativas (suman 1), dicha cantidad corresponde a $\min(I-1; \, J-1)$ donde en este caso $I=13$ y $J=4$.
+
+b) Me quedaría con dos ejes dado que entre los dos pri.meros se acumula un 88.6% de la inercia (es decir, se pierde muy poco información).
+
+c) Es correcta esta afirmación dado que todas las modalidades se encuentran bien representadas en el plano factorial, tal como reflejan sus cosendos cuadrados.
+
+3. 
