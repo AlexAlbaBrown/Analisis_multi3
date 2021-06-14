@@ -38,12 +38,5 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-# Subdirectorios específicos
-/Teóricos/
-
-# Archivos específicos
-Proyecciones.pptx
-Resultados.pdf
-
 # Mac files
 .DS_Store
