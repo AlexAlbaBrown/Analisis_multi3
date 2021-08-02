@@ -1,4 +1,5 @@
 *.bib linguist-detectable
+*.bib linguist-language=bib
 *.gitattributes linguist-detectable
 *.gitignore linguist-detectable
 *.mako linguist-vendored
