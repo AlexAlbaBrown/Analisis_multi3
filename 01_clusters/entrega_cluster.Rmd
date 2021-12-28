@@ -9,43 +9,42 @@ header-includes:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-setwd("C:/Users/dacza/Dropbox/UdelaR/FCEA/Semestre 11/Multivariado I/Entrega Cluster")
 ```
 
 
 ## Ejercicio 1
 
-En la clasificaciÛn jer·rquica agregativa:
+En la clasificaci√≥n jer√°rquica agregativa:
 
-a. **Verdadero**. La metodologÌa parte de tomar a cada individuo por separado. Define algoritmos para agregar individuos con individuos, individuos con grupos, y grupos con grupos. El proceso se itera en cada etapa hasta lograr un grupo con todos los individuos.  
+a. **Verdadero**. La metodolog√≠a parte de tomar a cada individuo por separado. Define algoritmos para agregar individuos con individuos, individuos con grupos, y grupos con grupos. El proceso se itera en cada etapa hasta lograr un grupo con todos los individuos.
 
-b. **Falso**. Por ejemplo, la distancia euclidea no tiene en cuenta las correlaciones entre las observaciones, mientras que la distancia de Mahalanobis sÌ. Pueden verse los laboratorios del curso para obtener contra-ejemplos de esta afirmaciÛn.  
+b. **Falso**. Por ejemplo, la distancia euclidea no tiene en cuenta las correlaciones entre las observaciones, mientras que la distancia de Mahalanobis s√≠. Pueden verse los laboratorios del curso para obtener contra-ejemplos de esta afirmaci√≥n.
 
-c. **Verdadero**. No dependen del algoritmo, dependen de la distancia.  
+c. **Verdadero**. No dependen del algoritmo, dependen de la distancia.
 
-d. **Falso**. El mÈtodo une en la etapa 1 a $min\{ A; \, B; \, C; \, D; \, ...\}$.  
+d. **Falso**. El m√©todo une en la etapa 1 a $min\{ A; \, B; \, C; \, D; \, ...\}$.
 
-e. **Verdadero**. Esto se debe a que la distancia de Mahalanobis tiene en cuenta las correlaciones entre las variables en su fÛrmula.  
+e. **Verdadero**. Esto se debe a que la distancia de Mahalanobis tiene en cuenta las correlaciones entre las variables en su f√≥rmula.
 
-$$d^2_{ij} = \sum\limits_{k=1}^{p} ( x_{ik} - x_{jk} )' \boldsymbol{\Sigma}^{-1} ( x_{ik} - x_{jk} ) $$
+$$d^2_{ij} = \sum\limits_{k=1}^{p} ( x_{ik} - x_{jk} )' \boldsymbol{\Sigma}^{-1} ( x_{ik} - x_{jk} )$$
 
-f. **Falso**. El procedimiento comienza con cada observaciÛn como su propio grupo, y termina con un grupo con todas las observaciones. 
+f. **Falso**. El procedimiento comienza con cada observaci√≥n como su propio grupo, y termina con un grupo con todas las observaciones.
 
-En la clasificaciÛn no jer·rquica:
+En la clasificaci√≥n no jer√°rquica:
 
-a. **Falso**. En la clasificaciÛn no jer·rquica se debe definir la cantidad de grupos de forma a priori.  
+a. **Falso**. En la clasificaci√≥n no jer√©rquica se debe definir la cantidad de grupos de forma a priori.
 
-b. **Verdadero.**. Ver Rencher secciÛn 14.4.1a para una explicaciÛn del mÈtodo.
+b. **Verdadero.**. Ver Rencher secci√≥n 14.4.1a para una explicaci√≥n del m√©todo.
 
 c. **Falso**. El criterio no requiere especificar individuos representativos de forma a priori.
 
-d. **Verdadero**. Este es el objetivo del mÈtodo.
+d. **Verdadero**. Este es el objetivo del m√©todo.
 
 ## Ejercicio 2
 
-a. **Falso**. Los primeros individuos que se unen son el A y el D dado que ellos son la soluciÛn a la ecuaciÛn:
+a. **Falso**. Los primeros individuos que se unen son el A y el D dado que ellos son la soluci√≥n a la ecuaci√≥n:
 
-$$ Etapa \;\; 1: min\big\{ (A,B); \, (A,C); \, (A,D); \, (B,C); \; (B,D); \, (C,D) \big\} $$
+$$ Etapa \;\; 1: min\big\{ (A,B); \, (A,C); \, (A,D); \, (B,C); \; (B,D); \, (C,D) \big\}$$
 
 b. **Verdadero**. Las etapas son las siguientes:
 
@@ -95,51 +94,51 @@ d. **Falso**, es 5, lo que corresponde a la distancia entre C y B.
 ## Ejercicio 3
 
 \begin{enumerate}
-\item ComenzarÌa con Simple Linkage ya que al ser el algoritmo m·s sensible a los valors atÌpicos permite ver claramente la distorsiÛn que estos producen. Si este algoritmo tiene como resultado un dendogrrama alargado (es esperable que asÌ sea), entonces se puede probar con Complete Linkage, y Ward. El problema de estos algoritmos es que podrÌan estar forzando un agrupamiento que no sea el que refleje la verdadera naturaleza de los datos (por ejemplo, Ward tiende a formar grupos esfÈricos).
+\item Comenzar√≠a con Simple Linkage ya que al ser el algoritmo m√°s sensible a los valors at√≠picos permite ver claramente la distorsi√≥n que estos producen. Si este algoritmo tiene como resultado un dendogrrama alargado (es esperable que as√≠ sea), entonces se puede probar con Complete Linkage, y Ward. El problema de estos algoritmos es que podr√≠an estar forzando un agrupamiento que no sea el que refleje la verdadera naturaleza de los datos (por ejemplo, Ward tiende a formar grupos esf√©ricos).
 
-Dado que estas observaciones son atÌpicas en la gran mayorÌa de las variables, es esperable que ninguno de los algoritmos anteriores solucione el problema. PodrÌa entonces separarse moment·neamente estas dos observaciones y repetir el proceso. Si existiera una estructura de datos que dichas observaciones no me permiten ver, se deberÌa solucionar de esta forma. Las mismas deben luego ser incluidas en el grupo al que m·s se parezcan (por ejemplo, utilizando la mÌnima distancia al centroide del grupo). El principal problema con estas estrategias radÌca en el concepto de dato atÌpico. Separar esas dos observaciones modificarÌa el rango intercuartilico de la distribuciÛn de las variables. Por tanto, luego de separadas, nuevas observaciones podrÌan caer dentro de la categorÌa de atÌpicas.
+Dado que estas observaciones son at√≠picas en la gran mayor√≠a de las variables, es esperable que ninguno de los algoritmos anteriores solucione el problema. Podr√≠a entonces separarse moment√°neamente estas dos observaciones y repetir el proceso. Si existiera una estructura de datos que dichas observaciones no me permiten ver, se deber√≠a solucionar de esta forma. Las mismas deben luego ser incluidas en el grupo al que m√°s se parezcan (por ejemplo, utilizando la m√≠nima distancia al centroide del grupo). El principal problema con estas estrategias rad√≠ca en el concepto de dato at√≠pico. Separar esas dos observaciones modificar√≠a el rango intercuartilico de la distribuci√≥n de las variables. Por tanto, luego de separadas, nuevas observaciones podr√≠an caer dentro de la categor√≠a de at√≠picas.
 
-En caso de que estas estrategias tampoco solucione el problema, puede deberse a que efectivamente no exista una estructura de grupos entre los datos (tal como sugerÌa Simple Linkage con todas las observaciones). Si a˙n asÌ es necesario formar tipologÌas, entonces serÌa recomendable utilizar mÈtodos no jer·rquicos (por ejemplo, k-medias) y combinarlos con fuzzy sets (la cual entrega el coeficiente de pertenencia a cada grupo. Por ˙ltimo, si la naturaleza de los datos lo permite, puede considerarse el armar un grupo solo con las dos observaciones que presentan valores atÌpicos.
+En caso de que estas estrategias tampoco solucione el problema, puede deberse a que efectivamente no exista una estructura de grupos entre los datos (tal como suger√≠a Simple Linkage con todas las observaciones). Si a√∫n as√≠ es necesario formar tipolog√≠as, entonces ser√≠a recomendable utilizar m√©todos no jer√°rquicos (por ejemplo, k-medias) y combinarlos con fuzzy sets (la cual entrega el coeficiente de pertenencia a cada grupo). Por √∫ltimo, si la naturaleza de los datos lo permite, puede considerarse el armar un grupo solo con las dos observaciones que presentan valores at√≠picos.
 
-\item Repetir el proceso del punto 1. Es probable que el mÈtodo de Ward solucione el problema dado que la atipicidad est· dada solo por una variable. Cuanto mayor n˙mero de variables, menos relevante ser· la atipicidad en una de ellas.
+\item Repetir el proceso del punto 1. Es probable que el m√©todo de Ward solucione el problema dado que la atipicidad est√© dada solo por una variable. Cuanto mayor n√∫mero de variables, menos relevante ser√° la atipicidad en una de ellas.
 
-\item Lo importante en estos casos es utilizar los mÈtodos correctos para medir distancias. Dos de estos posibles mÈtodos son: Simple Matching Coefficient y, el coeficiente de Jaccard. Ambos se basan en el uso de tablas de contingencia. Utilizando estas distancias, todos los mÈtodos de clustering vistos en el curso pueden ser utilizados para estos datos. Otra soluciÛn serÌa utilizar clustering basado en un modelo multinomial en caso de muestreos aleatorios con reposiciÛn, o en un modelo multihipergeomÈtrico en caso de un muestreo sin reposiciÛn.
+\item Lo importante en estos casos es utilizar los m√©todos correctos para medir distancias. Dos de estos posibles m√©todos son: Simple Matching Coefficient y, el coeficiente de Jaccard. Ambos se basan en el uso de tablas de contingencia. Utilizando estas distancias, todos los m√©todos de clustering vistos en el curso pueden ser utilizados para estos datos. Otra soluci√≥n ser√≠a utilizar clustering basado en un modelo multinomial en caso de muestreos aleatorios con reposici√≥n, o en un modelo multihipergeom√©trico en caso de un muestreo sin reposici√≥n.
 
-\item ComenzarÌa analizando las variables cuantitativas. Una vez formados estos grupos, analizarÌa la variable cualitativa. Si los niveles de la cualitativa quedan determinados por las otras variables, entonces las cuantitativas son suficientes para revelar la estructura de grupos (esto puede realizarse mediante una regresiÛn Logit o Probit en caso de vaiables binarias, o sus extensiones para casos de variables con m·s de dos categorÌas). En caso de que al analizar la variable cualitativa, proporciones no despreciables pertenezcan a los distintos grupos definidos por las cuantitativas, entonces deben emplearse mÈtodos adicionales, por ejemplo los mencionados en la parte c.
+\item Comenzar√≠a analizando las variables cuantitativas. Una vez formados estos grupos, analizar√≠a la variable cualitativa. Si los niveles de la cualitativa quedan determinados por las otras variables, entonces las cuantitativas son suficientes para revelar la estructura de grupos (esto puede realizarse mediante una regresi√≥n Logit o Probit en caso de vaiables binarias, o sus extensiones para casos de variables con m√°s de dos categor√≠as). En caso de que al analizar la variable cualitativa, proporciones no despreciables pertenezcan a los distintos grupos definidos por las cuantitativas, entonces deben emplearse m√©todos adicionales, por ejemplo los mencionados en la parte c.
 
 \end{enumerate}
 
 ## Ejercicio 4
 
-**An·lisis visual del dendograma:** dado que las barras verticales del dendograma indican el nivel al que se unen los individuos/grupos, analizar visualmente la longitud de dichas barras da una idea de la estructura de grupos que presentan los datos. Este mÈtodo es muy informal y solo permite una primera aproximaciÛn. En caso de tener una cantidad predeterminada de grupos, esto determinar· el nivel en el cual cortar. En este caso donde dicha cantidad no est· especificada a priori, sugiero 4 grupos.
+**An√°lisis visual del dendrograma:** dado que las barras verticales del dendrograma indican el nivel al que se unen los individuos/grupos, analizar visualmente la longitud de dichas barras da una idea de la estructura de grupos que presentan los datos. Este m√©todo es muy informal y solo permite una primera aproximaci√≥n. En caso de tener una cantidad predeterminada de grupos, esto determinar√≠a el nivel en el cual cortar. En este caso donde dicha cantidad no est√© especificada a priori, sugiero 4 grupos.
 
-**Criterio del $R^2$**: Lo que hace este indicador es relacionar la variaciÛn explicada y la variaciÛn total, dÛnde la variaciÛn explicada est· representa por la estructura de grupos que se encuentra en cada nivel. Por lo tanto, el valor del R cuadrado se encuentra en el intervalo [0,1], valiendo 0 cuando todas las observaciones se encuentran en un mismo grupo (es decir, la variaciÛn explicada por la estructura de grupos es 0 ya que todos los individuos est·n en un mismo grupo), y valiendo 1 cuando cada individuo es un grupo (es decir, cuando la variaciÛn explicada es igual a la variaciÛn total).
+**Criterio del $R^2$**: Lo que hace este indicador es relacionar la variaci√≥n explicada y la variaci√≥n total, donde la variaci√≥n explicada est√° representa por la estructura de grupos que se encuentra en cada nivel. Por lo tanto, el valor del R cuadrado se encuentra en el intervalo [0, 1], valiendo 0 cuando todas las observaciones se encuentran en un mismo grupo (es decir, la variaci√≥n explicada por la estructura de grupos es 0 ya que todos los individuos est√°n en un mismo grupo), y valiendo 1 cuando cada individuo es un grupo (es decir, cuando la variaci√≥n explicada es igual a la variaci√≥n total).
 
-En tÈrminos matem·ticos:
+En t√©rminos matem√°ticos:
 $$ R^2 = 1 - \frac{ \sum\limits_{k=1}^{g} \sum\limits_{i=1}^{n_k} \sum\limits_{j=1}^{p} \big( x_{ijk} - \bar{x}_{jk} \big)^2 }{ \sum\limits_{i=1}^{n} \sum\limits_{j=1}^{p} \big( x_{ij} - \bar{x}_{j} \big)^2 } $$
 donde $p$ es la cantidad de variables, $g$ la cantidad de grupos, $n$ la cantidad total de observaciones, y $n_k$ la cantidad de observaciones en el grupo $k$.
 
-Para este ejemplo vemos que el mayor aumento del indicador se da cuando pasamos de 3 grupos ($R^2 = 0.3978791$) a 4 grupos ($R^2 = 0.5081371$) leyendo desde abajo hacia arriba. Dado que aquÌ es cuando se da el mayor aumento (en tÈrminos proporcionales), nos quedamos con 4 grupos.
+Para este ejemplo vemos que el mayor aumento del indicador se da cuando pasamos de 3 grupos ($R^2 = 0.3978791$) a 4 grupos ($R^2 = 0.5081371$) leyendo desde abajo hacia arriba. Dado que aqu√≠ es cuando se da el mayor aumento (en t√©rminos proporcionales), nos quedamos con 4 grupos.
 
-**Criterio pseudo-F:** relaciona la suma de variaciones entre los grupos (variaciÛn explicada) con la suma de variaciones en los grupos (variaciÛn residual):
+**Criterio pseudo-F:** relaciona la suma de variaciones entre los grupos (variaci√≥n explicada) con la suma de variaciones en los grupos (variaci√≥n residual):
 
-$$Pseudo \, F = \frac{ \text{VariaciÛn entre grupos} / (k-1) }{ \text{VariaciÛn en los grupos} / (n-k)}$$
-La cual puede calcularse tambiÈn como:
+$$Pseudo \, F = \frac{ \text{Variaci√≥n entre grupos} / (k-1) }{ \text{Variaci√≥n en los grupos} / (n-k)}$$
+La cual puede calcularse tambi√©n como:
 $$Pseudo \, F = \frac{ tr(B) / (k-1) }{ tr(W) / (n-k) }$$
 O como cocientes del $R^2$:
 $$Pseudo \, F = \frac{ tr(B) / (k-1) }{ tr(W) / (n-k) }$$
 
-Reglas empÌricas de utilizaciÛn:
+Reglas emp√≠ricas de utilizaci√≥n:
 
-- Si el indicador crece de forma monÛtona al crecer el n˙mero de grupos, no se puede determinar una estructura de grupos.  
-- Si disminuye de forma monÛtona al crecer el n˙mero de grupos, no se puede determinar una estructura de grupos, pero se puede decir que existe jerarquÌa.  
-- Cuando se halla un m·ximo, la poblaciÛn presenta una estructura de grupos en ese m·ximo.  
+- Si el indicador crece de forma mon√≥tona al crecer el n√∫mero de grupos, no se puede determinar una estructura de grupos.  
+- Si disminuye de forma mon√≥tona al crecer el n√∫mero de grupos, no se puede determinar una estructura de grupos, pero se puede decir que existe jerarqu√≠a.  
+- Cuando se halla un m√°?ximo, la poblaci√≥n presenta una estructura de grupos en ese m√°ximo.  
 
-En este caso, en cuatro grupos tambiÈn se observa un m·ximo local. Cabe destacar que este no es el ˙nico m·ximo local. Esto enfatiza la necesidad de no quedarse con un solo mÈtodo, sino que combinarlos.
+En este caso, en cuatro grupos tambi√©n se observa un m√°ximo local. Cabe destacar que este no es el √∫nico m√°ximo local. Esto enfatiza la necesidad de no quedarse con un solo m√©todo, sino que combinarlos.
 
 *Nota:* el indicador no es una variable aleatoria que se distribuye F.
 
-**Criterio pseudo-$t^2$:** este indicador busca determinar la significaciÛn de juntar dos grupos. Busca determinar en cada paso, si la disminuciÛn de la SCR (variaciÛn intra-grupos) como resultado de pasar de $k$ a $k+1$ grupos es significativa o no. Algebraicamente, este indicador tambiÈn se basa en las tazas de las matrices de varianza en el grupo ($W$), antes y despuÈs de unir dos grupos:
+**Criterio pseudo-$t^2$:** este indicador busca determinar la significaci√≥n de juntar dos grupos. Busca determinar en cada paso, si la disminuci√≥n de la SCR (variaci√≥n intra-grupos) como resultado de pasar de $k$ a $k+1$ grupos es significativa o no. Algebraicamente, este indicador tambi√©n se basa en las tazas de las matrices de varianza en el grupo ($W$), antes y despu√©s de unir dos grupos:
 
 $$ \text{Pseudo-} t^2 = \frac{ tr(W_{GL}) - \Big[ tr\big( W_G + tr(W_L) \big) \Big] }{ \Big[ tr(W_G) + tr(W_L) \Big] \big/ \big( n_G + n_L - 2 \big) }$$
 donde:
@@ -147,8 +146,6 @@ donde:
 - $n_i$ es la cantidad de observaciones en el grupo $i=G, \, L$.  
 - $tr(W_i)$ es la traza en el grupo $i=G, \, L, \, GL$
 
-Si se analiza el vector de valores de pseudo-$t^2$ desde abajo (1 grupo con $n$ observaciones) hacia arriba ($n$ grupos con 1 observaciÛn cada uno), si en $k+1$ grupos presenta una caÌda "fuerte" respecto de $k$, entonces nos quedamos con $k+1$ grupos. En este caso, dicho comportamiento se observa al pasar desde 3 grupos (pseudo-$t^2$ = 194.72) a 4 grupos (pseudo-$t^2$ = 44.84), por lo que sugiere quedarse con 4 grupos.
+Si se analiza el vector de valores de pseudo-$t^2$ desde abajo (1 grupo con $n$ observaciones) hacia arriba ($n$ grupos con 1 observaci√≥n cada uno), si en $k+1$ grupos presenta una ca√≠da "fuerte" respecto de $k$, entonces nos quedamos con $k+1$ grupos. En este caso, dicho comportamiento se observa al pasar desde 3 grupos (pseudo-$t^2$ = 194.72) a 4 grupos (pseudo-$t^2$ = 44.84), por lo que sugiere quedarse con 4 grupos.
 
-Dado que tanto la inspecciÛn visual, como los tres Ìndices sugieren quedarse con 4 grupos, esta es la opciÛn por la que se opta. Como ya se adelantÛ, los diferentes mÈtodos pueden no siempre coincidir, por lo que es necesario contemplar lo que todos ellos sugieren para tomar una decisiÛn.
-
-
+Dado que tanto la inspecci√≥n visual, como los tres √≠ndices sugieren quedarse con 4 grupos, esta es la opci√≥n por la que se opta. Como ya se adelant√≥, los diferentes m√©todos pueden no siempre coincidir, por lo que es necesario contemplar lo que todos ellos sugieren para tomar una decisi√≥n.
