@@ -31,8 +31,8 @@ nocite: |
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-   echo = FALSE
-   )
+  echo = FALSE
+)
 ```
 
 # Análisis Factorial
@@ -145,24 +145,24 @@ $$\begin{array}{ccc}
 La siguiente tabla resume lo hallado.
 
 \begin{center}
-  \begin{tabular}{| l | c | c |}
-      \hline
-                               & Nube $N_I$                & Nube $N_J$                 \\ \hline \hline
-      Espacio                  & $\mathbb{R}^J$            & $\mathbb{R}^I$             \\
-      Métrica                  & $\mathbf{M}_{J \times J}$ & $\mathbf{D}_{I \times I}$  \\
-      Coordenadas              & $\mathbf{X}_{I \times J}$ & $\mathbf{X}_{J \times I}'$ \\
-      Pesos                    & $\mathbf{D}_{I \times I}$ & $\mathbf{M}_{J \times J}$  \\ \hline
-      Ejes de inercia          & $\mathbf{u}_s$            & $\mathbf{v}_s$             \\
-      Ecuación                 & $\mathbf{X}' \mathbf{D} \mathbf{X} \mathbf{M} \mathbf{u}_s = \lambda_s \mathbf{u}_s$ & $\mathbf{X} \mathbf{M} \mathbf{X}' \mathbf{D} \mathbf{v}_s = \lambda_s \mathbf{v}_s$ \\
-      Norma                    & $||\mathbf{u}_s||_{\mathbf{M}} = 1$ & $||\mathbf{v}_s||_{\mathbf{D}} = 1$ \\ \hline
-      Factores                 & $\mathbf{F}_s = \mathbf{X} \mathbf{M} \mathbf{u}_s$ & $\mathbf{G}_s = \mathbf{X}' \mathbf{D} \mathbf{v}_s$ \\
-      Ecuaciones               & $\mathbf{X} \mathbf{M} \mathbf{X}' \mathbf{D} \mathbf{F}_s = \lambda_s \mathbf{F}_s$ & $\mathbf{X}' \mathbf{D} \mathbf{X} \mathbf{M} \mathbf{G}_s = \lambda_s \mathbf{G}_s$ \\
-      Norma                    & $||\mathbf{F}_s||_{\mathbf{D}} = \sqrt{\lambda_s}$ & $||\mathbf{G}_s||_{\mathbf{M}} = \sqrt{\lambda_s}$ \\
-      Ortogonalidad            & $\sum_i F_t(i) \, F_s(i) p_i = 0 \text{ si } s \neq t$ & $\sum_j G_t(j) \, G_s(j) m_j = 0 \text{ si } s \neq t$ \\ \hline
-      Inercio sobre el eje $s$ & $\lambda_s$ & $\lambda_s$ \\
-      Inercia total            & $\sum_s \lambda_s$ & $\sum_s \lambda_s$ \\ \hline
-      Fórmulas de transición   & $\mathbf{u}_s = \lambda_s^{-1} \mathbf{G}_s$ & $\mathbf{v}_s = \lambda_s^{-1} \mathbf{F}_s$ \\ \hline
-  \end{tabular}
+\begin{tabular}{| l | c | c |}
+\hline
+& Nube $N_I$                & Nube $N_J$                 \\ \hline \hline
+Espacio                  & $\mathbb{R}^J$            & $\mathbb{R}^I$             \\
+Métrica                  & $\mathbf{M}_{J \times J}$ & $\mathbf{D}_{I \times I}$  \\
+Coordenadas              & $\mathbf{X}_{I \times J}$ & $\mathbf{X}_{J \times I}'$ \\
+Pesos                    & $\mathbf{D}_{I \times I}$ & $\mathbf{M}_{J \times J}$  \\ \hline
+Ejes de inercia          & $\mathbf{u}_s$            & $\mathbf{v}_s$             \\
+Ecuación                 & $\mathbf{X}' \mathbf{D} \mathbf{X} \mathbf{M} \mathbf{u}_s = \lambda_s \mathbf{u}_s$ & $\mathbf{X} \mathbf{M} \mathbf{X}' \mathbf{D} \mathbf{v}_s = \lambda_s \mathbf{v}_s$ \\
+Norma                    & $||\mathbf{u}_s||_{\mathbf{M}} = 1$ & $||\mathbf{v}_s||_{\mathbf{D}} = 1$ \\ \hline
+Factores                 & $\mathbf{F}_s = \mathbf{X} \mathbf{M} \mathbf{u}_s$ & $\mathbf{G}_s = \mathbf{X}' \mathbf{D} \mathbf{v}_s$ \\
+Ecuaciones               & $\mathbf{X} \mathbf{M} \mathbf{X}' \mathbf{D} \mathbf{F}_s = \lambda_s \mathbf{F}_s$ & $\mathbf{X}' \mathbf{D} \mathbf{X} \mathbf{M} \mathbf{G}_s = \lambda_s \mathbf{G}_s$ \\
+Norma                    & $||\mathbf{F}_s||_{\mathbf{D}} = \sqrt{\lambda_s}$ & $||\mathbf{G}_s||_{\mathbf{M}} = \sqrt{\lambda_s}$ \\
+Ortogonalidad            & $\sum_i F_t(i) \, F_s(i) p_i = 0 \text{ si } s \neq t$ & $\sum_j G_t(j) \, G_s(j) m_j = 0 \text{ si } s \neq t$ \\ \hline
+Inercio sobre el eje $s$ & $\lambda_s$ & $\lambda_s$ \\
+Inercia total            & $\sum_s \lambda_s$ & $\sum_s \lambda_s$ \\ \hline
+Fórmulas de transición   & $\mathbf{u}_s = \lambda_s^{-1} \mathbf{G}_s$ & $\mathbf{v}_s = \lambda_s^{-1} \mathbf{F}_s$ \\ \hline
+\end{tabular}
 \end{center}
 
 ## Interpretación de resultados
@@ -238,11 +238,11 @@ Nuevamente, impondremos que $\mathbf{a}'_j\mathbf{a}_j = 1$.
 Por último, notemos tambien que, dado que la matriz de datos está centrada,
 $$\begin{array}{rcl}
 \V(\mathbf{z}_1) & = & \V(\mathbf{X} \mathbf{a}_1) \\ \\
-   & = & \frac{1}{n} \mathbf{z}_1' \mathbf{z}_1 \\ \\
-   & = & \frac{1}{n} (\mathbf{X} \mathbf{a}_1)' (\mathbf{X} \mathbf{a}_1) \\ \\
-   & = & \frac{1}{n} \mathbf{a}_1' \mathbf{X}' \mathbf{X} \mathbf{a}_1 \\ \\
-   & = & \mathbf{a}_1' \left( \frac{1}{n} \mathbf{X}' \mathbf{X} \right) \mathbf{a}_1 \\ \\
-   & = & \mathbf{a}_1' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_1
+& = & \frac{1}{n} \mathbf{z}_1' \mathbf{z}_1 \\ \\
+& = & \frac{1}{n} (\mathbf{X} \mathbf{a}_1)' (\mathbf{X} \mathbf{a}_1) \\ \\
+& = & \frac{1}{n} \mathbf{a}_1' \mathbf{X}' \mathbf{X} \mathbf{a}_1 \\ \\
+& = & \mathbf{a}_1' \left( \frac{1}{n} \mathbf{X}' \mathbf{X} \right) \mathbf{a}_1 \\ \\
+& = & \mathbf{a}_1' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_1
 \end{array}$$
 
 Por lo tanto, el problema de maximización lo podemos resolver con le siguiente Lagrangeano:
@@ -264,9 +264,9 @@ $$\mathscr{L}_2(\mathbf{a}_2) = \mathbf{a}_2' \mathbf{\Sigma}_{\mathbf{X}} \math
 Su CPO será:
 $$\begin{array}{rcl}
 \frac{\partial \mathscr{L}_2(\mathbf{a}_2)}{\partial \mathbf{a}_2'} & = & 2 \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_2 - 2 \lambda_2 \mathbf{a}_2 - \delta \mathbf{a}_1 \\ \\
-   & = & 2 \mathbf{a}_1' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_2 - 2 \lambda_2 \mathbf{a}_1' \mathbf{a}_2 - \delta \mathbf{a}_1' \mathbf{a}_1 \\ \\
-   & = & 2 \mathbf{a}_1' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_2 - 2 \lambda_2 \underbrace{ \mathbf{a}_1' \mathbf{a}_2 }_{ = 0} - \delta \underbrace{ \mathbf{a}_1' \mathbf{a}_1 }_{ = 1} \\ \\
-   & = & 2 \mathbf{a}_1' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_2 - \delta = \mathbf{0}_p
+& = & 2 \mathbf{a}_1' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_2 - 2 \lambda_2 \mathbf{a}_1' \mathbf{a}_2 - \delta \mathbf{a}_1' \mathbf{a}_1 \\ \\
+& = & 2 \mathbf{a}_1' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_2 - 2 \lambda_2 \underbrace{ \mathbf{a}_1' \mathbf{a}_2 }_{ = 0} - \delta \underbrace{ \mathbf{a}_1' \mathbf{a}_1 }_{ = 1} \\ \\
+& = & 2 \mathbf{a}_1' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_2 - \delta = \mathbf{0}_p
 \end{array}$$
 Tenemos entonces que el máximo se halla cuando 
 $$\delta = 2 \mathbf{a}_1' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_2 = 2 \mathbf{a}_2' \mathbf{\Sigma}_{\mathbf{X}} \mathbf{a}_1$$
@@ -318,15 +318,15 @@ El análisis parte de una tabla de contingencia, construye los perfiles filas y 
 Partimos de una tabla de contingencias. Esta contiene los conteos de individuos con modalidad $i$ en la variable 1 y modalidad $j$ en la variable 2.
 
 \begin{center}
-  \begin{tabular}{ c | ccccc | c }
-             & 1        & $\cdots$ & $j$                    & $\cdots$ & $J$      & Total                  \\ \hline
-    1        &          &          & $\vdots$               &          &          & $\vdots$               \\
-    $\vdots$ &          &          & $\vdots$               &          &          & $\vdots$               \\
-    $i$      & $\cdots$ & $\cdots$ & $x_{ij}$               & $\cdots$ & $\cdots$ & $\sum\limits_j x_{ij}$ \\
-    $\vdots$ &          &          & $\vdots$               &          &          & $\vdots$               \\
-    $I$      &          &          & $\vdots$               &          &          & $\vdots$               \\ \hline
-    Total    & $\cdots$ & $\cdots$ & $\sum\limits_i x_{ij}$ & $\cdots$ & $\cdots$ & $n = \sum\limits_{ij} x_{ij}$
-  \end{tabular}
+\begin{tabular}{ c | ccccc | c }
+& 1        & $\cdots$ & $j$                    & $\cdots$ & $J$      & Total                  \\ \hline
+1        &          &          & $\vdots$               &          &          & $\vdots$               \\
+$\vdots$ &          &          & $\vdots$               &          &          & $\vdots$               \\
+$i$      & $\cdots$ & $\cdots$ & $x_{ij}$               & $\cdots$ & $\cdots$ & $\sum\limits_j x_{ij}$ \\
+$\vdots$ &          &          & $\vdots$               &          &          & $\vdots$               \\
+$I$      &          &          & $\vdots$               &          &          & $\vdots$               \\ \hline
+Total    & $\cdots$ & $\cdots$ & $\sum\limits_i x_{ij}$ & $\cdots$ & $\cdots$ & $n = \sum\limits_{ij} x_{ij}$
+\end{tabular}
 \end{center}
 
 Para realizar ACS primero debemos computar la tabla de frecuencias relativas, donde:
@@ -342,15 +342,15 @@ $$f_{i.} = \frac{1}{n} \sum\limits_j x_{ij}$$
 - La celda de cantidad de observaciones ($n$), será ahora igual a 1.
 
 \begin{center}
-  \begin{tabular}{ c | ccccc | c }
-             & 1        & $\cdots$ & $j$      & $\cdots$ & $J$      &          \\ \hline
-    1        &          &          & $\vdots$ &          &          & $\vdots$ \\
-    $\vdots$ &          &          & $\vdots$ &          &          & $\vdots$ \\
-    $i$      & $\cdots$ & $\cdots$ & $f_{ij}$ & $\cdots$ & $\cdots$ & $f_{i.}$ \\
-    $\vdots$ &          &          & $\vdots$ &          &          & $\vdots$ \\
-    $I$      &          &          & $\vdots$ &          &          & $\vdots$ \\ \hline
-             & $\cdots$ & $\cdots$ & $f_{.j}$ & $\cdots$ & $\cdots$ & 1
-  \end{tabular}
+\begin{tabular}{ c | ccccc | c }
+& 1        & $\cdots$ & $j$      & $\cdots$ & $J$      &          \\ \hline
+1        &          &          & $\vdots$ &          &          & $\vdots$ \\
+$\vdots$ &          &          & $\vdots$ &          &          & $\vdots$ \\
+$i$      & $\cdots$ & $\cdots$ & $f_{ij}$ & $\cdots$ & $\cdots$ & $f_{i.}$ \\
+$\vdots$ &          &          & $\vdots$ &          &          & $\vdots$ \\
+$I$      &          &          & $\vdots$ &          &          & $\vdots$ \\ \hline
+& $\cdots$ & $\cdots$ & $f_{.j}$ & $\cdots$ & $\cdots$ & 1
+\end{tabular}
 \end{center}
 
 Se trabaja con las frecuencias relativas dado que se busca estudiar la dependencia. En una tabla de frecuencias, si las variables son independientes, se cumple que, para toda modalidad conjunta, la frecuencia relativa de dicha modalidad conjunta, es igual al producto de sus frecuencias marginales:
@@ -367,28 +367,28 @@ En caso de que esto no se cumpla, podemos decir que existe una asociación entre
 Para realizar ACS construimos los perfiles de filas y de columnas. El perfil filas se construye dividiendo las frecuencias relativas por la frecuencia marginal de la $i$-ésima fila, $f_{i.}$. Por lo tanto, la columna de frecuencias marginales vale 1 para todas las filas, y no existe una fila de frecuencias marginales.
 
 \begin{center}
-  \begin{tabular}{ c | ccccc | c }
-             & 1        & $\cdots$ & $j$               & $\cdots$ & $J$      &          \\ \hline
-    1        &          &          & $\vdots$          &          &          & $1$      \\
-    $\vdots$ &          &          & $\vdots$          &          &          & $\vdots$ \\
-    $i$      & $\cdots$ & $\cdots$ & $f_{ij} / f_{i.}$ & $\cdots$ & $\cdots$ & $1$      \\
-    $\vdots$ &          &          & $\vdots$          &          &          & $\vdots$ \\
-    $I$      &          &          & $\vdots$          &          &          & $1$      \\
-  \end{tabular}
+\begin{tabular}{ c | ccccc | c }
+& 1        & $\cdots$ & $j$               & $\cdots$ & $J$      &          \\ \hline
+1        &          &          & $\vdots$          &          &          & $1$      \\
+$\vdots$ &          &          & $\vdots$          &          &          & $\vdots$ \\
+$i$      & $\cdots$ & $\cdots$ & $f_{ij} / f_{i.}$ & $\cdots$ & $\cdots$ & $1$      \\
+$\vdots$ &          &          & $\vdots$          &          &          & $\vdots$ \\
+$I$      &          &          & $\vdots$          &          &          & $1$      \\
+\end{tabular}
 \end{center}
 
 El perfil columnas se construye dividiendo las frecuencias relativas por la frecuencia marginal de la $j$-ésima columna, $f_{.j}$. Por lo tanto, la fila de frecuencias marginales vale 1 para todas las columnas, y no existe una columna de frecuencias marginales.
 
 \begin{center}
-  \begin{tabular}{ c | ccccc }
-             & 1        & $\cdots$ & $j$               & $\cdots$ & $J$      \\ \hline
-    1        &          &          & $\vdots$          &          &          \\
-    $\vdots$ &          &          & $\vdots$          &          &          \\
-    $i$      & $\cdots$ & $\cdots$ & $f_{ij} / f_{.j}$ & $\cdots$ & $\cdots$ \\
-    $\vdots$ &          &          & $\vdots$          &          &          \\
-    $I$      &          &          & $\vdots$          &          &          \\ \hline
-             & $1$      & $\cdots$ & $1$               & $\cdots$ & $1$
-  \end{tabular}
+\begin{tabular}{ c | ccccc }
+& 1        & $\cdots$ & $j$               & $\cdots$ & $J$      \\ \hline
+1        &          &          & $\vdots$          &          &          \\
+$\vdots$ &          &          & $\vdots$          &          &          \\
+$i$      & $\cdots$ & $\cdots$ & $f_{ij} / f_{.j}$ & $\cdots$ & $\cdots$ \\
+$\vdots$ &          &          & $\vdots$          &          &          \\
+$I$      &          &          & $\vdots$          &          &          \\ \hline
+& $1$      & $\cdots$ & $1$               & $\cdots$ & $1$
+\end{tabular}
 \end{center}
 
 Esto permite un análisis por perfil (frecuencia condicional). Si la independencia se cumple, entonces todas las filas serán proporcionales:
@@ -434,21 +434,21 @@ Dado que de haber independencia todos los perfiles son proporcionales (e iguales
 Las inercias de las nubes respecto de sus baricentros se calculan como la suma sobre todos los puntos, del producto entre la masa y la distancia. Entonces para le perfil filas:
 $$\begin{array}{rcl}
 \text{Inercia}(N_I) & = & \sum\limits_{i = 1}^{I} \text{inercia}(i) \\ \\
-   & = & \sum\limits_{i = 1}^{I} f_{i.} \, d^2_{\chi^2}(i, \, G_I) \\ \\
-   & = & \sum\limits_{i = 1}^{I} f_{i.} \left( \sum\limits_{j = 1}^{J} \frac{1}{f_{.j}} \left( \frac{ f_{ij} }{ f_{i.} } - f_{.j} \right)^2 \right) \\ \\
-   & = & \sum\limits_{i = 1}^{I} \sum\limits_{j = 1}^{J} \frac{ f_{i.} }{ f_{.j} } \left( \frac{ f_{ij} }{ f_{i.} } - f_{.j} \right)^2 \\ \\
-   & = & \sum\limits_{i = 1}^{I} \sum\limits_{j = 1}^{J} \frac{ (f_{ij} - f_{i.} \, f_{.j})^2 }{ f_{i.} \, f_{.j} } \\ \\
-   & = & \frac{ \chi^2 }{ n } = \phi^2
+& = & \sum\limits_{i = 1}^{I} f_{i.} \, d^2_{\chi^2}(i, \, G_I) \\ \\
+& = & \sum\limits_{i = 1}^{I} f_{i.} \left( \sum\limits_{j = 1}^{J} \frac{1}{f_{.j}} \left( \frac{ f_{ij} }{ f_{i.} } - f_{.j} \right)^2 \right) \\ \\
+& = & \sum\limits_{i = 1}^{I} \sum\limits_{j = 1}^{J} \frac{ f_{i.} }{ f_{.j} } \left( \frac{ f_{ij} }{ f_{i.} } - f_{.j} \right)^2 \\ \\
+& = & \sum\limits_{i = 1}^{I} \sum\limits_{j = 1}^{J} \frac{ (f_{ij} - f_{i.} \, f_{.j})^2 }{ f_{i.} \, f_{.j} } \\ \\
+& = & \frac{ \chi^2 }{ n } = \phi^2
 \end{array}$$
 
 Y para el perfil columnas:
 $$\begin{array}{rcl}
 \text{Inercia}(N_J) & = & \sum\limits_{j = 1}^{J} \text{inercia}(j) \\ \\
-   & = & \sum\limits_{j = 1}^{J} f_{.j} \, d^2_{\chi^2}(j, \, G_J) \\ \\
-   & = & \sum\limits_{j = 1}^{J} f_{.j} \left( \sum\limits_{i = 1}^{I} \frac{ 1 }{ f_{i.} } \left( \frac{ f_{ij} }{ f_{.j} } - f_{i.} \right)^2 \right) \\ \\
-   & = & \sum\limits_{j = 1}^{J} \sum\limits_{i = 1}^{I} \frac{ f_{.j} }{ f_{i.} } \left( \frac{ f_{ij} }{ f_{i.} } - f_{i.} \right)^2 \\ \\
-   & = & \sum\limits_{j = 1}^{J} \sum\limits_{i = 1}^{I} \frac{ (f_{ij} - f_{i.} \, f_{.j})^2 }{ f_{i.} \, f_{.j} } \\ \\
-   & = & \frac{ \chi^2 }{ n } = \phi^2
+& = & \sum\limits_{j = 1}^{J} f_{.j} \, d^2_{\chi^2}(j, \, G_J) \\ \\
+& = & \sum\limits_{j = 1}^{J} f_{.j} \left( \sum\limits_{i = 1}^{I} \frac{ 1 }{ f_{i.} } \left( \frac{ f_{ij} }{ f_{.j} } - f_{i.} \right)^2 \right) \\ \\
+& = & \sum\limits_{j = 1}^{J} \sum\limits_{i = 1}^{I} \frac{ f_{.j} }{ f_{i.} } \left( \frac{ f_{ij} }{ f_{i.} } - f_{i.} \right)^2 \\ \\
+& = & \sum\limits_{j = 1}^{J} \sum\limits_{i = 1}^{I} \frac{ (f_{ij} - f_{i.} \, f_{.j})^2 }{ f_{i.} \, f_{.j} } \\ \\
+& = & \frac{ \chi^2 }{ n } = \phi^2
 \end{array}$$
 
 Vemos entonces que la inercia total es igual tanto para la nube de filas como para la nube de columnas, y se corresponde con $\phi^2$. Esta igualdad entre la inercia de ambas nubes implíca que realizar ACS con perfiles filas es igual a que realizar ACS con perfiles columnas. Esto lo distingue de ACP y se debe a que tanto en las filas como en las columnas de la tabla de contingencia tenemos objetos de la misma naturaleza (variables).
@@ -507,29 +507,29 @@ $$\text{Cramer's V} = \frac{ \phi^2 }{ \min(I - 1, \, J - 1) } \in [0, \, 1]$$
 En ACM volvemos a trabajar con una matriz de datos con $I$ individuos y $J$ variables. A diferencia de ACP, ahora las $J$ columnas son variables cuantitativas. $v_{ij}$ es el valor del $i$-ésimo individuo en la $j$-ésima variable.
 
 \begin{center}
-  \begin{tabular}{ c | ccccc | }
-             & 1        & $\cdots$ & $j$      & $\cdots$ & $J$      \\ \hline
-    1        &          &          & $\vdots$ &          &          \\
-    $\vdots$ &          &          & $\vdots$ &          &          \\
-    $i$      & $\cdots$ & $\cdots$ & $v_{ij}$ & $\cdots$ & $\cdots$ \\
-    $\vdots$ &          &          & $\vdots$ &          &          \\
-    $I$      &          &          & $\vdots$ &          &          \\ \hline
-  \end{tabular}
+\begin{tabular}{ c | ccccc | }
+& 1        & $\cdots$ & $j$      & $\cdots$ & $J$      \\ \hline
+1        &          &          & $\vdots$ &          &          \\
+$\vdots$ &          &          & $\vdots$ &          &          \\
+$i$      & $\cdots$ & $\cdots$ & $v_{ij}$ & $\cdots$ & $\cdots$ \\
+$\vdots$ &          &          & $\vdots$ &          &          \\
+$I$      &          &          & $\vdots$ &          &          \\ \hline
+\end{tabular}
 \end{center}
 
 A partir de estos datos se construyen tablas disjuntas. En una tabla disjunta, las filas representan a los $I$ individuos, pero las columnas representan a las modalidades de las $J$ variables.
 
 \begin{center}
-  \begin{tabular}{ c | ccccccccc | c}
-             & 1        & $\cdots$ & $j$      & $j$      & $j$      & $j$      & $j$      & $\cdots$ & $J$      &      \\
-             &          &          & $1$      & $\cdots$ & $k$      & $\cdots$ & $K_j$    &          &          &      \\ \hline
-    1        &          &          &          &          & $\vdots$ &          &          &          &          & $J$  \\
-    $\vdots$ &          &          &          &          & $\vdots$ &          &          &          &          & $J$  \\
-    $i$      & $\cdots$ & $\cdots$ & $\cdots$ & $\cdots$ & $y_{ik}$ & $\cdots$ & $\cdots$ & $\cdots$ & $\cdots$ & $J$  \\
-    $\vdots$ &          &          &          &          & $\vdots$ &          &          &          &          & $J$  \\
-    $I$      &          &          &          &          & $\vdots$ &          &          &          &          & $J$  \\ \hline
-             &          &          &          &          & $I p_k$  &          &          &          &          & $IJ$
-  \end{tabular}
+\begin{tabular}{ c | ccccccccc | c}
+& 1        & $\cdots$ & $j$      & $j$      & $j$      & $j$      & $j$      & $\cdots$ & $J$      &      \\
+&          &          & $1$      & $\cdots$ & $k$      & $\cdots$ & $K_j$    &          &          &      \\ \hline
+1        &          &          &          &          & $\vdots$ &          &          &          &          & $J$  \\
+$\vdots$ &          &          &          &          & $\vdots$ &          &          &          &          & $J$  \\
+$i$      & $\cdots$ & $\cdots$ & $\cdots$ & $\cdots$ & $y_{ik}$ & $\cdots$ & $\cdots$ & $\cdots$ & $\cdots$ & $J$  \\
+$\vdots$ &          &          &          &          & $\vdots$ &          &          &          &          & $J$  \\
+$I$      &          &          &          &          & $\vdots$ &          &          &          &          & $J$  \\ \hline
+&          &          &          &          & $I p_k$  &          &          &          &          & $IJ$
+\end{tabular}
 \end{center}
 
 Entonces, si la $j$-ésima variable tiene $K$ modalidades distintas, se agregan $K_j$ columnas a la tabla. La tabla tendrá entonces tantas columnas como la suma de las modalidades de cada variable. $y_{ik} = 1$ si el individuo $i$ presenta la modalidad $k$ en la variable $j$, o 0 en otro caso. Por lo tanto, en las $K_j$ columnas que representan a la variable $j$, cada individuo estará conformado por un vector de ceros con un único 1 en la modalidad de dicho individuo.
