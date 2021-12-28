@@ -27,7 +27,7 @@ nocite: |
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
    echo = FALSE
-   )
+)
 ```
 
 # Descripción general
@@ -87,23 +87,23 @@ donde $s_{jih}$ es el índice de similaridad entre los elementos $i$ y $h$ en la
 Los índices de similariadad para cada tipo de variable se construyen de la siguiente forma:
 \begin{itemize}
 \item \textbf{Variables cualitativas}: puede construirse por bloque o para cada variable. 
-   \begin{itemize}
-   \item Cuando se realiza por variable la similitud será 1 en los casos en que ambas unidades posean o no el atributo, y 0 en caso de que una de ellas lo posea y la otra no.
-   \item Cuando se las trata de forma conjunta se construyen tablas de asociación contando los atributos presentes en:
-      \begin{itemize}
-      \item ambos elementos: $a$
-      \item en $i$ y no en $h$: $b$
-      \item en $h$ y no en $i$: $c$
-      \item en ningún elemento: $d$
-      \end{itemize}
-   Luego la similitud puede construirse mediante:
-      \begin{itemize}
-      \item \textit{Prop. de coincidencias}: se calcula como el número total de coincidencias sobre el número total de atributos.
-      $$s_{ij} = \frac{ a + d }{ n_a}$$
-      \item \textit{Prop. de apariciones}: proporción de veces donde el atributo aparece en ambas observaciones.
-      $$s_{ij} = \frac{ a }{ a + b + c }$$
-      \end{itemize}
-   \end{itemize}
+\begin{itemize}
+\item Cuando se realiza por variable la similitud será 1 en los casos en que ambas unidades posean o no el atributo, y 0 en caso de que una de ellas lo posea y la otra no.
+\item Cuando se las trata de forma conjunta se construyen tablas de asociación contando los atributos presentes en:
+\begin{itemize}
+\item ambos elementos: $a$
+\item en $i$ y no en $h$: $b$
+\item en $h$ y no en $i$: $c$
+\item en ningún elemento: $d$
+\end{itemize}
+Luego la similitud puede construirse mediante:
+\begin{itemize}
+\item \textit{Prop. de coincidencias}: se calcula como el número total de coincidencias sobre el número total de atributos.
+$$s_{ij} = \frac{ a + d }{ n_a}$$
+\item \textit{Prop. de apariciones}: proporción de veces donde el atributo aparece en ambas observaciones.
+$$s_{ij} = \frac{ a }{ a + b + c }$$
+\end{itemize}
+\end{itemize}
 \item \textbf{Variables cuantiativas}:
 $$s_{jih} = 1 - \frac{|x_{ij} - x_{hj}|}{ rg(x_j) }$$
 \end{itemize}
@@ -131,18 +131,18 @@ El primer paso es siempre igual y muy sencillo. Se parte de la matriz de datos $
 El problema comienza con los pasos subsiguiente cuando deben unirse observaciones con grupos previamente formados, o grupos con grupos. La pregunta a la que se debe dar respuesta es ¿cuál es la distancia entre la observación $k$, y el grupo formado por las observaciones $i$ y $j$? (Análogamente uno podría preguntarse cuál es la distancia entre el grupo $U_1$ y el grupo $U_2$, siendo estos dos grupos formados en pasos anteriores del algoritmo). Para definir estas distancias existen distintos criterios:
 
 \begin{itemize}
-   \item \textbf{Single Linkage}: $d_{(i,j), k} = \min\{ d_{i,k}; \, d_{j,k} \}$
-   \item \textbf{Complete Linkage}: $d_{(i,j), k} = \max\{ d_{i,k}; \, d_{j,k} \}$
-   \item \textbf{Average Linkage}: la distancia entre dos grupos es el prmedio entras las distancias entre pares de observaciones. Es sesgado hacia la formación de grupos con igual varianza.
-   \item \textbf{Centroide}: define la distancia entre los grupos $K$ y $L$ como $d_{(K, L)} = || \bar{x}_K - \bar{x}_L ||^2$. Tiene el beneficio de ser robusto a la presencia de outliers.
-   \item \textbf{Ward}: la unión entre grupos se relaiza de forma tal de minimizar la varianza interna.
+\item \textbf{Single Linkage}: $d_{(i,j), k} = \min\{ d_{i,k}; \, d_{j,k} \}$
+\item \textbf{Complete Linkage}: $d_{(i,j), k} = \max\{ d_{i,k}; \, d_{j,k} \}$
+\item \textbf{Average Linkage}: la distancia entre dos grupos es el prmedio entras las distancias entre pares de observaciones. Es sesgado hacia la formación de grupos con igual varianza.
+\item \textbf{Centroide}: define la distancia entre los grupos $K$ y $L$ como $d_{(K, L)} = || \bar{x}_K - \bar{x}_L ||^2$. Tiene el beneficio de ser robusto a la presencia de outliers.
+\item \textbf{Ward}: la unión entre grupos se relaiza de forma tal de minimizar la varianza interna.
 $$\underbrace{\sum\limits_{i = 1}^{I} \sum\limits_{j = 1}^{J} (x_{ij} - \bar{x}_j)^2}_{ \text{ T (Total variance)}} = \underbrace{ \sum\limits_{k = 1}^{K} \sum\limits_{i = 1}^{n_k} \sum\limits_{j = 1}^{J} \big( x_{ij}^{(k)} - \bar{x}_j^{(k)} \big)^2 }_{\text{W (Within group variance)} } + \underbrace{ \sum\limits_{k = 1}^{K} \sum\limits_{j = 1}^{J} n_k \big( \bar{x}_j^{(k)} - \bar{x}_j \big)^2 }_{ \text{B (Between group variance)}} $$
 Esto puede verse en términos de distancias realizando las sumas en $J$:
 
 \begin{itemize}
-   \item $T$ es la suma de las distancias entre cada una de las $i$ observaciones y el centroide de las observaciones, es decir: $\sum\limits_{i = 1}^{I} \sum\limits_{j = 1}^{J} (x_{ij} - \bar{x}_j)^2 = \sum\limits_{i = 1}^{I} d^2_{(i, G)}$  
-   \item $W$ es la suma de las distancias entre cada una de las observaciones y el centroide del grupo $k$, es decir: $\sum\limits_{k = 1}^{K} \sum\limits_{i = 1}^{n_k} \sum\limits_{j = 1}^{J} \big( x_{ij}^{(k)} - \bar{x}_j^{(k)} \big)^2 = \sum\limits_{k = 1}^{K} \sum\limits_{i = 1}^{n_k} d^2_{(i, G_k)}$  
-   \item $B$ es la suma de $n_k$-veces las distancias entre el centroide del grupo $k$ y el centroide total de la observaciones, es decir: $\sum\limits_{k = 1}^{K} \sum\limits_{j = 1}^{J} n_k \big( \bar{x}_j^{(k)} - \bar{x}_j \big)^2 = \sum\limits_{k = 1}^{K} n_k d^2_{(G_k, G)}$.
+\item $T$ es la suma de las distancias entre cada una de las $i$ observaciones y el centroide de las observaciones, es decir: $\sum\limits_{i = 1}^{I} \sum\limits_{j = 1}^{J} (x_{ij} - \bar{x}_j)^2 = \sum\limits_{i = 1}^{I} d^2_{(i, G)}$  
+\item $W$ es la suma de las distancias entre cada una de las observaciones y el centroide del grupo $k$, es decir: $\sum\limits_{k = 1}^{K} \sum\limits_{i = 1}^{n_k} \sum\limits_{j = 1}^{J} \big( x_{ij}^{(k)} - \bar{x}_j^{(k)} \big)^2 = \sum\limits_{k = 1}^{K} \sum\limits_{i = 1}^{n_k} d^2_{(i, G_k)}$  
+\item $B$ es la suma de $n_k$-veces las distancias entre el centroide del grupo $k$ y el centroide total de la observaciones, es decir: $\sum\limits_{k = 1}^{K} \sum\limits_{j = 1}^{J} n_k \big( \bar{x}_j^{(k)} - \bar{x}_j \big)^2 = \sum\limits_{k = 1}^{K} n_k d^2_{(G_k, G)}$.
 \end{itemize}
 
 El crecimiento de la inercia intraclase puede medirse mediante: 
@@ -174,11 +174,11 @@ Un problema en el análisis de clusters mediante métodos jerárquicos consiste 
 
 \item $\boldsymbol{pseudo-F}$:
 $$ F_{p(k-1); \, p(n-k)} = \frac{ \text{tr}(B) / (k-1) }{ \text{tr}(W) / (n-k) } = \frac{ R^2 / (k-1) }{ (1 - R^2) / (n-k) } $$
-   \begin{itemize}
-      \item Si $F$ crece de forma monótona al crecer la cantidad de grupos $k$, entonces no se puede determinar una clara estructura de grupos.
-      \item Si $F$ decrece de forma monótona al crecer la cantidad de grupos $k$, entonces no se puede determinar una clara estructura de grupos, pero se puede decir que existe una estructura jerárquica.
-      \item Si $F$ presenta un máximo en $k$ grupos, entonces la población presenta un número definido de grupos en dicho máximo.
-   \end{itemize}
+\begin{itemize}
+\item Si $F$ crece de forma monótona al crecer la cantidad de grupos $k$, entonces no se puede determinar una clara estructura de grupos.
+\item Si $F$ decrece de forma monótona al crecer la cantidad de grupos $k$, entonces no se puede determinar una clara estructura de grupos, pero se puede decir que existe una estructura jerárquica.
+\item Si $F$ presenta un máximo en $k$ grupos, entonces la población presenta un número definido de grupos en dicho máximo.
+\end{itemize}
 
 \item $\boldsymbol{pseudo-t^2}$:
 $$ t^2 = \frac{ \text{tr}(W_{G,L}) - \big[ \text{tr}(W_G) + \text{tr}(W_L) \big] }{ \big[ \text{tr}(W_G) + \text{tr}(W_L) \big] / (n_G + n_L - 2) } $$
