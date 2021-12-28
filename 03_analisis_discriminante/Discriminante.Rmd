@@ -31,7 +31,7 @@ nocite: |
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
    echo = FALSE
-   )
+)
 ```
 
 # Descripción general
@@ -171,8 +171,8 @@ $$\mathbf{\Sigma}_1 = \mathbf{\Sigma}_2 = \ldots = \mathbf{\Sigma}_k$$
 Sabemos que para aplicar la regla de probabilidad a posteriori, se debe maximizar la probabilidad condicional $\Pr(i \in g | \mathbf{x} = \mathbf{x}_i)$. Sabemos tambien que maximizar dicha probabilidad condicional es equivalente a maximizar $\pi_g \, \exp\left\{ - \frac{1}{2} D_{ig}^2 \right\}$. Definimos la función $L_{ig}$ como el logaritmo de nuestra función objetivo, esto es:
 $$\begin{array}{rcl}
 L_{ig} & = & \log \pi_g - \frac{1}{2} D_{ig}^2 \\ \\
-   & = & \log \pi_g - \frac{1}{2} \left[ (\mathbf{x}_i - \boldsymbol{\mu}_g)' \mathbf{\Sigma}^{-1} ((\mathbf{x}_i - \boldsymbol{\mu}_g)) \right] \\ \\
-   & = & \log \pi_g - \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \boldsymbol{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \boldsymbol{\mu}_g - \frac{1}{2} \boldsymbol{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \boldsymbol{\mu}_g
+& = & \log \pi_g - \frac{1}{2} \left[ (\mathbf{x}_i - \boldsymbol{\mu}_g)' \mathbf{\Sigma}^{-1} ((\mathbf{x}_i - \boldsymbol{\mu}_g)) \right] \\ \\
+& = & \log \pi_g - \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \boldsymbol{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \boldsymbol{\mu}_g - \frac{1}{2} \boldsymbol{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \boldsymbol{\mu}_g
 \end{array}$$
 dado que $\boldsymbol{\mu}_g$ y $\mathbf{\Sigma}$ son desconocidos, utilizamos sus estimadores MV. Adicionalmente, dado que $\mathbf{\Sigma}$ es una matriz simétrica, tenemos que $\frac{1}{2} \boldsymbol{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i + \frac{1}{2} \mathbf{x}'_i \, \mathbf{\Sigma}^{-1} \, \boldsymbol{\mu}_g = \boldsymbol{\mu}'_g \, \mathbf{\Sigma}^{-1} \, \mathbf{x}_i$. Por útimo, dado que el vector $\mathbf{x}_i$ es el mismo para todos los grupo, el término $\mathbf{x}'_i \, \mathbf{S}^{-1} \, \mathbf{x}_i$ puede descartarse ya que es constante. De esta forma, obtenemos que la función $L_{ig}$ está dada por
 $$L_{ig} = \log \hat{\pi}_g + \mathbf{\bar{x}}'_g \, \mathbf{S}^{-1} \, \mathbf{x}_i - \frac{1}{2} \mathbf{\bar{x}}'_g \, \mathbf{S}^{-1} \, \mathbf{\bar{x}}_g$$
@@ -212,9 +212,9 @@ $$\max\big\{ \Pr(i \in g | \mathbf{x} = \mathbf{x}_i) \big\} = \max\left\{ \pi_g
 Definimos la **función discriminante cuadrática** aplicando logarítmos y utilizando los estimadores MV para $\boldsymbol{\mu}_g$ y $\mathbf{\Sigma}_g$ en la función objetivo. De esta forma, tenemos que:
 $$\begin{array}{rcl}
 Q_{ig} & = & \pi_g \, \exp\left\{ - \frac{1}{2} D_{ig}^2 \right\} \left| \mathbf{\Sigma}_g \right|^{-1/2} \\ \\
-   & = & \log \hat{\pi}_g - \frac{1}{2} \hat{D}_{ig}^2 - \frac{1}{2} \log |\mathbf{S}_g| \\ \\
-   & = & \log \hat{\pi}_g - \frac{1}{2} \log |\mathbf{S}_g| - \frac{1}{2} \left(\mathbf{x}_i - \mathbf{\bar{x}}_g \right)' \mathbf{S}_g^{-1} \left(\mathbf{x}_i - \mathbf{\bar{x}}_g \right) \\ \\
-   & = & \log \hat{\pi}_g - \frac{1}{2} \log |\mathbf{S}_g| - \frac{1}{2} \mathbf{x}_i' \mathbf{S}_g^{-1} \mathbf{x}_i + \frac{1}{2} \mathbf{x}_i' \mathbf{S}_g^{-1} \mathbf{\bar{x}}_g + \frac{1}{2} \mathbf{\bar{x}}_g' \mathbf{S}_g^{-1} \mathbf{x}_i - \frac{1}{2} \mathbf{\bar{x}}_g' \mathbf{S}_g^{-1} \mathbf{\bar{x}}_g
+& = & \log \hat{\pi}_g - \frac{1}{2} \hat{D}_{ig}^2 - \frac{1}{2} \log |\mathbf{S}_g| \\ \\
+& = & \log \hat{\pi}_g - \frac{1}{2} \log |\mathbf{S}_g| - \frac{1}{2} \left(\mathbf{x}_i - \mathbf{\bar{x}}_g \right)' \mathbf{S}_g^{-1} \left(\mathbf{x}_i - \mathbf{\bar{x}}_g \right) \\ \\
+& = & \log \hat{\pi}_g - \frac{1}{2} \log |\mathbf{S}_g| - \frac{1}{2} \mathbf{x}_i' \mathbf{S}_g^{-1} \mathbf{x}_i + \frac{1}{2} \mathbf{x}_i' \mathbf{S}_g^{-1} \mathbf{\bar{x}}_g + \frac{1}{2} \mathbf{\bar{x}}_g' \mathbf{S}_g^{-1} \mathbf{x}_i - \frac{1}{2} \mathbf{\bar{x}}_g' \mathbf{S}_g^{-1} \mathbf{\bar{x}}_g
 \end{array}$$
 
 La función $Q_{ig}$ se utiliza para calcular el **score** de la observación $i$ en el grupo $g$, para cada grupo $g = 1, \, \ldots, \, k$. Así entonces, $i$ se asigna al grupo $g$, sí, y solo si, $Q_{ig} > Q_{ig'} \,\,\, \forall g \neq g'$.
@@ -250,7 +250,7 @@ $$\mathscr{L}(\beta) = \prod\limits_{i = 1}^{n} f(Y_i) = \prod\limits_{i = 1}^{n
 y su log-verosimilitud será:
 $$\begin{array}{rcl}
 \ell(\boldsymbol{\beta}) & = & \sum\limits_{i = 1}^{n} Y_i \log\left( \frac{ \pi_i }{ 1 - \pi_i } \right) + \sum\limits_{i = 1}^{n} \log \big( 1 - Y_i \big) \\ \\
-   & = & \sum\limits_{i = 1}^{n} Y_i \mathbf{x}_i' \boldsymbol{\beta} + \sum\limits_{i = 1}^{n} \log \big( 1 - Y_i \big)
+& = & \sum\limits_{i = 1}^{n} Y_i \mathbf{x}_i' \boldsymbol{\beta} + \sum\limits_{i = 1}^{n} \log \big( 1 - Y_i \big)
 \end{array}$$
 
 Las estimaciones de los coeficientes se obtienen resolviendo las CPO:
