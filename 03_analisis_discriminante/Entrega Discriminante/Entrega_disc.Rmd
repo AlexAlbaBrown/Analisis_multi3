@@ -1,5 +1,5 @@
 ---
-title: "Ejercicios An?lisis Discriminante"
+title: "Ejercicios Análisis Discriminante"
 author: "Daniel Czarnievicz"
 output: pdf_document
 ---
@@ -17,22 +17,8 @@ $$ \rho_{12} = \frac{\sigma_{12}}{\sigma_1 \, \sigma_2} \Rightarrow \sigma_{12} 
 Dado que ambas poblaciones tienen distribución normal, con igual matriz de varianzas y covarianzas, se construye un discriminante lineal.
 
 $$ f_{\vec{X}_i}(\vec{x}_i) = \frac{1}{ 2\pi \; |\boldsymbol{\Sigma}|^{^1\!/_2} } \;\; \exp\Big\{ - \frac{1}{2} (\vec{x} - \vec{\mu})' \boldsymbol{\Sigma}^{-1} ( \vec{x} - \vec{\mu} ) \Big\}  $$
-La partici?n ?ptima es calsificar en la poblaci?n $P_2 \Leftrightarrow \frac{ f_{\vec{X}_2}(\vec{x}_2) \;\; \pi_2 }{ c(2|1) } > \frac{ f_{\vec{X}_1}(\vec{x}_2) \;\; \pi_1 }{ c(1|2) }$, donde $\pi_i$ es la probabilidad a priori de pertenecer a la poblaci?n $i$, y $c(i|j)$ es el costo de clasificar en el grupo $i$ a una observaci?n proveniende de la poblaci?n $j$. Dado que no se informan probabilidades a priori distintas para cada caso, ni costos distintos para cada caso, se asumen iguales. De esta forma, la partici?n ?ptima ser? clasificar en $P_2 \Leftrightarrow f_{\vec{X}_2}(\vec{x}_2) \;\; \pi_2 > f_{\vec{X}_1}(\vec{x}_1) \;\; \pi_1$. Dado que ambos t?rminos son estrictamente positivos y ambas poblacions tienen igual matriz de varianzas, podemos concentrarnos en el kernel de las distribuciones. La regla ser? entonces: clasificar en $P_2 \Leftrightarrow \pi_1 \;\; D_1^2(\vec{x}) > \pi_2 \;\; D_2^1(\vec{x})$.
+La partición óptima es calsificar en la población $P_2 \Leftrightarrow \frac{ f_{\vec{X}_2}(\vec{x}_2) \;\; \pi_2 }{ c(2|1) } > \frac{ f_{\vec{X}_1}(\vec{x}_2) \;\; \pi_1 }{ c(1|2) }$, donde $\pi_i$ es la probabilidad a priori de pertenecer a la población $i$, y $c(i|j)$ es el costo de clasificar en el grupo $i$ a una observación proveniende de la población $j$. Dado que no se informan probabilidades a priori distintas para cada caso, ni costos distintos para cada caso, se asumen iguales. De esta forma, la partición óptima será clasificar en $P_2 \Leftrightarrow f_{\vec{X}_2}(\vec{x}_2) \;\; \pi_2 > f_{\vec{X}_1}(\vec{x}_1) \;\; \pi_1$. Dado que ambos términos son estrictamente positivos y ambas poblacions tienen igual matriz de varianzas, podemos concentrarnos en el kernel de las distribuciones. La regla será entonces: clasificar en $P_2 \Leftrightarrow \pi_1 \;\; D_1^2(\vec{x}) > \pi_2 \;\; D_2^1(\vec{x})$.
 
-Las funciones discriminantes ser?n: 
+Las funciones discriminantes serán: 
 $$ P( i \in g | \vec{X} = \vec{x}) = \max \Big\{ \pi_g \;\; \exp \big\{ -\frac{1}{2} \; D^2_{ig} \big\} \Big\} \Rightarrow $$
 $$ \Rightarrow \log( \pi_g ) -\frac{1}{2} \; D^2_{ig} = \log( \pi_g ) -\frac{1}{2} \Big[ (\vec{x} - \vec{\mu})' \boldsymbol{\Sigma}^{-1} ( \vec{x} - \vec{\mu} ) \Big]  $$
-
-
-
-# Ejercicio 2
-
-
-# Ejercicio 3
-
-
-# Ejercicio 4
-
-
-
-
